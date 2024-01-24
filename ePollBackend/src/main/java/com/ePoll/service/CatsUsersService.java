@@ -1,7 +1,14 @@
 package com.ePoll.service;
 
+import java.util.List;
+
+import com.ePoll.model.CatsUsers;
+
 public interface CatsUsersService {
 	
-	void userIDValidation(String user_name, String password);
+	public CatsUsers userIDValidation(CatsUsers g);
+	
+	
+	public List<CatsUsers> getalldeta();
 
 }

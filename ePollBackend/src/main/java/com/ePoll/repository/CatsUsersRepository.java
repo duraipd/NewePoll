@@ -6,5 +6,7 @@ import com.ePoll.model.CatsUsers;
 
 @Repository
 public interface CatsUsersRepository extends JpaRepository<CatsUsers, Integer> {
+	
+	
 
 }
