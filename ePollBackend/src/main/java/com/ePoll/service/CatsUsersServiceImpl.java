@@ -14,9 +14,10 @@ public class CatsUsersServiceImpl implements CatsUsersService {
 	int count = 0;
 
 	@Override
-	public CatsUsers userIDValidation(CatsUsers g) {
+	public void userIDValidation(CatsUsers g) {
 		List<CatsUsers> findAll = catsUsersRepo.findAll();
 		int size = findAll.size();
+		System.out.println("username : "+ g.getUser_Name() +" "+"Password: "+g.getPassword());
 
 		for (int i = 0; i < findAll.size(); i++) {
 
@@ -28,21 +29,12 @@ public class CatsUsersServiceImpl implements CatsUsersService {
 			} else {
 				if (size == i + 1) {
 					count = count + 1;
-
+					System.out.println("invalid");
 					if (count >= 3) {
 						System.out.println("wait for 10 sec....");
 					}
 				}
 			}
-
 		}
-		return null;
 	}
-
-	@Override
-	public List<CatsUsers> getalldeta() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
