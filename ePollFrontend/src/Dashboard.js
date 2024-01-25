@@ -7,7 +7,7 @@ const Dashboard = () => {
    
     const fetchUserData = async () => {
       try {
-        const data = { username: 'To Dashboard' };
+        const data = { user_Name: 'To Dashboard' };
 
         setUserData(data);
       } catch (error) {
@@ -27,7 +27,7 @@ const Dashboard = () => {
               <h2 className="card-title text-center mb-4">Dashboard</h2>
               {userData ? (
                 <>
-                  <p>Welcome, {userData.username}!</p>
+                  <p>Welcome, {userData.user_Name}!</p>
                  
                 
                 </>

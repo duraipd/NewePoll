@@ -4,10 +4,13 @@ import Navbar from './Navbar';
 import Dashboard from './Dashboard';
 import Login from './Login';
 
+
 const App = () => {
   return (
+
     <Router>
       <div>
+       
         <Navbar />
         <Routes>
           <Route path="/" element={<Login />} />
@@ -15,6 +18,7 @@ const App = () => {
         </Routes>
       </div>
     </Router>
+    
   );
 };
 
