@@ -210,7 +210,7 @@ const Login = () => {
               </form>
               {showTimer && (
                 <p className="text-danger mt-3">
-                 You have entered invalid credentials 3 times. Please retry login after 10 seconds.. Try again in {timerSeconds} seconds.
+                 You have entered invalid credentials 3 times. Try again in {timerSeconds} seconds.
                 </p>
               )}
             </div>
