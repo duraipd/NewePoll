@@ -6,7 +6,7 @@ import com.ePoll.model.CatsUsers;
 
 public interface CatsUsersService {
 	
-	public void userIDValidation(CatsUsers g);
+	public String userIDValidation(CatsUsers g);
 	
 	
 	

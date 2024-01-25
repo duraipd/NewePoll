@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("http://localhost:3005")
 
 public class CatsUsersController {
 	
@@ -33,8 +33,8 @@ public class CatsUsersController {
 	@ResponseBody
 	public String loginValidation(CatsUsers g) {
 		System.out.println(g.getUser_Name());
-		catsUSerService.userIDValidation(g);
-		return "Welcome";
+		
+		return catsUSerService.userIDValidation(g);
 	}
 	
 	
