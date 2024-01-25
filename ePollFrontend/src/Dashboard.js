@@ -1,22 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Dashboard = () => {
-  const [userData, setUserData] = useState(null);
-
-  useEffect(() => {
-   
-    const fetchUserData = async () => {
-      try {
-        const data = { user_Name: 'To Dashboard' };
-
-        setUserData(data);
-      } catch (error) {
-        console.error('Error fetching user data', error);
-      }
-    };
-
-    fetchUserData();
-  }, []); 
+  const location = useLocation();
+  const userData = location.state?.userData;
 
   return (
     <div className="container mt-5">
@@ -28,11 +15,9 @@ const Dashboard = () => {
               {userData ? (
                 <>
                   <p>Welcome, {userData.user_Name}!</p>
-                 
-                
                 </>
               ) : (
-                <p>Loading user data...</p>
+                <p>Welcome to Dashboard</p>
               )}
             </div>
           </div>
@@ -43,3 +28,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
