@@ -39,7 +39,9 @@ public class CatsUsersServiceImpl implements CatsUsersService {
 	    } else {
 	        count++;
 	       
-	        if (count>= 4) {
+	        if (count>= 3) {
+	        	
+	            
 	        	System.out.println("Wait for 10 seconds....");
 	        	return "waittt Creditenial";
 	            
