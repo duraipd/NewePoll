@@ -5,6 +5,8 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ePoll.model.CatsUsers;
+import com.ePoll.model.CatsUsersDetails;
+import com.ePoll.repository.CatsUsersDetailsRepository;
 import com.ePoll.repository.CatsUsersRepository;
  
 @Service
@@ -12,10 +14,13 @@ public class CatsUsersServiceImpl implements CatsUsersService {
  
 	@Autowired
 	private CatsUsersRepository catsUsersRepo;
+	@Autowired
+	private  CatsUsersDetailsRepository catsUsersDetailsRepo;
 	int count = 0;
+	 int z;
  
 	@Override
-	public String userIDValidation(CatsUsers user) {
+	public String userIDValidation(CatsUsers user, CatsUsersDetails c) {
 	    List<CatsUsers> allUsers = catsUsersRepo.findAll();
 	    int size = allUsers.size();
 	    System.out.println("Username: " + user.getUser_Name() + " Password: " + user.getPassword());
@@ -26,7 +31,8 @@ public class CatsUsersServiceImpl implements CatsUsersService {
 	        if (Objects.equals(user.getUser_Name(), storedUser.getUser_Name())
 	                && Objects.equals(user.getPassword(), storedUser.getPassword())) {
 	            isValid = true;
-	            
+	            catsUsersDetailsRepo.save(c);
+	           
 	            break;
 	        }
 	    }
@@ -50,5 +56,9 @@ public class CatsUsersServiceImpl implements CatsUsersService {
 		return "invaild credtinal";
 	    
 	}
-}
+	
+		
+		
+	}
+
  
