@@ -1,5 +1,4 @@
-
-import axios from 'axios';
+import axios from "axios";
 
 const Apiurl = "http://localhost:7777/api/login";
 
@@ -16,4 +15,3 @@ class UserService {
 }
 
 export default new UserService();
-
