@@ -17,10 +17,7 @@ import lombok.Data;
 public class CatsUsers {
 	
 	@Id
-	 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen1")
-	@SequenceGenerator(name="gen1",sequenceName="seq1", allocationSize=1)
-	
-	@Column(name="USER_ID")
+	@Column(name="USER_ID",columnDefinition = "serial")
 	private int User_ID;
 	
 	@Column(name="USER_NAME",nullable = false)
