@@ -1,8 +1,12 @@
 package com.ePoll.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +15,7 @@ import com.ePoll.model.CatsUsers;
 import com.ePoll.model.CatsUsersDetails;
 import com.ePoll.model.UserEntity;
 import com.ePoll.service.CatsUsersServiceImpl;
+import com.ePoll.service.DynamicTableService;
 
 import jakarta.annotation.PostConstruct;
 
@@ -32,6 +37,9 @@ public class CatsUsersController {
 	
 	@Autowired
 	private CatsUsersServiceImpl catsUSerService;
+	
+	@Autowired
+	private final DynamicTableService dynamicTableService;
 
 
 	
@@ -51,6 +59,25 @@ public class CatsUsersController {
 		
 		return catsUSerService.userIDValidation(user1 );
 	}
+	
+	@Autowired
+    public CatsUsersController(DynamicTableService dynamicTableService) {
+        this.dynamicTableService = dynamicTableService;
+    }
+ 
+    @GetMapping("/{tableName}")
+    public List<Map<String, Object>> getTableData(@PathVariable String tableName) {
+    	System.out.println(dynamicTableService.getTableData(tableName));
+        return dynamicTableService.getTableData(tableName);
+    }
+    
+    @GetMapping("/table")
+    
+    public List<Map<String, Object>> getAllTable(){
+    	System.out.println(dynamicTableService.getAllTable());
+    	return dynamicTableService.getAllTable();
+    }
+   
 	
 
 	
