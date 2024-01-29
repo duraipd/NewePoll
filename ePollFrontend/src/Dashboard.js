@@ -29,25 +29,20 @@
 //   );
 // };
 
-
-
 import React, { useState } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import Nullable from './Nullable';
 import CustomTable from './CustomTable';
 import DataType from './DataType';
-import Navbar from './Navbar';
 import DynamicTable from './table';
 
 function Dashboard() {
- 
-  const [inputSets, setInputSets] = useState([{ id: 1 }]); 
+  const [inputSets, setInputSets] = useState([{ id: 1 }]);
   const [selectedColumn, setSelectedColumn] = useState('');
   const [selectedNullable, setSelectedNullable] = useState(null);
   const [selectedDataType, setSelectedDataType] = useState(null);
 
   const handleColumnChange = (event, setId) => {
-    
     const updatedInputSets = inputSets.map((set) =>
       set.id === setId ? { ...set, selectedColumn: event.target.value } : set
     );
@@ -55,7 +50,6 @@ function Dashboard() {
   };
 
   const handleNullableChange = (value, setId) => {
-
     const updatedInputSets = inputSets.map((set) =>
       set.id === setId ? { ...set, selectedNullable: value } : set
     );
@@ -63,7 +57,6 @@ function Dashboard() {
   };
 
   const handleDataTypeChange = (value, setId) => {
-    
     const updatedInputSets = inputSets.map((set) =>
       set.id === setId ? { ...set, selectedDataType: value } : set
     );
@@ -71,20 +64,18 @@ function Dashboard() {
   };
 
   const handleAddInputSet = () => {
-  
     setInputSets([...inputSets, { id: inputSets.length + 1 }]);
   };
 
   const handleRemoveInputSet = (setId) => {
-   
     const updatedInputSets = inputSets.filter((set) => set.id !== setId);
     setInputSets(updatedInputSets);
   };
-  
 
   const handleSubmit = () => {
-     const location = useLocation();
-  const userData = location.state?.userData;
+    console.log('Input Sets:', inputSets);
+  };
+
   const columnsData = [
     { header: 'Name', accessor: 'name' },
     { header: 'Age', accessor: 'age' },
@@ -102,15 +93,10 @@ function Dashboard() {
     }
     return rows;
   };
- 
+
   const numberOfRows = 50;
- 
+
   const rowData = generateRowData(numberOfRows);
-
-   
-    console.log('Input Sets:', inputSets);
-  };
-
 
   return (
     <div>
@@ -147,11 +133,12 @@ function Dashboard() {
           Submit
         </button>
       </div>
-      <DynamicTable initialColumns={columnsData} initialData={rowData} />
+
+      <div>
+        <DynamicTable initialColumns={columnsData} initialData={rowData} />
+      </div>
     </div>
   );
-        }
-
+}
 
 export default Dashboard;
-
