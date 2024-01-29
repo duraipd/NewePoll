@@ -1,6 +1,6 @@
 
 
-export const MAX_CONSECUTIVE_FAILURES = 3;
+export const MAX_CONSECUTIVE_FAILURES = 0;
 
 export const startTimer = (setShowTimer, setTimerSeconds, setFailedAttempts) => {
   const intervalId = setInterval(() => {
