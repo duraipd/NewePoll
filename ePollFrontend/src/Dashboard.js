@@ -29,63 +29,75 @@
 //   );
 // };
 
-
-
 import React, { useState } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import Nullable from './Nullable';
 import CustomTable from './CustomTable';
 import DataType from './DataType';
-import Navbar from './Navbar';
- 
+import DynamicTable from './table';
+
 function Dashboard() {
- 
   const [inputSets, setInputSets] = useState([{ id: 1 }]);
   const [selectedColumn, setSelectedColumn] = useState('');
   const [selectedNullable, setSelectedNullable] = useState(null);
   const [selectedDataType, setSelectedDataType] = useState(null);
- 
+
   const handleColumnChange = (event, setId) => {
-   
     const updatedInputSets = inputSets.map((set) =>
       set.id === setId ? { ...set, selectedColumn: event.target.value } : set
     );
     setInputSets(updatedInputSets);
   };
- 
+
   const handleNullableChange = (value, setId) => {
- 
     const updatedInputSets = inputSets.map((set) =>
       set.id === setId ? { ...set, selectedNullable: value } : set
     );
     setInputSets(updatedInputSets);
   };
- 
+
   const handleDataTypeChange = (value, setId) => {
-   
     const updatedInputSets = inputSets.map((set) =>
       set.id === setId ? { ...set, selectedDataType: value } : set
     );
     setInputSets(updatedInputSets);
   };
- 
+
   const handleAddInputSet = () => {
- 
     setInputSets([...inputSets, { id: inputSets.length + 1 }]);
   };
- 
+
   const handleRemoveInputSet = (setId) => {
-   
     const updatedInputSets = inputSets.filter((set) => set.id !== setId);
     setInputSets(updatedInputSets);
   };
- 
- 
+
   const handleSubmit = () => {
-   
     console.log('Input Sets:', inputSets);
   };
- 
+
+  const columnsData = [
+    { header: 'Name', accessor: 'name' },
+    { header: 'Age', accessor: 'age' },
+    { header: 'Email', accessor: 'email' },
+  ];
+  const generateRowData = (count) => {
+    const rows = [];
+    for (let i = 1; i <= count; i++) {
+      rows.push({
+        id: i,
+        name: `durai ${i}`,
+        age: Math.floor(Math.random() * 30) + 20,
+        email: `durai${i}@bca.com`,
+      });
+    }
+    return rows;
+  };
+
+  const numberOfRows = 50;
+
+  const rowData = generateRowData(numberOfRows);
+
   return (
     <div>
       {inputSets.map((set) => (
@@ -105,7 +117,7 @@ function Dashboard() {
           />
         </div>
       ))}
- 
+
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <FaPlus
           style={{
@@ -121,9 +133,12 @@ function Dashboard() {
           Submit
         </button>
       </div>
+
+      <div>
+        <DynamicTable initialColumns={columnsData} initialData={rowData} />
+      </div>
     </div>
   );
-        }
- 
- 
+}
+
 export default Dashboard;
