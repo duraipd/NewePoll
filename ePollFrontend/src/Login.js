@@ -134,6 +134,10 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const time = new Date().toDateString;
+    
+    console.log(time);
+   
     if (navigator.geolocation) {
 
       navigator.geolocation.getCurrentPosition(
@@ -172,7 +176,7 @@ const Login = () => {
 
     }
 
-    console.log('Submitting user data:', user.user_Name, user.password);
+    console.log('Submitting user data:', user.user_Name, user.password ,user.currentDateTime);
     
 
     try {

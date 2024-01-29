@@ -1,9 +1,9 @@
 
-
 import React, { useState } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import Nullable from './Nullable';
 import CustomTable from './CustomTable';
+
 import DataType from './Datatype';
 import TextBox from './Textbox';
 import ApiService from './ApiService';
@@ -35,14 +35,16 @@ function Dashboard() {
   };
 
   const handleAddInputSet = () => {
+
     const newId = inputSets.length + 1;
     setInputSets([...inputSets, { id: newId }]);
-  };
+
 
   const handleRemoveInputSet = (setId) => {
     const updatedInputSets = inputSets.filter((set) => set.id !== setId);
     setInputSets(updatedInputSets);
   };
+
 
   const handleSubmit = async () => {
     try {
@@ -64,7 +66,33 @@ function Dashboard() {
     } catch (error) {
       console.error('Error submitting data:', error);
     }
+
+  const handleSubmit = () => {
+    console.log('Input Sets:', inputSets);
+
   };
+
+  const columnsData = [
+    { header: 'Name', accessor: 'name' },
+    { header: 'Age', accessor: 'age' },
+    { header: 'Email', accessor: 'email' },
+  ];
+  const generateRowData = (count) => {
+    const rows = [];
+    for (let i = 1; i <= count; i++) {
+      rows.push({
+        id: i,
+        name: `durai ${i}`,
+        age: Math.floor(Math.random() * 30) + 20,
+        email: `durai${i}@bca.com`,
+      });
+    }
+    return rows;
+  };
+
+  const numberOfRows = 50;
+
+  const rowData = generateRowData(numberOfRows);
 
   return (
     <div className={`app-container ${submitted ? 'hide-on-submit' : ''}`}>
@@ -92,7 +120,9 @@ function Dashboard() {
             Submit
           </button>
         </div>
+
       </main>
+
     </div>
   );
 }
