@@ -14,5 +14,17 @@ class UserService {
     }
   }
 }
+async (data) => {
+    try {
+      const response = await axios.post(`${BASE_URL}/submitData`, data);
+      return response.data;
+    } catch (error) {
+      console.error('Error submitting data:', error);
+      throw error;
+    }
+  };
+
+
+
 
 export default new UserService();

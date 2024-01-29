@@ -1,23 +1,19 @@
 
 
-
-
 import React, { useState } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import Nullable from './Nullable';
 import CustomTable from './CustomTable';
-import DataType from './DataType';
-import Navbar from './Navbar';
+import DataType from './Datatype';
+import TextBox from './Textbox';
+import ApiService from './ApiService';
+import './App.css';
 
 function Dashboard() {
- 
-  const [inputSets, setInputSets] = useState([{ id: 1 }]); 
-  const [selectedColumn, setSelectedColumn] = useState('');
-  const [selectedNullable, setSelectedNullable] = useState(null);
-  const [selectedDataType, setSelectedDataType] = useState(null);
+  const [inputSets, setInputSets] = useState([{ id: 1 }]);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleColumnChange = (event, setId) => {
-   
     const updatedInputSets = inputSets.map((set) =>
       set.id === setId ? { ...set, selectedColumn: event.target.value } : set
     );
@@ -25,7 +21,6 @@ function Dashboard() {
   };
 
   const handleNullableChange = (value, setId) => {
-
     const updatedInputSets = inputSets.map((set) =>
       set.id === setId ? { ...set, selectedNullable: value } : set
     );
@@ -33,7 +28,6 @@ function Dashboard() {
   };
 
   const handleDataTypeChange = (value, setId) => {
-    
     const updatedInputSets = inputSets.map((set) =>
       set.id === setId ? { ...set, selectedDataType: value } : set
     );
@@ -41,61 +35,66 @@ function Dashboard() {
   };
 
   const handleAddInputSet = () => {
-  
-    setInputSets([...inputSets, { id: inputSets.length + 1 }]);
+    const newId = inputSets.length + 1;
+    setInputSets([...inputSets, { id: newId }]);
   };
 
   const handleRemoveInputSet = (setId) => {
-   
     const updatedInputSets = inputSets.filter((set) => set.id !== setId);
     setInputSets(updatedInputSets);
   };
-  
 
-  const handleSubmit = () => {
-   
-    console.log('Input Sets:', inputSets);
+  const handleSubmit = async () => {
+    try {
+     
+      const fixedRow = inputSets.find((set) => set.id === 1);
+      if (!fixedRow || !fixedRow.selectedColumn || !fixedRow.selectedNullable || !fixedRow.selectedDataType) {
+        alert('Please fill in all fields in the fixed row');
+        return;
+      }
+
+    
+      const updatedInputSets = [fixedRow];
+      setInputSets(updatedInputSets);
+
+      await ApiService.submitData(fixedRow);
+
+      // Set submitted to true
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Error submitting data:', error);
+    }
   };
 
   return (
-    <div>
-      {inputSets.map((set) => (
-        <div key={set.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-          <CustomTable onChange={(event) => handleColumnChange(event, set.id)} />
-          <Nullable value={set.selectedNullable} onChange={(value) => handleNullableChange(value, set.id)} />
-          <DataType value={set.selectedDataType} onChange={(value) => handleDataTypeChange(value, set.id)} />
-          <FaMinus
-            style={{
-              cursor: 'pointer',
-              fontSize: '24px',
-              fontWeight: 'bold',
-              color: 'red',
-              marginLeft: '10px',
-            }}
-            onClick={() => handleRemoveInputSet(set.id)}
-          />
-        </div>
-      ))}
+    <div className={`app-container ${submitted ? 'hide-on-submit' : ''}`}>
+      <header>
+        <h1>Table Definition</h1>
+      </header>
 
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <FaPlus
-          style={{
-            cursor: 'pointer',
-            fontSize: '24px',
-            fontWeight: 'bold',
-            color: 'green',
-            marginRight: '10px',
-          }}
-          onClick={handleAddInputSet}
-        />
-        <button style={{ fontSize: '16px' }} onClick={handleSubmit}>
-          Submit
-        </button>
-      </div>
+      <main>
+        <TextBox />
+
+        {inputSets.map((set) => (
+          <div key={set.id} className={`input-set ${set.id === 1 ? 'fixed-set' : ''}`}>
+            <CustomTable onChange={(event) => handleColumnChange(event, set.id)} />
+            <Nullable value={set.selectedNullable} onChange={(value) => handleNullableChange(value, set.id)} />
+            <DataType value={set.selectedDataType} onChange={(value) => handleDataTypeChange(value, set.id)} />
+            {set.id !== 1 && (
+              <FaMinus onClick={() => handleRemoveInputSet(set.id)} className="remove-icon" />
+            )}
+          </div>
+        ))}
+
+        <div className="add-button-container">
+          <FaPlus className="add-icon" onClick={handleAddInputSet} />
+          <button className="submit-button" onClick={handleSubmit}>
+            Submit
+          </button>
+        </div>
+      </main>
     </div>
   );
-        }
-
+}
 
 export default Dashboard;
-
