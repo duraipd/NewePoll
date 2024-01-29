@@ -1,3 +1,5 @@
+
+
 // import React from 'react';
 // import { useLocation } from 'react-router-dom';
 
@@ -35,6 +37,7 @@ import Nullable from './Nullable';
 import CustomTable from './CustomTable';
 import DataType from './DataType';
 import Navbar from './Navbar';
+import DynamicTable from './table';
 
 function Dashboard() {
  
@@ -44,7 +47,7 @@ function Dashboard() {
   const [selectedDataType, setSelectedDataType] = useState(null);
 
   const handleColumnChange = (event, setId) => {
-   
+    
     const updatedInputSets = inputSets.map((set) =>
       set.id === setId ? { ...set, selectedColumn: event.target.value } : set
     );
@@ -80,9 +83,34 @@ function Dashboard() {
   
 
   const handleSubmit = () => {
+     const location = useLocation();
+  const userData = location.state?.userData;
+  const columnsData = [
+    { header: 'Name', accessor: 'name' },
+    { header: 'Age', accessor: 'age' },
+    { header: 'Email', accessor: 'email' },
+  ];
+  const generateRowData = (count) => {
+    const rows = [];
+    for (let i = 1; i <= count; i++) {
+      rows.push({
+        id: i,
+        name: `durai ${i}`,
+        age: Math.floor(Math.random() * 30) + 20,
+        email: `durai${i}@bca.com`,
+      });
+    }
+    return rows;
+  };
+ 
+  const numberOfRows = 50;
+ 
+  const rowData = generateRowData(numberOfRows);
+
    
     console.log('Input Sets:', inputSets);
   };
+
 
   return (
     <div>
@@ -119,6 +147,7 @@ function Dashboard() {
           Submit
         </button>
       </div>
+      <DynamicTable initialColumns={columnsData} initialData={rowData} />
     </div>
   );
         }

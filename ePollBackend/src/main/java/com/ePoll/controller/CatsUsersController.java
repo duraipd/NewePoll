@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 
-@CrossOrigin("http://localhost:3002")
+
+@CrossOrigin("http://localhost:3001")
+
 
 
 public class CatsUsersController {
