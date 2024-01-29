@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ePoll.model.CatsUsers;
 import com.ePoll.model.CatsUsersDetails;
+import com.ePoll.model.UserEntity;
 import com.ePoll.repository.CatsUsersDetailsRepository;
 import com.ePoll.repository.CatsUsersRepository;
  
@@ -20,19 +21,23 @@ public class CatsUsersServiceImpl implements CatsUsersService {
 	 int z;
  
 	@Override
-	public String userIDValidation(CatsUsers user, CatsUsersDetails c) {
+	public String userIDValidation(CatsUsers user , CatsUsersDetails user2) {
+		
+		
 	    List<CatsUsers> allUsers = catsUsersRepo.findAll();
 	    int size = allUsers.size();
+	    System.out.println(size);
 	    System.out.println("Username: " + user.getUser_Name() + " Password: " + user.getPassword());
- 
+	    
 	    boolean isValid = false;
  
 	    for (CatsUsers storedUser : allUsers) {
 	        if (Objects.equals(user.getUser_Name(), storedUser.getUser_Name())
 	                && Objects.equals(user.getPassword(), storedUser.getPassword())) {
 	            isValid = true;
-	            catsUsersDetailsRepo.save(c);
-	           
+	            
+	            
+	        
 	            break;
 	        }
 	    }

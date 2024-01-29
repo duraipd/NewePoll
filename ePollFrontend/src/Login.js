@@ -117,6 +117,10 @@ const Login = () => {
   const [user, setUser] = useState({
     user_Name: '',
     password: '',
+    Latitude: '',
+    longitude:'',
+    // userLocation : '',
+    currentDateTime: '',
   });
   const [errorMessage ,setErrorMessage]=useState('');
   const [failedAttempts, setFailedAttempts] = useState(0);
@@ -130,6 +134,43 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (navigator.geolocation) {
+
+      navigator.geolocation.getCurrentPosition(
+
+        (position) => {
+
+          const { latitude, longitude } = position.coords;
+
+          const currentDate = new Date().toLocaleString();
+
+          setUser({
+
+            ...user,
+
+          // userLocation: `Latitude: ${latitude}, Longitude: ${longitude}`,
+           Latitude :` ${latitude}`,
+           longitude:`${longitude}`,
+
+            currentDateTime: currentDate,
+
+          });
+
+        },
+
+        (error) => {
+
+          console.error('Error getting user location:', error);
+
+        }
+
+      );
+
+    } else {
+
+      console.error('Geolocation is not supported by this browser.');
+
+    }
 
     console.log('Submitting user data:', user.user_Name, user.password);
     
@@ -144,7 +185,7 @@ const Login = () => {
       } else if (d === 'Invalid Credentials' || d === 'waittt Creditenial') {
         setFailedAttempts((prevAttempts) => prevAttempts + 1);
 
-        if (failedAttempts + 1 === MAX_CONSECUTIVE_FAILURES) {
+        if (0 === MAX_CONSECUTIVE_FAILURES) {
           setShowTimer(true);
           startTimer(setShowTimer, setTimerSeconds, setFailedAttempts);
         }
