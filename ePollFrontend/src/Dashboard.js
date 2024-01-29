@@ -35,12 +35,15 @@ import Nullable from './Nullable';
 import CustomTable from './CustomTable';
 import DataType from './DataType';
 import DynamicTable from './table';
+import Dropdown from './components/Dropdown'; 
+import Folder from './components/Folder';
 
 function Dashboard() {
   const [inputSets, setInputSets] = useState([{ id: 1 }]);
-  const [selectedColumn, setSelectedColumn] = useState('');
-  const [selectedNullable, setSelectedNullable] = useState(null);
-  const [selectedDataType, setSelectedDataType] = useState(null);
+  // const [selectedColumn, setSelectedColumn] = useState('');
+  // const [selectedNullable, setSelectedNullable] = useState(null);
+  // const [selectedDataType, setSelectedDataType] = useState(null);
+  const [selectedFolder, setSelectedFolder] = useState('');
 
   const handleColumnChange = (event, setId) => {
     const updatedInputSets = inputSets.map((set) =>
@@ -61,6 +64,10 @@ function Dashboard() {
       set.id === setId ? { ...set, selectedDataType: value } : set
     );
     setInputSets(updatedInputSets);
+  };
+
+  const handleFolderChange = (folder) => {
+    setSelectedFolder(folder);
   };
 
   const handleAddInputSet = () => {
@@ -95,7 +102,6 @@ function Dashboard() {
   };
 
   const numberOfRows = 50;
-
   const rowData = generateRowData(numberOfRows);
 
   return (
@@ -132,6 +138,12 @@ function Dashboard() {
         <button style={{ fontSize: '16px' }} onClick={handleSubmit}>
           Submit
         </button>
+      </div>
+
+   
+      <div className='folder-container '>
+        <Dropdown options={['Table Definition', 'Data Mapping']} onSelect={handleFolderChange} />
+        <Folder name={selectedFolder} files={[]} />
       </div>
 
       <div>

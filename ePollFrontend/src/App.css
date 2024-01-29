@@ -41,3 +41,39 @@
   margin: 0px 0px 0px -46px;
  
 }
+
+
+
+ul {
+  list-style-type: none;
+  padding-left: 20px;
+  
+}
+
+.folder-container {
+  border: 3px solid #b9b3b3; 
+  margin: 10px; 
+  padding: 5px;
+  height: 700px;
+  width: 250px;
+  /* margin-left: 0px; */
+}
+
+
+.folder-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+@media (max-width: 600px) {
+  .folder-container {
+    width: 100%;
+  }
+}
+
+
+.dropdown-container {
+  margin-bottom: 10px;
+}
