@@ -31,9 +31,19 @@ public class DynamicTableService {
     	
     }
     
+    public List<Map<String, Object>> getTableData(String tableName, String colname, String dataType) {
+    	
+    	String sql = "ALTER TABLE " + tableName+" ADD COLUMN "+colname+" "+dataType;
+    	
+          return jdbcTemplate.queryForList(sql);
+    }
+    
 //    public List<Map<String, Object>> tabledesc(String tableName){
 //    	String sql="select column_name,is_nullable,data_type "
 //    			+ "from information_schema.columns where table_name "+tableName;
 //    	return jdbcTemplate.queryForList(sql);
 //    }
+    
+    
+    
 }

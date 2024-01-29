@@ -40,4 +40,10 @@ public class DynamicTableController {
 //        return dynamicTableService.getTableData(tableName);
 //    }
     
+    @GetMapping("/{tableName}/{colname}/{dataType}")
+    public List<Map<String, Object>> getTableData(@PathVariable String tableName,@PathVariable String colname,@PathVariable  String dataType) {
+    	System.out.println(dynamicTableService.getTableData(tableName, colname, dataType));
+        return dynamicTableService.getTableData(tableName, colname, dataType);
+    }
+    
 }
