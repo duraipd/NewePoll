@@ -1,9 +1,31 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import DynamicTable from './table';
 
 const Dashboard = () => {
   const location = useLocation();
   const userData = location.state?.userData;
+  const columnsData = [
+    { header: 'Name', accessor: 'name' },
+    { header: 'Age', accessor: 'age' },
+    { header: 'Email', accessor: 'email' },
+  ];
+  const generateRowData = (count) => {
+    const rows = [];
+    for (let i = 1; i <= count; i++) {
+      rows.push({
+        id: i,
+        name: `durai ${i}`,
+        age: Math.floor(Math.random() * 30) + 20,
+        email: `durai${i}@bca.com`,
+      });
+    }
+    return rows;
+  };
+ 
+  const numberOfRows = 50;
+ 
+  const rowData = generateRowData(numberOfRows);
 
   return (
     <div className="container mt-5">
@@ -23,6 +45,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      <DynamicTable initialColumns={columnsData} initialData={rowData} />
     </div>
   );
 };
