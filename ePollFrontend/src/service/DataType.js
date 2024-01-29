@@ -38,7 +38,7 @@
 import React from 'react';
 import Select from 'react-select';
 
-const DataType = ({ value, onChange }) => {
+ export const DataType = ({ value, onChange }) => {
   const dataTypes = [
     { label: 'Integer', value: 'int' },
     { label: 'String', value: 'string' },
@@ -66,5 +66,5 @@ const DataType = ({ value, onChange }) => {
   );
 };
 
-export default DataType;
+
 

@@ -14,9 +14,11 @@ class UserService {
     }
   }
 }
-async (data) => {
+
+ export const fetch = async ()=>{
+
     try {
-      const response = await axios.post(`${BASE_URL}/submitData`, data);
+      const response = await axios.post(`http://localhost:7777/api/table`);
       return response.data;
     } catch (error) {
       console.error('Error submitting data:', error);

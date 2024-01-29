@@ -184,7 +184,7 @@ const Login = () => {
       var d = response;
       console.log(d);
 
-      if (d === 'Welcome') {
+      if (d === 'waittt Creditenial') {
         navigate('/Dashboard');
       } else if (d === 'Invalid Credentials' || d === 'waittt Creditenial') {
         setFailedAttempts((prevAttempts) => prevAttempts + 1);
