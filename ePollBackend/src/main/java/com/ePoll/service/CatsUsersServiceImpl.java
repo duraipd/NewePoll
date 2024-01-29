@@ -21,7 +21,7 @@ public class CatsUsersServiceImpl implements CatsUsersService {
 	 int z;
  
 	@Override
-	public String userIDValidation(CatsUsers user , CatsUsersDetails user2) {
+	public String userIDValidation(CatsUsers user) {
 		
 		
 	    List<CatsUsers> allUsers = catsUsersRepo.findAll();

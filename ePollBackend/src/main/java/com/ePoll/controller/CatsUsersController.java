@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 
 
-@CrossOrigin("http://localhost:3001")
+@CrossOrigin("http://localhost:3000")
 
 
 
@@ -43,18 +43,13 @@ public class CatsUsersController {
 	@PostMapping("/login")
 	public String loginValidation(@RequestBody UserEntity user) {
 		System.out.println(user);
+		
 		CatsUsers user1 = new CatsUsers();
 		user1.setUser_Name(user.getUser_Name());
 		user1.setPassword(user.getPassword());
+	
 		
-		CatsUsersDetails user2 = new CatsUsersDetails();
-		user2.setLoggedin_time(user.currentDateTime);
-		user2.setUser_Name(user.getUser_Name());
-		double  lat =Double.parseDouble(user.getLatitude());
-		double lon = Double.parseDouble(user.getLongitude());
-		user2.setLatitude(lat);
-		user2.setLongitude(lon);
-		return catsUSerService.userIDValidation(user1 ,user2);
+		return catsUSerService.userIDValidation(user1 );
 	}
 	
 
