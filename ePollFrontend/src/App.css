@@ -38,7 +38,7 @@ body{
  
   width: 250px;
   flex-shrink: 0;
-  background-color:cadetblue;
+  background-color:#202e50;;
   height: 700px;
   overflow: auto;
 }
@@ -58,7 +58,7 @@ body{
   display: flex;
   font-size: 1.2em;
   justify-content: space-between;
-  color:brown;
+  color:white;
 }
 .sidebar-title span i{
   display: inline-block;
@@ -81,7 +81,7 @@ body{
 }
  
 .sidebar-item.plain{
-  color:black;
+  color:white;
   text-decoration: none;
 }
 .sidebar-item.plain:hover{
