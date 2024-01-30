@@ -1,120 +1,146 @@
-import React, { useState } from 'react';
-import { FaPlus, FaMinus } from 'react-icons/fa';
-import Nullable from './Nullable';
-import CustomTable from './CustomTable';
-import { DataType } from './service/DataType';
-import TextBox from './service/Testbox';
-import ApiService from './service/ApiService.JS';
-import DynamicTable from './table';
-import './App.css';
- 
+import React, { useState } from "react";
+import './Css/Dashboard.css';
+import TextBox from "./service/TextBox";
+import { CreateColoumn } from "./service/Service";
+
 function Dashboard() {
-  const [inputSets, setInputSets] = useState([{ id: 1 }]);
-  const [submitted, setSubmitted] = useState(false);
-  const [columnsData, setColumnsData] = useState([
-    { header: 'Name', accessor: 'name' },
-    { header: 'Age', accessor: 'age' },
-    { header: 'Email', accessor: 'email' },
-  ]);
- 
-  // Example function to generate row data
-  const generateRowData = (count) => {
-    const rows = [];
-    for (let i = 1; i <= count; i++) {
-      rows.push({
-        id: i,
-        name: `durai ${i}`,
-        age: Math.floor(Math.random() * 30) + 20,
-        email: `durai${i}@bca.com`,
-      });
+  const [rowCount, setRowCount] = useState(1);
+  const [tableData, setTableData] = useState([{
+    columnName: '',
+    nullable: '',
+    dataType: ''
+  }]);
+
+  const handleAddRow = () => {
+    setRowCount(rowCount + 1);
+    setTableData([...tableData, {
+      columnName: '',
+      nullable: '',
+      dataType: ''
+    }]);
+  };
+
+  const handleRemoveRow = (index) => {
+    if (rowCount > 1) {
+      setRowCount(rowCount - 1);
+      setTableData((prevData) => prevData.filter((_, i) => i !== index));
     }
-    return rows;
   };
- 
-  const [rowData, setRowData] = useState(generateRowData(50));
- 
-  const handleColumnChange = (event, setId) => {
-    const updatedInputSets = inputSets.map((set) =>
-      set.id === setId ? { ...set, selectedColumn: event.target.value } : set
-    );
-    setInputSets(updatedInputSets);
+
+  const handleChange = (event, index, field) => {
+    const updatedData = [...tableData];
+    updatedData[index][field] = event.target.value;
+    setTableData(updatedData);
   };
- 
-  const handleNullableChange = (value, setId) => {
-    const updatedInputSets = inputSets.map((set) =>
-      set.id === setId ? { ...set, selectedNullable: value } : set
-    );
-    setInputSets(updatedInputSets);
-  };
- 
-  const handleDataTypeChange = (value, setId) => {
-    const updatedInputSets = inputSets.map((set) =>
-      set.id === setId ? { ...set, selectedDataType: value } : set
-    );
-    setInputSets(updatedInputSets);
-  };
- 
-  const handleAddInputSet = () => {
-    const newId = inputSets.length + 1;
-    setInputSets([...inputSets, { id: newId }]);
-  };
- 
-  const handleRemoveInputSet = (setId) => {
-    const updatedInputSets = inputSets.filter((set) => set.id !== setId);
-    setInputSets(updatedInputSets);
-  };
- 
+
   const handleSubmit = async () => {
-    try {
-      const fixedRow = inputSets.find((set) => set.id === 1);
-      if (!fixedRow || !fixedRow.selectedColumn || !fixedRow.selectedNullable || !fixedRow.selectedDataType) {
-        alert('Please fill in all fields in the fixed row');
-        return;
-      }
- 
-      const updatedInputSets = [fixedRow];
-      setInputSets(updatedInputSets);
- 
-      await ApiService.submitData(fixedRow);
- 
-      setSubmitted(true);
-    } catch (error) {
-      console.error('Error submitting data:', error);
+    const hasEmptyRow = tableData.some(data => (
+      data.columnName.trim() === '' || 
+      data.nullable.trim() === '' || 
+      data.dataType.trim() === ''
+    ));
+
+    if (hasEmptyRow) {
+      alert('Please fill all the fields');
+    } else {
+      console.log("submit button clicked");
+      console.log(tableData);
+       const response =await CreateColoumn(tableData);
+       console.log(response)
+
+
+     
     }
   };
- 
+
   return (
-<div className={`app-container ${submitted ? 'hide-on-submit' : ''}`}>
-<header>
-<h1>Table Definition</h1>
-</header>
- 
+    <div className="dashboard-container">
+      <header>
+        <h1 >Table Definition</h1>
+      </header>
+
+   <TextBox></TextBox>
+
       <main>
-<TextBox />
- 
-        {inputSets.map((set) => (
-<div key={set.id} className={`input-set ${set.id === 1 ? 'fixed-set' : ''}`}>
-<CustomTable onChange={(event) => handleColumnChange(event, set.id)} />
-<Nullable value={set.selectedNullable} onChange={(value) => handleNullableChange(value, set.id)} />
-<DataType value={set.selectedDataType} onChange={(value) => handleDataTypeChange(value, set.id)} />
-            {set.id !== 1 && (
-<FaMinus onClick={() => handleRemoveInputSet(set.id)} className="remove-icon" />
-            )}
-</div>
-        ))}
- 
-        <div className="add-button-container">
-<FaPlus className="add-icon" onClick={handleAddInputSet} />
-<button className="submit-button" onClick={handleSubmit}>
-            Submit
-</button>
-</div>
-</main>
- 
-      {/* Include DynamicTable component */}
-<DynamicTable initialColumns={columnsData} initialData={rowData} />
-</div>
+        <div className="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Column Name</th>
+                <th>Nullable</th>
+                <th>Data Type</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tableData.map((data, index) => (
+                <tr key={index}>
+                  <td>
+                    <input
+                      type='text'
+                      name={`columnName${index}`}
+                      value={data.columnName}
+                      onChange={(e) => handleChange(e, index, 'columnName')}
+                      className="form-control"
+                      placeholder="Column Name"
+                      required
+                    />
+                  </td>
+                  <td>
+                    <select
+                      name={`nullable${index}`}
+                      value={data.nullable}
+                      onChange={(e) => handleChange(e, index, 'nullable')}
+                      className="form-control"
+                    >
+                    <option value="null">Select the Value</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      name={`dataType${index}`}
+                      value={data.dataType}
+                      onChange={(e) => handleChange(e, index, 'dataType')}
+                      className="form-control"
+                    >
+                      <option value="null">Select the value</option>
+                      <option value="Integer">Integer</option>
+                      <option value="String">String</option>
+                      <option value="Number">Number</option>
+                      <option value="Boolean">Boolean</option>
+                      <option value="Character">CHAR(n)</option>
+                      <option value="Character">VARCHAR(n)</option>
+                      <option value="Character">TEXT</option>
+                      <option value="Date">DATE</option>
+                    </select>
+                  </td>
+                  <td>
+                    <button className="action-button plus" onClick={handleAddRow}>
+                      &#43;
+                    </button>
+                    {index > 0 && (
+                      <>
+                        <button className="action-button minus" onClick={() => handleRemoveRow(index)}>
+                          &#8722;
+                        </button>
+                      </>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <button className="submit-button" onClick={handleSubmit}>
+          Submit
+        </button>
+      </main>
+    </div>
   );
 }
- 
+
 export default Dashboard;
+
