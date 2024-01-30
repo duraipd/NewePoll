@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import "./Css/Dashboard.css";
-import { fetch } from "./service/Service";
+import React, {useEffect, useState } from "react";
+import './Css/Dashboard.css';
 import { CreateColoumn } from "./service/Service";
 import Sidebar from "./components/Sidebar";
+import { fetch } from "./service/Service";
+
 
 function Dashboard() {
   const [fetchResponse, setFetchResponse] = useState([]);
@@ -17,13 +18,13 @@ function Dashboard() {
       tableName: "",  // Initialize tableName as an empty string
     },
   ]);
-
+ 
   const handleSelectChange = (e) => {
     const selectedValue = e.target.value;
     setSelectedOption(selectedValue);
     console.log(`Selected Option: ${selectedValue}`);
   };
-
+ 
   const fetchData = async () => {
     try {
       const response = await fetch();
@@ -35,18 +36,18 @@ function Dashboard() {
       setLoading(false);
     }
   };
-
+ 
   useEffect(() => {
     fetchData();
   }, [selectedOption]);
-
+ 
   useEffect(() => {
     // Update tableName in tableData when selectedOption changes
     setTableData((prevData) =>
       prevData.map((row) => ({ ...row, tableName: selectedOption }))
     );
   }, [selectedOption]);
-
+ 
   const handleAddRow = () => {
     setRowCount(rowCount + 1);
     setTableData([
@@ -59,20 +60,20 @@ function Dashboard() {
       },
     ]);
   };
-
+ 
   const handleRemoveRow = (index) => {
     if (rowCount > 1) {
       setRowCount(rowCount - 1);
       setTableData((prevData) => prevData.filter((_, i) => i !== index));
     }
   };
-
+ 
   const handleChange = (event, index, field) => {
     const updatedData = [...tableData];
     updatedData[index][field] = event.target.value;
     setTableData(updatedData);
   };
-
+ 
   const handleSubmit = async () => {
     const hasEmptyRow = tableData.some(
       (data) =>
@@ -80,25 +81,26 @@ function Dashboard() {
         data.nullable.trim() === "" ||
         data.dataType.trim() === ""
     );
-
+ 
     if (hasEmptyRow) {
       alert("Please fill all the fields");
     } else {
       console.log("submit button clicked");
       console.log(tableData);
-
+      console.log(selectedOption);
       const response = await CreateColoumn(tableData);
       console.log(response);
     }
   };
-
-
-  return (
-    <div className="dashboard-container">
-      <header>
-        <h1>Table Definition</h1>
-      </header>
-      <div>
+  return (  
+    <div className="main">
+      <Sidebar />
+      <div className="container">
+        <div className="dashboard-container">
+          <header>
+            <h1>Table Definition</h1>
+          </header>
+          <div>
         <label htmlFor="dropdown">Select a table:</label>
         {loading ? (
           <p>Loading options...</p>
@@ -119,8 +121,9 @@ function Dashboard() {
           </div>
         )}
       </div>
+          
 
-      <main>
+          <main>
         <div className="table-container">
           <table>
             <thead>
@@ -189,26 +192,20 @@ function Dashboard() {
                           onClick={() => handleRemoveRow(index)}
                         >
                           &#8722;
-
                         </button>
-                        {index > 0 && (
-                          <>
-                            <button className="action-button minus" onClick={() => handleRemoveRow(index)}>
-                              &#8722;
-                            </button>
-                          </>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            <button className="submit-button" onClick={handleSubmit}>
-              Submit
-            </button>
-          </main>
+                      </>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+ 
+        <button className="submit-button" onClick={handleSubmit}>
+          Submit
+        </button>
+      </main>
         </div>
       </div>
     </div>
