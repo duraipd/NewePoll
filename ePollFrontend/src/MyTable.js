@@ -9,8 +9,8 @@ const MyTable = (props) => {
 
   const handleButtonClick1 = () => {
     console.log("Button 1 clicked");
-    console.log(table);
-    // setTableData(table);
+    // console.log(table);
+    setTableData(table);
   };
 
   const handleButtonClick2 = async () => {
