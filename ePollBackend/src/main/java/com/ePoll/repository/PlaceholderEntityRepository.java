@@ -7,6 +7,6 @@ import com.ePoll.model.PlaceholderEntity;
 
 
 @Repository
-public interface PlaceholderEntityRepository extends JpaRepository<PlaceholderEntity, Integer> {
+public interface PlaceholderEntityRepository extends JpaRepository<PlaceholderEntity, Long> {
     
 }
