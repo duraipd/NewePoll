@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 
 
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("http://localhost:3001")
 
 
 

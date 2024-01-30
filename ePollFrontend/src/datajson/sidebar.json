@@ -1,3 +1,4 @@
+
 [
     {
         "title": "Data Source",
@@ -5,12 +6,12 @@
         "childrens": [
             {
                 "title": "Table Definition",
-                "icon": "bi-house-fill",
+                "icon": "SubdirectoryArrowRightIcon",
                 "path": "/  "
             },
             {
                 "title": "Data Mapping",
-                "icon": "bi-info-circle-fill",
+                "icon": "SubdirectoryArrowRightIcon",
                 "path": "/"
             }
            
@@ -22,6 +23,7 @@
         "childrens": [
             {
                 "title": "Load Data",
+                "icon":"SubdirectoryArrowRightIcon",
                 "path": "/"
             }            
         ]
