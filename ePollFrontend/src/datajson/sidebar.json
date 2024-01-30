@@ -1,0 +1,33 @@
+
+[
+    {
+        "title": "Data Source",
+        "icon": "bi-gear-fill",
+        "childrens": [
+            {
+                "title": "Table Definition",
+                "icon": "SubdirectoryArrowRightIcon",
+                "path": "/  "
+            },
+            {
+                "title": "Data Mapping",
+                "icon": "SubdirectoryArrowRightIcon",
+                "path": "/"
+            }
+           
+        ]
+    },
+    {
+        "title": "Data Loaders",
+        "icon": "bi-gear-fill",
+        "childrens": [
+            {
+                "title": "Load Data",
+                "icon":"SubdirectoryArrowRightIcon",
+                "path": "/"
+            }            
+        ]
+    }
+   
+   
+]

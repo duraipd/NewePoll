@@ -1,21 +1,26 @@
 .dashboard-container {
     padding: 20px;
+    margin-left: 150px;
+    margin-top: -700px;
   }
   
   .table-container {
     overflow-x: auto;
+    
   }
   
   table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    
   }
   
   th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    
   }
   
   .form-control {
@@ -23,6 +28,7 @@
     padding: 8px;
     box-sizing: border-box;
     margin-bottom: 10px;
+    
   }
   
   .input-group {
@@ -41,6 +47,7 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 10px;
+    
   }
   
   .action-button {
@@ -77,6 +84,7 @@
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
+    width: fit-content;
     font-weight: bolder;
     width: fit-content;
   }

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -6,51 +7,45 @@ import { fetch } from './service/Service';
 import { startTimer, MAX_CONSECUTIVE_FAILURES } from './timer';
 import './login.css';
 
+
 const Login = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
-    user_Name: '',
-    password: '',
-    Latitude: '',
-    longitude: '',
+    user_Name: "",
+    password: "",
+    Latitude: "",
+    longitude: "",
     // userLocation : '',
-    currentDateTime: '',
+    currentDateTime: "",
   });
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [failedAttempts, setFailedAttempts] = useState(0);
   const [showTimer, setShowTimer] = useState(false);
   const [timerSeconds, setTimerSeconds] = useState(10);
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
-    setErrorMessage(' ');
+    setErrorMessage(" ");
   };
 
   const handleSubmit = async (e) => {
-
-
-
     e.preventDefault();
 
     const response = await fetch();
-    console.log(response)
+    console.log(response);
 
     const time = new Date().toDateString;
 
     console.log(time);
 
     if (navigator.geolocation) {
-
       navigator.geolocation.getCurrentPosition(
-
         (position) => {
-
           const { latitude, longitude } = position.coords;
 
           const currentDate = new Date().toLocaleString();
 
           setUser({
-
             ...user,
 
             // userLocation: `Latitude: ${latitude}, Longitude: ${longitude}`,
@@ -58,48 +53,43 @@ const Login = () => {
             longitude: `${longitude}`,
 
             currentDateTime: currentDate,
-
           });
-
         },
 
         (error) => {
-
-          console.error('Error getting user location:', error);
-
+          console.error("Error getting user location:", error);
         }
-
       );
-
     } else {
-
-      console.error('Geolocation is not supported by this browser.');
-
+      console.error("Geolocation is not supported by this browser.");
     }
 
-    console.log('Submitting user data:', user.user_Name, user.password, user.currentDateTime);
-
+    console.log(
+      "Submitting user data:",
+      user.user_Name,
+      user.password,
+      user.currentDateTime
+    );
 
     try {
       const response = await Service.getUser(user);
       var d = response;
       console.log(d);
 
-      if (d === 'Welcome') {
-        navigate('/Dashboard');
-      } else if (d === 'Invalid Credentials' || d === 'waittt Creditenial') {
+      if (d === "Welcome") {
+        navigate("/Dashboard");
+      } else if (d === "Invalid Credentials" || d === "waittt Creditenial") {
         setFailedAttempts((prevAttempts) => prevAttempts + 1);
 
         if (0 === MAX_CONSECUTIVE_FAILURES) {
           setShowTimer(true);
           startTimer(setShowTimer, setTimerSeconds, setFailedAttempts);
         }
-      }
-      else {
-        setErrorMessage('Invaild Credentials')
+      } else {
+        setErrorMessage("Invaild Credentials");
       }
     } catch (error) {
-      console.error('Error submitting user data:', error);
+      console.error("Error submitting user data:", error);
     }
   };
 
@@ -149,20 +139,27 @@ const Login = () => {
                     required
                   />
                 </div>
+
                 <br></br>
                 <br></br>
                 
 
                 {errorMessage && <p className='text-danger'>{errorMessage}</p>}
+
                 <div className="d-grid">
-                  <button type="submit" className="btn btn-primary" disabled={showTimer}>
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={showTimer}
+                  >
                     Sign in
                   </button>
                 </div>
               </form>
               {showTimer && (
                 <p className="text-danger mt-3">
-                  You have entered invalid credentials 3 times. Try again in {timerSeconds} seconds.
+                  You have entered invalid credentials 3 times. Try again in{" "}
+                  {timerSeconds} seconds.
                 </p>
               )}
             </div>

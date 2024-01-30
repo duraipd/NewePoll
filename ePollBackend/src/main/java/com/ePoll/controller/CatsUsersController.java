@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 
 
-@CrossOrigin("http://localhost:3003")
+@CrossOrigin("http://localhost:3000")
 
 
 
@@ -71,12 +71,12 @@ public class CatsUsersController {
         return dynamicTableService.getTableData(tableName);
     }
     
-    @GetMapping("/table")
-    
-    public List<Map<String, Object>> getAllTable(){
-    	System.out.println(dynamicTableService.getAllTable());
-    	return dynamicTableService.getAllTable();
-    }
+//    @GetMapping("/table")
+//    
+//    public List<Map<String, Object>> getAllTable(){
+//    	System.out.println(dynamicTableService.getAllTable());
+//    	return dynamicTableService.getAllTable();
+//    }
    
 	
 

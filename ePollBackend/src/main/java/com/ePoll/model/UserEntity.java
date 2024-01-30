@@ -12,6 +12,6 @@ public class UserEntity {
 //		public String userLocation;
 		public String currentDateTime;
 		public	String tableName;
-		public String colname;
+		public String columnName;
 		public String dataType;
 }

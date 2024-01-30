@@ -26,27 +26,38 @@ public class DynamicTableService {
         return jdbcTemplate.queryForList(sql);
     }
     
-    public List<Map<String, Object>> getAllTable(){
-    	String sql ="SELECT  table_name\r\n"
-    			+ "FROM information_schema.tables\r\n"
-    			+ "WHERE table_schema = 'public';";
-    	
-    	return jdbcTemplate.queryForList(sql);
+    public List<Map<String, Object>> getTableFields(String table){
+    	String sql = "SELECT column_name, data_type, is_nullable " +
+                "FROM INFORMATION_SCHEMA.COLUMNS " +
+                "WHERE table_name = ?";
+   
+   return jdbcTemplate.queryForList(sql, table);
     	
     }
+    
+   
+    public List<Map<String, Object>> getAllTable(){
+        	String sql ="SELECT  table_name\r\n"
+        			+ "FROM information_schema.tables\r\n"
+        			+ "WHERE table_schema = 'public';";
+        	
+        	return jdbcTemplate.queryForList(sql);
+        	
+        }
     
     public List<Map<String, Object>> getTableData(UserEntity values) {
     	
     	String tableName = values.getTableName();
-    	String colname= values.getColname();
+    	String colname= values.getColumnName();
     	String dataType= values.getDataType();
     	
     	String sql = "ALTER TABLE " + tableName+" ADD COLUMN "+colname+" "+dataType;
     	
           return jdbcTemplate.queryForList(sql);
     }
+    
     public void addColumn(String tableName, String columnName, String dataType) {
-        String sql = "ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " " + dataType;
+        String sql = "ALTER TABLE " +tableName  + " ADD COLUMN " + columnName + " " + dataType;
         jdbcTemplate.update(sql);
     }
 
