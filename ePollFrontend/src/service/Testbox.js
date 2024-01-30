@@ -1,35 +1,56 @@
-import React, { useState } from "react";
- 
+import React, { useState, useEffect } from 'react';
+import { fetch } from './Service';
+
 const TextBox = () => {
   const [selectedOption, setSelectedOption] = useState("");
- 
+  const [fetchResponse, setFetchResponse] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const handleSelectChange = (e) => {
     setSelectedOption(e.target.value);
   };
- 
-  const handleAddClick = () => {
-    console.log(`Adding item with option: ${selectedOption}`);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(); 
+      console.log('Fetched Data:', response);
+      setFetchResponse(response);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
+    }
   };
- 
+
+  useEffect(() => {
+    fetchData(); // Fetch data on component mount
+  }, []);
+
+
   return (
     <div>
-      <label htmlFor="dropdown"></label>
-      <select
-        id="dropdown"
-        value={selectedOption}
-        onChange={handleSelectChange}
-      >
-        <option value="option1">cats_users</option>
-        <option value="option2">cats_users1</option>
-        <option value="option3">cats_users2</option>
-        <option value="option4">cats_users3</option>
-        <option value="option5">cats_users</option>
-       
-      </select>
- 
-     
+      <label htmlFor="dropdown">Select a table:</label>
+      {loading ? (
+        <p>Loading options...</p>
+      ) : (
+        <div>
+          <select
+            id="dropdown"
+            value={selectedOption}
+            onChange={handleSelectChange}
+          >
+            <option value="">Select a table</option>
+            {fetchResponse.map((item, index) => (
+              <option key={index} value={item.table_name}>
+                {item.table_name}
+              </option>
+            ))}
+          </select>
+         
+        </div>
+      )}
     </div>
   );
 };
- 
+
 export default TextBox;

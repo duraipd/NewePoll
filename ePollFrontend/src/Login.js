@@ -5,7 +5,7 @@
 
 
 // const Login = () => {
-  
+
 //   const navigate = useNavigate();
 //   const [user, setUser] = useState({
 //     user_Name: '',
@@ -18,7 +18,7 @@
 
 //   const handleSubmit = (e) => {
 //     e.preventDefault();
-    
+
 
 //     console.log('Submitting user data:', user.user_Name, user.password);
 
@@ -29,10 +29,10 @@
 //         console.log(d)
 
 //         if (d==="Welcome") {
-        
+
 //           navigate('/Dashboard');
 //         } else if(d==="Invaild Creditenial") {
-       
+
 //           console.log('Login failed. Handle accordingly.');
 //         }
 //       })
@@ -42,7 +42,7 @@
 //   };
 
 //   useEffect(() => {
-   
+
 //   }, []);
 
 
@@ -110,6 +110,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Service from './service/Service';
+import { fetch } from './service/Service';
 import { startTimer, MAX_CONSECUTIVE_FAILURES } from './timer';
 
 const Login = () => {
@@ -118,11 +119,11 @@ const Login = () => {
     user_Name: '',
     password: '',
     Latitude: '',
-    longitude:'',
+    longitude: '',
     // userLocation : '',
     currentDateTime: '',
   });
-  const [errorMessage ,setErrorMessage]=useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [failedAttempts, setFailedAttempts] = useState(0);
   const [showTimer, setShowTimer] = useState(false);
   const [timerSeconds, setTimerSeconds] = useState(10);
@@ -133,11 +134,18 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
+
+
+
     e.preventDefault();
+
+    const response = await fetch();
+    console.log(response)
+
     const time = new Date().toDateString;
-    
+
     console.log(time);
-   
+
     if (navigator.geolocation) {
 
       navigator.geolocation.getCurrentPosition(
@@ -152,9 +160,9 @@ const Login = () => {
 
             ...user,
 
-          // userLocation: `Latitude: ${latitude}, Longitude: ${longitude}`,
-           Latitude :` ${latitude}`,
-           longitude:`${longitude}`,
+            // userLocation: `Latitude: ${latitude}, Longitude: ${longitude}`,
+            Latitude: ` ${latitude}`,
+            longitude: `${longitude}`,
 
             currentDateTime: currentDate,
 
@@ -176,15 +184,15 @@ const Login = () => {
 
     }
 
-    console.log('Submitting user data:', user.user_Name, user.password ,user.currentDateTime);
-    
+    console.log('Submitting user data:', user.user_Name, user.password, user.currentDateTime);
+
 
     try {
       const response = await Service.getUser(user);
       var d = response;
       console.log(d);
 
-      if (d === 'waittt Creditenial') {
+      if (d === 'Welcome') {
         navigate('/Dashboard');
       } else if (d === 'Invalid Credentials' || d === 'waittt Creditenial') {
         setFailedAttempts((prevAttempts) => prevAttempts + 1);
@@ -194,7 +202,7 @@ const Login = () => {
           startTimer(setShowTimer, setTimerSeconds, setFailedAttempts);
         }
       }
-      else{
+      else {
         setErrorMessage('Invaild Credentials')
       }
     } catch (error) {
@@ -255,7 +263,7 @@ const Login = () => {
               </form>
               {showTimer && (
                 <p className="text-danger mt-3">
-                 You have entered invalid credentials 3 times. Try again in {timerSeconds} seconds.
+                  You have entered invalid credentials 3 times. Try again in {timerSeconds} seconds.
                 </p>
               )}
             </div>

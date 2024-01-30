@@ -11,4 +11,7 @@ public class UserEntity {
 		public String  longitude;
 //		public String userLocation;
 		public String currentDateTime;
+		public	String tableName;
+		public String colname;
+		public String dataType;
 }
