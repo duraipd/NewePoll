@@ -1,111 +1,12 @@
-// import React, { useEffect, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import Service from './service/Service';
 
-// const Login = () => {
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Service from './service/Service';
+import { fetch } from './service/Service';
+import { startTimer, MAX_CONSECUTIVE_FAILURES } from './timer';
+import './login.css';
 
-//   const navigate = useNavigate();
-//   const [user, setUser] = useState({
-//     user_Name: '',
-//     password: '',
-//   });
-
-//   const handleChange = (e) => {
-//     setUser({ ...user, [e.target.name]: e.target.value });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     console.log('Submitting user data:', user.user_Name, user.password);
-
-//     Service.getUser(user)
-//       .then((response) => {
-
-//         var d = response;
-//         console.log(d)
-
-//         if (d==="Welcome") {
-
-//           navigate('/Dashboard');
-//         } else if(d==="Invaild Creditenial") {
-
-//           console.log('Login failed. Handle accordingly.');
-//         }
-//       })
-//       .catch((error) => {
-//         console.error('Error submitting user data:', error);
-//       });
-//   };
-
-//   useEffect(() => {
-
-//   }, []);
-
-//   return (
-//     <div className="container mt-5">
-//       <div className="row justify-content-center">
-//         <div className="col-md-6 col-lg-4">
-//           <div className="card">
-//             <div className="card-body">
-//               <h2 className="card-title text-center mb-4">Sign In</h2>
-//               <form onSubmit={handleSubmit}>
-//                 <div className="mb-3">
-//                   <label htmlFor="user_Name" className="form-label">
-//                     User Name
-//                   </label>
-//                   <input
-//                     type="text"
-//                     className="form-control"
-//                     placeholder="User Name"
-//                     id="user_Name"
-//                     name="user_Name"
-//                     value={user.user_Name}
-//                     onChange={handleChange}
-//                     required
-//                   />
-//                 </div>
-//                 <div className="mb-3">
-//                   <label htmlFor="password" className="form-label">
-//                     Password
-//                   </label>
-//                   <input
-//                     type="password"
-//                     className="form-control"
-//                     placeholder="Password"
-//                     id="password"
-//                     name="password"
-//                     value={user.password}
-//                     onChange={handleChange}
-//                     required
-//                   />
-//                 </div>
-//                 <div className="d-grid">
-//                 <button type="submit" onClick={handleSubmit}  className="btn btn-primary">
-//                     Sign in
-//                   </button>
-//                 </div>
-//               </form>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Login;
-
-// Login.js
-
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Service from "./service/Service";
-import { fetch } from "./service/Service";
-import { startTimer, MAX_CONSECUTIVE_FAILURES } from "./timer";
-import Navbar from "./Navbar";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -197,14 +98,16 @@ const Login = () => {
       setTimerSeconds(10);
     };
   }, []);
+  
 
   return (
-    <div className="container mt-5">
+    <div className='bg-img'>
+    <div className="container mt-5 login-box">
       <div className="row justify-content-center">
         <div className="col-md-6 col-lg-4">
           <div className="card">
             <div className="card-body">
-              <h2 className="card-title text-center mb-4">Sign In</h2>
+              <h1 className="card-title text-center mb-4" >Sign In</h1>
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="user_Name" className="form-label">
@@ -236,7 +139,13 @@ const Login = () => {
                     required
                   />
                 </div>
-                {errorMessage && <p className="text-danger">{errorMessage}</p>}
+
+                <br></br>
+                <br></br>
+                
+
+                {errorMessage && <p className='text-danger'>{errorMessage}</p>}
+
                 <div className="d-grid">
                   <button
                     type="submit"
@@ -257,6 +166,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

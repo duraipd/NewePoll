@@ -23,6 +23,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg demo">
       <div className="container">
+
         <img src={myImage} className="a" />
 
         <button
@@ -50,6 +51,7 @@ const Navbar = () => {
             </div>
           )}
         </div>
+
       </div>
     </nav>
   );

@@ -6,15 +6,30 @@ import Login from "./Login";
 
 const App = () => {
   return (
+
+    <div>
+      <Navbar />
+    
+
+    <Router>
+      <div>
+       
+        
+
     <Router>
       <div>
         <Navbar />
+
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </div>
     </Router>
+
+    </div>
+    
+
   );
 };
 
