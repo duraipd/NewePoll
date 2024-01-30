@@ -115,7 +115,7 @@ const Login = () => {
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control login-control"
                     placeholder="User Name"
                     id="user_Name"
                     name="user_Name"
@@ -130,7 +130,7 @@ const Login = () => {
                   </label>
                   <input
                     type="password"
-                    className="form-control"
+                    className="form-control login-control"
                     placeholder="Password"
                     id="password"
                     name="password"
@@ -141,15 +141,13 @@ const Login = () => {
                 </div>
 
                 <br></br>
-                <br></br>
                 
-
                 {errorMessage && <p className='text-danger'>{errorMessage}</p>}
 
                 <div className="d-grid">
                   <button
                     type="submit"
-                    className="btn btn-primary"
+                    className="btn btn-primary sub-btn"
                     disabled={showTimer}
                   >
                     Sign in
