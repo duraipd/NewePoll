@@ -1,5 +1,6 @@
 package com.ePoll.controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin("http://localhost:3003")
 @RequestMapping("/api/dynamic")
 public class DynamicTableController {
 
@@ -56,10 +58,11 @@ public class DynamicTableController {
     
     @PostMapping("/addColumns")
     public void addColumns(@RequestBody List<UserEntity> columnDetailsList) {
+    	System.out.println(columnDetailsList);
         for (UserEntity columnDetails : columnDetailsList) {
             dynamicTableService.addColumn(
                     columnDetails.getTableName(),
-                    columnDetails.getColname(),
+                    columnDetails.getColumnName(),
                     columnDetails.getDataType()
             );
         }

@@ -1,23 +1,62 @@
-import React, { useState } from "react";
-import './Css/Dashboard.css';
-import TextBox from "./service/TextBox";
+import React, { useEffect, useState } from "react";
+import "./Css/Dashboard.css";
+import { fetch } from "./service/Service";
 import { CreateColoumn } from "./service/Service";
 
 function Dashboard() {
+  const [fetchResponse, setFetchResponse] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [rowCount, setRowCount] = useState(1);
-  const [tableData, setTableData] = useState([{
-    columnName: '',
-    nullable: '',
-    dataType: ''
-  }]);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [tableData, setTableData] = useState([
+    {
+      columnName: "",
+      nullable: "",
+      dataType: "",
+      tableName: "",  // Initialize tableName as an empty string
+    },
+  ]);
+
+  const handleSelectChange = (e) => {
+    const selectedValue = e.target.value;
+    setSelectedOption(selectedValue);
+    console.log(`Selected Option: ${selectedValue}`);
+  };
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch();
+      console.log("Fetched Data:", response);
+      setFetchResponse(response);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [selectedOption]);
+
+  useEffect(() => {
+    // Update tableName in tableData when selectedOption changes
+    setTableData((prevData) =>
+      prevData.map((row) => ({ ...row, tableName: selectedOption }))
+    );
+  }, [selectedOption]);
 
   const handleAddRow = () => {
     setRowCount(rowCount + 1);
-    setTableData([...tableData, {
-      columnName: '',
-      nullable: '',
-      dataType: ''
-    }]);
+    setTableData([
+      ...tableData,
+      {
+        columnName: "",
+        nullable: "",
+        dataType: "",
+        tableName: selectedOption,  // Set tableName when adding a new row
+      },
+    ]);
   };
 
   const handleRemoveRow = (index) => {
@@ -34,32 +73,50 @@ function Dashboard() {
   };
 
   const handleSubmit = async () => {
-    const hasEmptyRow = tableData.some(data => (
-      data.columnName.trim() === '' || 
-      data.nullable.trim() === '' || 
-      data.dataType.trim() === ''
-    ));
+    const hasEmptyRow = tableData.some(
+      (data) =>
+        data.columnName.trim() === "" ||
+        data.nullable.trim() === "" ||
+        data.dataType.trim() === ""
+    );
 
     if (hasEmptyRow) {
-      alert('Please fill all the fields');
+      alert("Please fill all the fields");
     } else {
       console.log("submit button clicked");
       console.log(tableData);
-       const response =await CreateColoumn(tableData);
-       console.log(response)
-
-
-     
+      console.log(selectedOption);
+      const response = await CreateColoumn(tableData);
+      console.log(response);
     }
   };
 
   return (
     <div className="dashboard-container">
       <header>
-        <h1 >Table Definition</h1>
+        <h1>Table Definition</h1>
       </header>
-
-   <TextBox></TextBox>
+      <div>
+        <label htmlFor="dropdown">Select a table:</label>
+        {loading ? (
+          <p>Loading options...</p>
+        ) : (
+          <div>
+            <select
+              id="dropdown"
+              value={selectedOption}
+              onChange={handleSelectChange}
+            >
+              <option value="">Select a table</option>
+              {fetchResponse.map((item, index) => (
+                <option key={index} value={item.table_name}>
+                  {item.table_name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+      </div>
 
       <main>
         <div className="table-container">
@@ -77,10 +134,10 @@ function Dashboard() {
                 <tr key={index}>
                   <td>
                     <input
-                      type='text'
+                      type="text"
                       name={`columnName${index}`}
                       value={data.columnName}
-                      onChange={(e) => handleChange(e, index, 'columnName')}
+                      onChange={(e) => handleChange(e, index, "columnName")}
                       className="form-control"
                       placeholder="Column Name"
                       required
@@ -90,10 +147,10 @@ function Dashboard() {
                     <select
                       name={`nullable${index}`}
                       value={data.nullable}
-                      onChange={(e) => handleChange(e, index, 'nullable')}
+                      onChange={(e) => handleChange(e, index, "nullable")}
                       className="form-control"
                     >
-                    <option value="null">Select the Value</option>
+                      <option value="null">Select the Value</option>
                       <option value="Yes">Yes</option>
                       <option value="No">No</option>
                     </select>
@@ -102,7 +159,7 @@ function Dashboard() {
                     <select
                       name={`dataType${index}`}
                       value={data.dataType}
-                      onChange={(e) => handleChange(e, index, 'dataType')}
+                      onChange={(e) => handleChange(e, index, "dataType")}
                       className="form-control"
                     >
                       <option value="null">Select the value</option>
@@ -117,12 +174,18 @@ function Dashboard() {
                     </select>
                   </td>
                   <td>
-                    <button className="action-button plus" onClick={handleAddRow}>
+                    <button
+                      className="action-button plus"
+                      onClick={handleAddRow}
+                    >
                       &#43;
                     </button>
                     {index > 0 && (
                       <>
-                        <button className="action-button minus" onClick={() => handleRemoveRow(index)}>
+                        <button
+                          className="action-button minus"
+                          onClick={() => handleRemoveRow(index)}
+                        >
                           &#8722;
                         </button>
                       </>
@@ -143,4 +206,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
