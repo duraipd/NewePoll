@@ -6,6 +6,7 @@ import Login from "./Login";
 
 const App = () => {
   return (
+
     <Router>
       <div>
         <Navbar />
@@ -16,7 +17,9 @@ const App = () => {
         </Routes>
       </div>
     </Router>
+
   );
-};
+}
+
 
 export default App;

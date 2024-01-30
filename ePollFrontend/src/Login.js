@@ -107,7 +107,7 @@ const Login = () => {
         <div className="col-md-6 col-lg-4">
           <div className="card">
             <div className="card-body">
-              <h1 className="card-title text-center mb-4" >Sign In</h1>
+              {/* <h1 className="card-title text-center mb-4" >Sign In</h1> */}
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="user_Name" className="form-label">
