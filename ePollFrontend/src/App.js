@@ -6,16 +6,6 @@ import Login from "./Login";
 
 const App = () => {
   return (
-
-    <div>
-      <Navbar />
-    
-
-    <Router>
-      <div>
-       
-        
-
     <Router>
       <div>
         <Navbar />
@@ -26,10 +16,6 @@ const App = () => {
         </Routes>
       </div>
     </Router>
-
-    </div>
-    
-
   );
 };
 
