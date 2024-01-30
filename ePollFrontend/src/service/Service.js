@@ -69,7 +69,9 @@ export const tablefields = async (tablefield) => {
     const response = await axios.get(
       `http://localhost:7777/api/dynamic/table1/${tablefield}`
     );
+
     console.log(response.data);
+    return response.data;
   } catch (error) {
     console.error("Error submitting data:", error);
     throw error;

@@ -30,8 +30,8 @@ function Dashboard() {
     const selectedValue = e.target.value;
     setSelectedOption(selectedValue);
     const res = await tablefields(selectedValue);
-    console.log(res + "******");
-    setTableResponse1(res + "............");
+    console.log(res);
+    setTableResponse1(res);
     const response = await Desctable(selectedValue);
     setTableResponse(response);
 
