@@ -7,7 +7,7 @@ import './App.css';
  
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-secondary">
+    <nav className="navbar navbar-expand-lg ">
       <div className="container">
        <img src={myImage} className='a'/> 
            
