@@ -8,7 +8,8 @@
 }
 
 .navbar{
-  background-color: #202e50;
+  /* background-color: #202e50; */
+ background-image:url(Navbar-Background.png); 
 }
 
 @media (prefers-reduced-motion: no-preference) {
