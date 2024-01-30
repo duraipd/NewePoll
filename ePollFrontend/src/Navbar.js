@@ -4,7 +4,9 @@ import "./App.css";
 import "./Navbar.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import PersonIcon from "@mui/icons-material/Person";
+//
+//
 const Navbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
@@ -42,7 +44,7 @@ const Navbar = () => {
 
         <div className="profile-dropdown">
           <button className="profile-button" onClick={toggleDropdown}>
-            Profile ▼
+            <PersonIcon />
           </button>
           {isDropdownOpen && (
             <div className="dropdown-content">
