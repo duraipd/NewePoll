@@ -71,12 +71,12 @@ public class CatsUsersController {
         return dynamicTableService.getTableData(tableName);
     }
     
-    @GetMapping("/table")
-    
-    public List<Map<String, Object>> getAllTable(){
-    	System.out.println(dynamicTableService.getAllTable());
-    	return dynamicTableService.getAllTable();
-    }
+//    @GetMapping("/table")
+//    
+//    public List<Map<String, Object>> getAllTable(){
+//    	System.out.println(dynamicTableService.getAllTable());
+//    	return dynamicTableService.getAllTable();
+//    }
    
 	
 

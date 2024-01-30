@@ -3,13 +3,20 @@ import "./Css/Dashboard.css";
 import { CreateColoumn } from "./service/Service";
 import Sidebar from "./components/Sidebar";
 import { fetch } from "./service/Service";
-//
-//
+
+
+import MyTable from "./MyTable";
+import "./Css/table.css";
+
+import { Desctable, Tablecol, tablefields } from "./service/Service";
+
 
 function Dashboard() {
   const [fetchResponse, setFetchResponse] = useState([]);
   const [loading, setLoading] = useState(true);
   const [rowCount, setRowCount] = useState(1);
+  const [tableResponse, setTableResponse] = useState([]);
+  const [tableResponse1, setTableResponse1] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
   const [tableData, setTableData] = useState([
     {
@@ -20,15 +27,30 @@ function Dashboard() {
     },
   ]);
 
-  const handleSelectChange = (e) => {
+
+  const handleSelectChange = async (e) => {
+    setSelectedOption("");
+
     const selectedValue = e.target.value;
     setSelectedOption(selectedValue);
+    const res = await tablefields(selectedValue);
+    console.log(res + "******");
+    setTableResponse1(res + "............");
+    const response = await Desctable(selectedValue);
+    setTableResponse(response);
+
+    // Tablecol();
+
+    console.log(response);
     console.log(`Selected Option: ${selectedValue}`);
   };
 
   const fetchData = async () => {
     try {
+      // const response1 = await Desctable(selectedOption);
+      // console.log(response1);
       const response = await fetch();
+
       console.log("Fetched Data:", response);
       setFetchResponse(response);
     } catch (error) {
@@ -76,6 +98,9 @@ function Dashboard() {
   };
 
   const handleSubmit = async () => {
+    const response = await Desctable(selectedOption);
+    console.log(selectedOption);
+    console.log(response);
     const hasEmptyRow = tableData.some(
       (data) =>
         data.columnName.trim() === "" ||
@@ -207,6 +232,7 @@ function Dashboard() {
             </button>
           </main>
         </div>
+        <MyTable tableValue={tableResponse} table={tableResponse1} />
       </div>
     </div>
   );
