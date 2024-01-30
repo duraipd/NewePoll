@@ -2,6 +2,10 @@ package com.ePoll.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+
+import com.ePoll.model.PlaceholderEntity;
+import com.ePoll.model.UserEntity;
+
 import java.util.List;
 import java.util.Map;
 
@@ -31,18 +35,21 @@ public class DynamicTableService {
     	
     }
     
-    public List<Map<String, Object>> getTableData(String tableName, String colname, String dataType) {
+    public List<Map<String, Object>> getTableData(UserEntity values) {
+    	
+    	String tableName = values.getTableName();
+    	String colname= values.getColname();
+    	String dataType= values.getDataType();
     	
     	String sql = "ALTER TABLE " + tableName+" ADD COLUMN "+colname+" "+dataType;
     	
           return jdbcTemplate.queryForList(sql);
     }
-    
-//    public List<Map<String, Object>> tabledesc(String tableName){
-//    	String sql="select column_name,is_nullable,data_type "
-//    			+ "from information_schema.columns where table_name "+tableName;
-//    	return jdbcTemplate.queryForList(sql);
-//    }
+    public void addColumn(String tableName, String columnName, String dataType) {
+        String sql = "ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " " + dataType;
+        jdbcTemplate.update(sql);
+    }
+
     
     
     

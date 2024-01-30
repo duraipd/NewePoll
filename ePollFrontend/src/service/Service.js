@@ -18,13 +18,14 @@ class UserService {
  export const fetch = async ()=>{
 
     try {
-      const response = await axios.post(`http://localhost:7777/api/table`);
+      const response = await axios.get(`http://localhost:7777/api/table`);
       return response.data;
     } catch (error) {
       console.error('Error submitting data:', error);
       throw error;
     }
-  };
+
+  }
 
 
 

@@ -2,9 +2,15 @@ package com.ePoll.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ePoll.model.PlaceholderEntity;
+import com.ePoll.model.UserEntity;
 import com.ePoll.service.DynamicTableService;
 
 import java.util.List;
@@ -40,10 +46,22 @@ public class DynamicTableController {
 //        return dynamicTableService.getTableData(tableName);
 //    }
     
-    @GetMapping("/{tableName}/{colname}/{dataType}")
-    public List<Map<String, Object>> getTableData(@PathVariable String tableName,@PathVariable String colname,@PathVariable  String dataType) {
-    	System.out.println(dynamicTableService.getTableData(tableName, colname, dataType));
-        return dynamicTableService.getTableData(tableName, colname, dataType);
+    @PutMapping("/Addtable")
+    public List<Map<String, Object>> getTableData(@RequestBody UserEntity values) {
+    	
+    	
+    	System.out.println(values.getTableName());
+        return dynamicTableService.getTableData(values);
     }
     
+    @PostMapping("/addColumns")
+    public void addColumns(@RequestBody List<UserEntity> columnDetailsList) {
+        for (UserEntity columnDetails : columnDetailsList) {
+            dynamicTableService.addColumn(
+                    columnDetails.getTableName(),
+                    columnDetails.getColname(),
+                    columnDetails.getDataType()
+            );
+        }
+    }
 }
