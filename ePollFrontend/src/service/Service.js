@@ -27,6 +27,17 @@ class UserService {
 
   }
 
+  export const CreateColoumn = async (tableData) =>{
+
+    try{
+      const response = await axios.post(`http://localhost:7777/api/dynamic/addColumns` ,tableData);
+      console.log(response.data);
+    }catch(error){
+      console.error('Error submitting data:', error);
+      throw error;
+    }
+  }
+
 
 
 
