@@ -3,11 +3,12 @@
 }
 
 .profile-button {
-  padding: 8px 16px;
-  background-color: #3498db;
-  color: white;
+  /* padding: 8px; */
+  background-color: black;
+  color: #fff;
   border: none;
   cursor: pointer;
+  margin-left: -50px;
 }
 
 .dropdown-content {
