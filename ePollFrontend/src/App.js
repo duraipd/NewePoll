@@ -7,14 +7,7 @@ import Login from "./Login";
 const App = () => {
   return (
 
-    <div>
-      <Navbar />
-    
-
-    <Router>
-      <div>
-       
-        
+  
 
     <Router>
       <div>
@@ -27,10 +20,11 @@ const App = () => {
       </div>
     </Router>
 
-    </div>
+ 
     
 
   );
-};
+}
+
 
 export default App;
