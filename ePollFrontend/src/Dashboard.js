@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Css/Dashboard.css";
 import { fetch } from "./service/Service";
 import { CreateColoumn } from "./service/Service";
+import Sidebar from "./components/Sidebar";
 
 function Dashboard() {
   const [fetchResponse, setFetchResponse] = useState([]);
@@ -85,11 +86,12 @@ function Dashboard() {
     } else {
       console.log("submit button clicked");
       console.log(tableData);
-      console.log(selectedOption);
+
       const response = await CreateColoumn(tableData);
       console.log(response);
     }
   };
+
 
   return (
     <div className="dashboard-container">
@@ -187,20 +189,28 @@ function Dashboard() {
                           onClick={() => handleRemoveRow(index)}
                         >
                           &#8722;
-                        </button>
-                      </>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
 
-        <button className="submit-button" onClick={handleSubmit}>
-          Submit
-        </button>
-      </main>
+                        </button>
+                        {index > 0 && (
+                          <>
+                            <button className="action-button minus" onClick={() => handleRemoveRow(index)}>
+                              &#8722;
+                            </button>
+                          </>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <button className="submit-button" onClick={handleSubmit}>
+              Submit
+            </button>
+          </main>
+        </div>
+      </div>
     </div>
   );
 }
