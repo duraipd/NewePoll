@@ -3,11 +3,13 @@ import "./Css/Dashboard.css";
 import { CreateColoumn } from "./service/Service";
 import Sidebar from "./components/Sidebar";
 import { fetch } from "./service/Service";
-// import MyTable from "./MyTable";
+
+
 import MyTable from "./MyTable";
 import "./Css/table.css";
-// import { Desctable, Tablecol } from "./service/Service";
+
 import { Desctable, Tablecol, tablefields } from "./service/Service";
+
 
 function Dashboard() {
   const [fetchResponse, setFetchResponse] = useState([]);
@@ -25,8 +27,10 @@ function Dashboard() {
     },
   ]);
 
+
   const handleSelectChange = async (e) => {
     setSelectedOption("");
+
     const selectedValue = e.target.value;
     setSelectedOption(selectedValue);
     const res = await tablefields(selectedValue);
