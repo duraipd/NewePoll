@@ -7,7 +7,7 @@ import './App.css';
  
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg ">
+    <nav className="navbar navbar-expand-lg demo">
       <div className="container">
        <img src={myImage} className='a'/> 
            
