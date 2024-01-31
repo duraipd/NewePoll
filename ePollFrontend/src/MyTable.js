@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // import { Desctable } from "./service/Service";
 import { Desctable } from "./service/Service";
+import './Css/table.css'
 
 const MyTable = (props) => {
   const { tableValue, table } = props;
@@ -45,14 +46,14 @@ const MyTable = (props) => {
   ];
 
   return (
-    <div className="tab">
+    <div className="taba">
       <h2></h2>
       <div>
-        <button onClick={handleButtonClick1} className="tab2">
+        <button onClick={handleButtonClick1} className="tabab">
           {" "}
           Table Definition
         </button>
-        <button onClick={handleButtonClick2} className="tab3">
+        <button onClick={handleButtonClick2} className="tabac">
           Table Data
         </button>
       </div>

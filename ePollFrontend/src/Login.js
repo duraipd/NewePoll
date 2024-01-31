@@ -77,8 +77,10 @@ const Login = () => {
       console.log(d);
 
       if (d === "Welcome") {
+
         navigate("/Dashboard");
-      } else if ( d === "waittt Creditenial") {
+      }  else if ( d === "waittt Creditenial") {
+
         setFailedAttempts((prevAttempts) => prevAttempts + 1);
 
         if (0 === MAX_CONSECUTIVE_FAILURES) {
