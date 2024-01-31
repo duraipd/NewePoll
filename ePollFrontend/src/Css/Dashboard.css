@@ -146,13 +146,15 @@
   padding: 10px;
   color: white;
   width: 100%;
-  height: fit-content;
+  height: 50px;
   font-size: larger;
-text-align: center;
+   text-align: center;
+   border: 2px solid black;
 
 font-family: "DM Sans", sans-serif;
 font-optical-sizing: auto;
 font-style: normal;
+
 }
 
 .table-container {
@@ -323,4 +325,10 @@ th, td {
     font-optical-sizing: auto;
     font-style: normal;
 
+}
+
+
+.error-message {
+  color: red;
+  font-size: 14px;
 }
