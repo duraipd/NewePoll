@@ -1,7 +1,8 @@
 .taba {
-  margin-left: 146px;
+  /* margin-left: 16px; */
  margin-top: 48px;
-width: 97%;
+width: 100%;
+
 
 }
   
@@ -9,12 +10,14 @@ width: 97%;
    width: 50%;
    background-color: #202e50;
    color: #fff;
+   height: 50px;
   
  }
  .tabac {
    width: 50%;
    background-color: #202e50;
    color: #fff;
+   height: 50px;
  }
  /* table.css */
   

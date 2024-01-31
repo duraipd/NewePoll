@@ -3,11 +3,8 @@ import "./Css/Dashboard.css";
 import { CreateColoumn } from "./service/Service";
 import Sidebar from "./components/Sidebar";
 import { fetch } from "./service/Service";
-
-
 import MyTable from "./MyTable";
 import "./Css/table.css";
-
 import { Desctable, Tablecol, tablefields } from "./service/Service";
 
 
@@ -121,12 +118,15 @@ function Dashboard() {
   return (
     <div className="main">
       <Sidebar />
-      <div className="container">
+      <div className="container full">
         <div className="dashboard-container">
-          <header>
-            <h1>Table Definition</h1>
+        
+          <header className="h1table">
+            <h2>Table Definition</h2>
           </header>
-          <div>
+          
+          <br></br>
+          <div className="droptable">
             <label htmlFor="dropdown">Select a table:</label>
             {loading ? (
               <p>Loading options...</p>
@@ -149,10 +149,10 @@ function Dashboard() {
           </div>
 
           <main>
-            <div className="table-container">
+            <div className="table-container columndesign">
               <table>
                 <thead>
-                  <tr>
+                  <tr className="headerdesign">
                     <th>Column Name</th>
                     <th>Nullable</th>
                     <th>Data Type</th>
@@ -227,14 +227,14 @@ function Dashboard() {
               </table>
             </div>
 
-            <button className="submit-button" onClick={handleSubmit}>
+            <button className="submit-button submitdesign" onClick={handleSubmit}>
               Submit
             </button>
           </main>
         </div>
         <MyTable tableValue={tableResponse} table={tableResponse1} />
       </div>
-    </div>
+     </div>
   );
 }
 
