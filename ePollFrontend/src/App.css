@@ -1,9 +1,6 @@
-
-
-.navbar{
-
+.navbar {
   background-color: #14515e;
- /* background-image:url(Navbar-Background.png);  */
+  /* background-image:url(Navbar-Background.png);  */
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -23,84 +20,86 @@
   color: white;
 }
 
-
-
-
-
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-  
- html, body{ 
+
+html,
+body {
   height: 100vh;
 }
-body{
+body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
- color:black; 
+  color: black;
 }
- 
-.main1{
+
+.main1 {
   display: flex;
   height: 100vh;
 }
-.sidebar{
- 
+.sidebar {
   width: 250px;
   flex-shrink: 0;
-  background-color:#202e50;
+  background-color: #202e50;
   height: 700px;
   overflow: auto;
 }
- 
- 
-.sidebar-item{
-  padding: .75em 1em;
+
+.sidebar-item {
+  padding: 0.75em 1em;
   display: block;
-  transition: background-color .15s;
+  transition: background-color 0.15s;
   border-radius: 5px;
 }
-.sidebar-item:hover{
-  background-color: rgba(255, 255, 255, .1);
+.sidebar-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
- 
-.sidebar-title{
+
+.sidebar-title {
   display: flex;
   font-size: 1.2em;
   justify-content: space-between;
-  color:white;
+  color: white;
 }
-.sidebar-title span i{
+.sidebar-title span i {
   display: inline-block;
   width: 1.5em;
 }
-.sidebar-title .toggle-btn{
+.sidebar-title .toggle-btn {
   cursor: pointer;
-  transition: transform .3s;
+  transition: transform 0.3s;
 }
-.sidebar-item.open > .sidebar-title .toggle-btn{
+.sidebar-item.open > .sidebar-title .toggle-btn {
   transform: rotate(180deg);
 }
-.sidebar-content{
-  padding-top: .25em;
+.sidebar-content {
+  padding-top: 0.25em;
   height: 0;
-  overflow: hidden;
+  overflow: auto;
 }
-.sidebar-item.open > .sidebar-content{
+.sidebar-item.open > .sidebar-content {
   height: auto;
 }
- 
-.sidebar-item.plain{
-  color:white;
+
+.sidebar-item.plain {
+  color: white;
   text-decoration: none;
 }
-.sidebar-item.plain:hover{
+.sidebar-item.plain:hover {
   text-decoration: underline;
 }
-.sidebar-item.plain i{
+.sidebar-item.plain i {
   display: inline-block;
   width: 1.7em;
 }
-
+body.expand-sidebar .sidebar {
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+.container.full {
+  height: 100vh;
+  overflow: auto;
+}
