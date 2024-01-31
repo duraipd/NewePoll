@@ -47,7 +47,8 @@
  }
   
  th, td {
-   border: 1px solid #E1D9D1;
+  border: 1px solid #C9C0BB;
+   /* border: 1px solid #E1D9D1; */
    text-align: left;
    padding: 8px;
  }
