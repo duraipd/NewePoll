@@ -77,7 +77,7 @@ const Login = () => {
       console.log(d);
 
       if (d === "Welcome") {
-        navigate("/Dashboard");
+        navigate("/Tabledefinition");
       } else if (d === "Invalid Credentials" || d === "waittt Creditenial") {
         setFailedAttempts((prevAttempts) => prevAttempts + 1);
 
