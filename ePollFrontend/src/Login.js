@@ -117,9 +117,10 @@ const Login = () => {
                   <label htmlFor="user_Name" className="form-label">
                     User Name
                   </label>
-                  <input
+                  <input 
                     type="text"
                     className="form-control login-control"
+
                     placeholder="User Name"
                     id="user_Name"
                     name="user_Name"

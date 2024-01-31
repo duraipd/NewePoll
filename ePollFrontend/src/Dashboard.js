@@ -156,7 +156,7 @@ function Dashboard() {
                     <th className="headerdesign">Column Name</th>
                     <th className="headerdesign">Nullable</th>
                     <th  className="headerdesign">Data Type</th>
-                    <th  className="headerdesign">Actions</th>
+                    <th >Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -239,7 +239,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
-
-
-
