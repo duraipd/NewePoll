@@ -147,7 +147,12 @@
   color: white;
   width: 100%;
   height: fit-content;
+  font-size: larger;
 text-align: center;
+
+font-family: "DM Sans", sans-serif;
+font-optical-sizing: auto;
+font-style: normal;
 }
 
 .table-container {
@@ -166,7 +171,7 @@ th, td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
-  border: 1px solid black;
+  border: 1px solid rgb(14, 12, 12);
 }
 
 .form-control {
@@ -231,10 +236,9 @@ th, td {
   width: fit-content;
   font-weight: bolder;
   margin-left: 45%;
-  font-family: "Source Code Pro", monospace;
-  font-optical-sizing: auto;
-  font-weight: bold;
-  font-style: normal;
+  font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
 
 }
 
@@ -272,6 +276,8 @@ th, td {
 .droptable{
   margin-top: 30px;
   margin-left: 50px;
+  
+  
 }
 
 .columndesign{
@@ -304,17 +310,15 @@ th, td {
 }
 
 .selecttable{
-  font-family: "Source Code Pro", monospace;
-  font-optical-sizing: auto;
-  font-weight: bold;
-  font-style: normal;
+  font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
   margin-bottom: 5px;
 }
 .headerdesign{
-  text-align: center;
-  font-family: "Source Code Pro", monospace;
-  font-optical-sizing: auto;
-  font-weight: bold;
-  font-style: normal;
+  
+  font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
 
 }

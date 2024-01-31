@@ -1,9 +1,12 @@
-.taba {
-  /* margin-left: 16px; */
- margin-top: 48px;
-width: 100%;
 
 
+.tabad{
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 50px;
+}
+.tablebutton{
+  width: 100%;
 }
   
  .tabab {
