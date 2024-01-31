@@ -144,7 +144,7 @@ const Login = () => {
                   />
                 </div>
 
-                <br></br>
+                
                 {showTimer && (
                 <p className="text-danger mt-3">
                   You have entered invalid credentials 3 times. Try again in{" "}
