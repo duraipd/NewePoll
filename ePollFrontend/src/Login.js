@@ -78,7 +78,7 @@ const Login = () => {
 
       if (d === "Welcome") {
 
-        navigate("/Dashboard");
+        navigate("/Tabledefinition");
       }  else if ( d === "waittt Creditenial") {
 
         setFailedAttempts((prevAttempts) => prevAttempts + 1);
