@@ -1,10 +1,8 @@
 package com.ePoll.service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import com.ePoll.model.PlaceholderEntity;
 import com.ePoll.model.UserEntity;
 
 import java.util.List;
@@ -57,24 +55,15 @@ public class DynamicTableService {
           return jdbcTemplate.queryForList(sql);
     }
     
-  public String addColumn(String tableName, String columnName, String dataType){
+  public void addColumn(String tableName, String columnName, String dataType){
     	
-    	try {
+    	
     		
         String sql = "ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " " + dataType;
  
-        jdbcTemplate.update(sql); //which is used to update the data in Table.
+        jdbcTemplate.update(sql);
        	 
     	}
-    	
-    	catch(DataAccessException e)
-    	{
-    		
-    	}
-    	  	
-    	      return "Column "+columnName+" already exists in the Table";
-     
-    }
 
     
   }
