@@ -3,7 +3,9 @@
 
 .bg-img {
 
-  background: url('new\ bg4.png') center/cover no-repeat;
+  /* background: url('new\ bg4.png') center/cover no-repeat; */
+  background-color: #C9C0BB;
+
   height: 92.5vh;
   display: flex;
   align-items: center;
@@ -59,7 +61,7 @@
 
 }
 .form-label {
-    color: white;
+    color: black;
   }
  
 .sub-btn {
@@ -72,7 +74,7 @@
    width: 100px; 
   /* padding: 10px; */
   cursor: pointer;
-  color: white;
+  color: black;
   backdrop-filter: blur(10px);
   font-weight: bold;
   box-shadow: -9px 6px 9px rgba(50, 0, 0, 0.1);
