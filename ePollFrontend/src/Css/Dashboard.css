@@ -147,6 +147,7 @@
   color: white;
   width: 100%;
   height: fit-content;
+text-align: center;
 }
 
 .table-container {
@@ -157,12 +158,15 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  border: 1px solid black;
+
 }
 
 th, td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
+  border: 1px solid black;
 }
 
 .form-control {
@@ -227,6 +231,11 @@ th, td {
   width: fit-content;
   font-weight: bolder;
   margin-left: 45%;
+  font-family: "Source Code Pro", monospace;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+
 }
 
 .navbar {
@@ -292,4 +301,20 @@ th, td {
   color: white;
   border: none;
   cursor: pointer;
+}
+
+.selecttable{
+  font-family: "Source Code Pro", monospace;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+  margin-bottom: 5px;
+}
+.headerdesign{
+  text-align: center;
+  font-family: "Source Code Pro", monospace;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+
 }

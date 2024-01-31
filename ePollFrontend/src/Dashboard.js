@@ -124,7 +124,7 @@ function Dashboard() {
 
           <br></br>
           <div className="droptable">
-            <label htmlFor="dropdown">Select a table:</label>
+            <label htmlFor="dropdown" className="selecttable" >Select table:</label>
             {loading ? (
               <p>Loading options...</p>
             ) : (
@@ -134,7 +134,7 @@ function Dashboard() {
                   value={selectedOption}
                   onChange={handleSelectChange}
                 >
-                  <option value="">Select a table</option>
+                  <option value="">Select table</option>
                   {fetchResponse.map((item, index) => (
                     <option key={index} value={item.table_name}>
                       {item.table_name}
@@ -149,11 +149,11 @@ function Dashboard() {
             <div className="table-container columndesign">
               <table>
                 <thead>
-                  <tr className="headerdesign">
-                    <th>Column Name</th>
-                    <th>Nullable</th>
-                    <th>Data Type</th>
-                    <th>Actions</th>
+                  <tr >
+                    <th className="headerdesign">Column Name</th>
+                    <th className="headerdesign">Nullable</th>
+                    <th  className="headerdesign">Data Type</th>
+                    <th  className="headerdesign">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -239,3 +239,7 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
+
+
+
