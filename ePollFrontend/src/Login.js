@@ -77,15 +77,19 @@ const Login = () => {
       console.log(d);
 
       if (d === "Welcome") {
-        navigate("/Tabledefinition");
-      } else if (d === "Invalid Credentials" || d === "waittt Creditenial") {
+
+        navigate("/Dashboard");
+      }  else if ( d === "waittt Creditenial") {
+
         setFailedAttempts((prevAttempts) => prevAttempts + 1);
 
         if (0 === MAX_CONSECUTIVE_FAILURES) {
           setShowTimer(true);
+          setErrorMessage('')
           startTimer(setShowTimer, setTimerSeconds, setFailedAttempts);
         }
-      } else {
+      } else if(d==="invaild credtinal") {
+        
         setErrorMessage("Invaild Credentials");
       }
     } catch (error) {
@@ -141,6 +145,12 @@ const Login = () => {
                 </div>
 
                 <br></br>
+                {showTimer && (
+                <p className="text-danger mt-3">
+                  You have entered invalid credentials 3 times. Try again in{" "}
+                  {timerSeconds} seconds.
+                </p>
+              )}
                 
                 {errorMessage && <p className='text-danger'>{errorMessage}</p>}
 
@@ -154,12 +164,7 @@ const Login = () => {
                   </button>
                 </div>
               </form>
-              {showTimer && (
-                <p className="text-danger mt-3">
-                  You have entered invalid credentials 3 times. Try again in{" "}
-                  {timerSeconds} seconds.
-                </p>
-              )}
+            
             </div>
           </div>
         </div>
