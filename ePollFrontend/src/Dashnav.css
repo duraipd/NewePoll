@@ -1,16 +1,16 @@
 .profile-dropdown {
   position: relative;
 }
-
+ 
 .profile-button {
   padding: 1px;
-  background-color: black;
+  background-color: #454545;
   color: #fff;
   border: none;
   cursor: pointer;
   margin-left: -50px;
 }
-
+ 
 .dropdown-content {
   position: absolute;
   top: 100%;
@@ -22,7 +22,7 @@
   padding: 3px;
   z-index: 1;
 }
-
+ 
 .dropdown-content button {
   width: 100%;
   padding: 1px;
@@ -30,12 +30,12 @@
   background-color: transparent;
   cursor: pointer;
 }
-
+ 
 .dropdown-content button:hover {
   background-color: #ddd;
 }
-
-
+ 
+ 
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -43,4 +43,10 @@
   padding: 10px;
   background-color: #454545;
   color: white;
+}
+.demo1{
+  padding: 4px;
+}
+.b{
+  margin-left: 10px;
 }

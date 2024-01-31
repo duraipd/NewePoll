@@ -7,38 +7,28 @@ import "./Dashnav.css";
 const Dasnav = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
-
+ 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
-
+ 
   const handledLogout = () => {
     console.log("User logged out");
     setDropdownOpen(false);
     localStorage.clear();
     navigate("/");
   };
-
+ 
   return (
-    <nav className="navbar navbar-expand-lg demo ">
+    <nav className="navbar navbar-expand-lg demo1 ">
       <div className="container">
-        <img src={myImage} className="a" />
-
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+        <img src={myImage} className="b" />
+ 
+       
       </div>
       <div className="navbar">
         <div className="navbar-items"></div>
-
+ 
         <div className="profile-dropdown">
           <button className="profile-button" onClick={toggleDropdown}>
             <PersonIcon />
@@ -53,5 +43,5 @@ const Dasnav = () => {
     </nav>
   );
 };
-
+ 
 export default Dasnav;
