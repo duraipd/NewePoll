@@ -64,9 +64,9 @@
   }
  
 .sub-btn {
- justify-content: center;
-  /* background: rgba(31, 128, 226, 0.7);  */
-  background: linear-gradient(45deg, #d36605f6, #f2bf52);
+  justify-content: center;
+  /* background: linear-gradient(45deg, #d36605f6, #f2bf52); */
+  background: #C19A6B;
   border: none;
   border-radius: 30px;
   border-color: 2px solid #14515e;
@@ -98,9 +98,19 @@
   
 }
 .text-danger {
-  font-size: large;
+  font-size: medium;
   color: #dc3545;
   text-align: center;
   font-weight: 600;
+
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
   /* margin-top: 10px;  */
+}
+input[type=text]:focus {
+  background-color:#E9E4D4;
+}
+input[type=password]:focus {
+  background-color: #E9E4D4;
 }
