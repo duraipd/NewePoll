@@ -11,7 +11,7 @@ const MyTable = (props) => {
 
   return (
     <div >
-      <h2></h2>
+      
       <div>
         <button onClick={() => setDisplayStaticTable(true)} className="tabab">
           {" "}
