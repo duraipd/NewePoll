@@ -10,7 +10,7 @@ const MyTable = (props) => {
   console.log("tableValue", tableValue);
 
   return (
-    <div className="taba">
+    <div >
       <h2></h2>
       <div>
         <button onClick={() => setDisplayStaticTable(true)} className="tabab">
@@ -21,6 +21,7 @@ const MyTable = (props) => {
           Table Data
         </button>
       </div>
+      <div className="tabad">
       {error && <p>Error: {error}</p>}
       {table.length > 0 && (
         <table border="1">
@@ -55,7 +56,9 @@ const MyTable = (props) => {
             ))}
           </tbody>
         </table>
+        
       )}
+    </div>
     </div>
   );
 };
