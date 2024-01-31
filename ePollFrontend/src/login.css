@@ -26,19 +26,21 @@
   
 } 
 
-/*h2{
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
-  font-weight: bolder;
-}*/
+
 .card-title {
     color:white;
- 
+   
     
   }
+ 
 .card-body {
     color: white;
-    font-size: x-large;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    .ubuntu-bold {
+      font-family: "Ubuntu", sans-serif;
+      font-weight: bold;
+      font-style: medium;
+    }
+     
    
 }
  
@@ -70,6 +72,12 @@
   backdrop-filter: blur(10px);
   font-weight: bold;
   box-shadow: -9px 6px 9px rgba(50, 0, 0, 0.1);
+  .ubuntu-light {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+ 
   
   
 }
@@ -86,7 +94,9 @@
   margin-top: 50px;
 }
 .text-danger {
-  font-size: small;
-  color: #dc3545; 
-  margin-top: 10px; 
+  font-size: medium;
+  color: #dc3545;
+  font-weight: bold; 
+  text-align: center;
+  /* margin-top: 10px;  */
 }
