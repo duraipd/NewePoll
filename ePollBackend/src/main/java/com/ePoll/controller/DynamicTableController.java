@@ -65,11 +65,22 @@ public class DynamicTableController {
 	}
 
 	@PostMapping("/addColumns")
-	public void addColumns(@RequestBody List<UserEntity> columnDetailsList) {
-		System.out.println(columnDetailsList);
-		for (UserEntity columnDetails : columnDetailsList) {
-			dynamicTableService.addColumn(columnDetails.getTableName(), columnDetails.getColumnName(),
-					columnDetails.getDataType());
-		}
-	}
+    @ResponseBody
+     public String addColumns(@RequestBody List<UserEntity> columnDetailsList) {
+    	String error="";
+    
+        for (UserEntity columnDetails : columnDetailsList) {
+        	
+        	error=dynamicTableService.addColumn(
+                    columnDetails.getTableName(),
+                    columnDetails.getColumnName(),
+                    columnDetails.getDataType()
+         
+                   );
+        }
+
+ 
+      return error;
+    	
+       }
 }
