@@ -147,7 +147,20 @@
   color: white;
   width: 100%;
   height: fit-content;
+  font-size: larger;
 text-align: center;
+
+/* font-family: "Lora", serif;
+font-optical-sizing: auto;
+font-weight: bolder;
+font-style: normal; */
+
+font-family: "DM Sans", sans-serif;
+font-optical-sizing: auto;
+font-weight: bolder;
+font-style: normal;
+
+
 }
 
 .table-container {
@@ -272,6 +285,9 @@ th, td {
 .droptable{
   margin-top: 30px;
   margin-left: 50px;
+  
+ 
+  
 }
 
 .columndesign{
@@ -316,5 +332,6 @@ th, td {
   font-optical-sizing: auto;
   font-weight: bold;
   font-style: normal;
+
 
 }
