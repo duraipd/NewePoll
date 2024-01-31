@@ -1,13 +1,16 @@
 import React from 'react';
 import Sidebar from './components/Sidebar';
+import Dashboard from './Dashboard';
 
 
-const Tabledefinition = () => {
+const Datamapping = () => {
   return (
     <div>
+       
       <Sidebar />
+     
     </div>
   );
 };
 
-export default Tabledefinition;
+export default Datamapping;
