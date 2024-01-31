@@ -4,6 +4,9 @@ import Navbar from "./Navbar";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
 import Dasnav from "./Dashnav";
+import Tabledefinition from "./Tabledefinition";
+import Datamapping from "./Datamapping";
+import Loaddata from "./Loaddata";
 
 const App = () => {
   return (
@@ -27,6 +30,35 @@ const App = () => {
             </>
           }
         />
+        <Route
+          path="/Tabledefinition/*"
+          element={
+            <>
+              <Dasnav />
+              <Tabledefinition />
+            </>
+          }
+        />
+        <Route
+          path="/Datamapping/*"
+          element={
+            <>
+              <Dasnav />
+              <Datamapping />
+            </>
+          }
+        />
+          <Route
+          path="/Loaddata/*"
+          element={
+            <>
+              <Dasnav />
+              <Loaddata />
+            </>
+          }
+        />
+
+
       </Routes>
     </Router>
   );
