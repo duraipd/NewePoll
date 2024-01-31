@@ -23,7 +23,10 @@
   box-shadow: -20px 20px 9px rgba(50, 50, 50, 50);
   height: 400px;
  
-  
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+ 
 } 
 
 
@@ -34,13 +37,13 @@
   }
  
 .card-body {
+ 
     color: white;
-    .ubuntu-bold {
-      font-family: "Ubuntu", sans-serif;
-      font-weight: bold;
-      font-style: medium;
-    }
-     
+    font-size: large;
+
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
    
 }
  
@@ -52,6 +55,7 @@
   margin-bottom: 10px;
   padding: 10px;
   backdrop-filter: blur(10px); 
+  font-size: medium;
 
 }
 .form-label {
@@ -72,12 +76,9 @@
   backdrop-filter: blur(10px);
   font-weight: bold;
   box-shadow: -9px 6px 9px rgba(50, 0, 0, 0.1);
-  .ubuntu-light {
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 300;
-  font-style: normal;
-}
- 
+
+
+  
   
   
 }
@@ -92,11 +93,12 @@
   align-items: center;
   justify-content: center;
   margin-top: 50px;
+  
 }
 .text-danger {
   font-size: medium;
   color: #dc3545;
-  font-weight: bold; 
+
   text-align: center;
   /* margin-top: 10px;  */
 }

@@ -2,16 +2,16 @@
 [
     {
         "title": "Data Source",
-        "icon": "bi-gear-fill",
+        "icon": "",
         "childrens": [
             {
                 "title": "Table Definition",
-                "icon": "SubdirectoryArrowRightIcon",
+                "icon": "",
                 "path": "/Dashboard"
             },
             {
                 "title": "Data Mapping",
-                "icon": "SubdirectoryArrowRightIcon",
+                "icon": "",
                 "path": "/Datamapping"
             }
            
@@ -19,11 +19,11 @@
     },
     {
         "title": "Data Loaders",
-        "icon": "bi-gear-fill",
+        "icon": "",
         "childrens": [
             {
                 "title": "Load Data",
-                "icon":"SubdirectoryArrowRightIcon",
+                "icon":"",
                 "path": "/Loaddata"
             }            
         ]

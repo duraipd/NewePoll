@@ -20,6 +20,7 @@ function Dashboard() {
       nullable: "",
       dataType: "",
       tableName: "", // Initialize tableName as an empty string
+      
     },
   ]);
 
@@ -111,6 +112,8 @@ function Dashboard() {
       console.log(selectedOption);
       const response = await CreateColoumn(tableData);
       console.log(response);
+      alert(response);
+
     }
   };
   return (
@@ -119,7 +122,7 @@ function Dashboard() {
       <div className="container full">
         <div className="dashboard-container">
           <header className="h1table">
-            <h2>Table Definition</h2>
+            <h3>Table Definition</h3>
           </header>
 
           <br></br>
@@ -153,7 +156,7 @@ function Dashboard() {
                     <th className="headerdesign">Column Name</th>
                     <th className="headerdesign">Nullable</th>
                     <th  className="headerdesign">Data Type</th>
-                    <th  className="headerdesign">Actions</th>
+                    <th >Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -239,7 +242,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
-
-
-

@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("http://localhost:3002")
 @RequestMapping("/api/dynamic")
 public class DynamicTableController {
 
@@ -65,11 +65,22 @@ public class DynamicTableController {
 	}
 
 	@PostMapping("/addColumns")
-	public void addColumns(@RequestBody List<UserEntity> columnDetailsList) {
-		System.out.println(columnDetailsList);
-		for (UserEntity columnDetails : columnDetailsList) {
-			dynamicTableService.addColumn(columnDetails.getTableName(), columnDetails.getColumnName(),
-					columnDetails.getDataType());
-		}
-	}
+    @ResponseBody
+     public String addColumns(@RequestBody List<UserEntity> columnDetailsList) {
+    	String error="";
+    
+        for (UserEntity columnDetails : columnDetailsList) {
+        	
+        	error=dynamicTableService.addColumn(
+                    columnDetails.getTableName(),
+                    columnDetails.getColumnName(),
+                    columnDetails.getDataType()
+         
+                   );
+        }
+
+ 
+      return error;
+    	
+       }
 }
