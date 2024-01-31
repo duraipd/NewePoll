@@ -3,7 +3,7 @@
 }
 
 .profile-button {
-  padding: 4px;
+  padding: 1px;
   background-color: black;
   color: #fff;
   border: none;
@@ -25,7 +25,7 @@
 
 .dropdown-content button {
   width: 100%;
-  padding: 4px;
+  padding: 1px;
   border: none;
   background-color: transparent;
   cursor: pointer;

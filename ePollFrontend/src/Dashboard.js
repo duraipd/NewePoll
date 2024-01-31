@@ -7,7 +7,6 @@ import MyTable from "./MyTable";
 import "./Css/table.css";
 import { Desctable, Tablecol, tablefields } from "./service/Service";
 
-
 function Dashboard() {
   const [fetchResponse, setFetchResponse] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,7 +22,6 @@ function Dashboard() {
       tableName: "", // Initialize tableName as an empty string
     },
   ]);
-
 
   const handleSelectChange = async (e) => {
     setSelectedOption("");
@@ -120,11 +118,10 @@ function Dashboard() {
       <Sidebar />
       <div className="container full">
         <div className="dashboard-container">
-        
           <header className="h1table">
             <h2>Table Definition</h2>
           </header>
-          
+
           <br></br>
           <div className="droptable">
             <label htmlFor="dropdown">Select a table:</label>
@@ -227,14 +224,17 @@ function Dashboard() {
               </table>
             </div>
 
-            <button className="submit-button submitdesign" onClick={handleSubmit}>
+            <button
+              className="submit-button submitdesign"
+              onClick={handleSubmit}
+            >
               Submit
             </button>
           </main>
         </div>
         <MyTable tableValue={tableResponse} table={tableResponse1} />
       </div>
-     </div>
+    </div>
   );
 }
 

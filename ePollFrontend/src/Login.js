@@ -1,12 +1,10 @@
-
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Service from './service/Service';
-import { fetch } from './service/Service';
-import { startTimer, MAX_CONSECUTIVE_FAILURES } from './timer';
-import './login.css';
-
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Service from "./service/Service";
+import { fetch } from "./service/Service";
+import { startTimer, MAX_CONSECUTIVE_FAILURES } from "./timer";
+import "./login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -77,19 +75,16 @@ const Login = () => {
       console.log(d);
 
       if (d === "Welcome") {
-
         navigate("/Tabledefinition");
-      }  else if ( d === "waittt Creditenial") {
-
+      } else if (d === "waittt Creditenial") {
         setFailedAttempts((prevAttempts) => prevAttempts + 1);
 
         if (0 === MAX_CONSECUTIVE_FAILURES) {
           setShowTimer(true);
-          setErrorMessage('')
+          setErrorMessage("");
           startTimer(setShowTimer, setTimerSeconds, setFailedAttempts);
         }
-      } else if(d==="invaild credtinal") {
-        
+      } else if (d === "invaild credtinal") {
         setErrorMessage("Invaild Credentials");
       }
     } catch (error) {
@@ -102,74 +97,73 @@ const Login = () => {
       setTimerSeconds(10);
     };
   }, []);
-  
 
   return (
-    <div className='bg-img'>
-    <div className="container mt-5 login-box">
-      <div className="row justify-content-center">
-        <div className="col-md-6 col-lg-4">
-          <div className="card">
-            <div className="card-body">
-              {/* <h1 className="card-title text-center mb-4" >Sign In</h1> */}
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label htmlFor="user_Name" className="form-label">
-                    User Name
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control login-control"
-                    placeholder="User Name"
-                    id="user_Name"
-                    name="user_Name"
-                    value={user.user_Name}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="password" className="form-label">
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control login-control"
-                    placeholder="Password"
-                    id="password"
-                    name="password"
-                    value={user.password}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
+    <div className="bg-img">
+      <div className="container mt-5 login-box">
+        <div className="row justify-content-center">
+          <div className="col-md-6 col-lg-4">
+            <div className="card">
+              <div className="card-body">
+                {/* <h1 className="card-title text-center mb-4" >Sign In</h1> */}
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label htmlFor="user_Name" className="form-label">
+                      User Name
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control login-control"
+                      placeholder="User Name"
+                      id="user_Name"
+                      name="user_Name"
+                      value={user.user_Name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="password" className="form-label">
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      className="form-control login-control"
+                      placeholder="Password"
+                      id="password"
+                      name="password"
+                      value={user.password}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
 
-                
-                {showTimer && (
-                <p className="text-danger mt-3">
-                  You have entered invalid credentials 3 times. Try again in{" "}
-                  {timerSeconds} seconds.
-                </p>
-              )}
-                
-                {errorMessage && <p className='text-danger'>{errorMessage}</p>}
+                  {showTimer && (
+                    <p className="text-danger mt-3">
+                      You have entered invalid credentials 3 times. Try again in{" "}
+                      {timerSeconds} seconds.
+                    </p>
+                  )}
 
-                <div className="d-grid">
-                  <button
-                    type="submit"
-                    className="btn btn-primary sub-btn"
-                    disabled={showTimer}
-                  >
-                    Sign in
-                  </button>
-                </div>
-              </form>
-            
+                  {errorMessage && (
+                    <p className="text-danger">{errorMessage}</p>
+                  )}
+
+                  <div className="d-grid">
+                    <button
+                      type="submit"
+                      className="btn btn-primary sub-btn"
+                      disabled={showTimer}
+                    >
+                      Sign in
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };
