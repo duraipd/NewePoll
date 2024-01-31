@@ -20,7 +20,7 @@ const Dasnav = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg demo sticky-top">
+    <nav className="navbar navbar-expand-lg demo ">
       <div className="container">
         <img src={myImage} className="a" />
 

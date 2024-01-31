@@ -50,7 +50,7 @@ body{
  
   width: 250px;
   flex-shrink: 0;
-  background-color:#202e50;
+  background-color:#52595D;
   height: 700px;
   overflow: auto;
 
@@ -109,3 +109,20 @@ body{
   width: 1.7em;
 }
 
+.body.expand-sidebar .sidebar {
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+.container.full {
+  height: 100vh;
+  overflow: auto;
+}
+
+
+body {
+  overflow: hidden;
+}
+ 
+body.expand-sidebar {
+  overflow: auto;
+}
