@@ -1,12 +1,10 @@
-
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Service from './service/Service';
-import { fetch } from './service/Service';
-import { startTimer, MAX_CONSECUTIVE_FAILURES } from './timer';
-import './login.css';
-
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Service from "./service/Service";
+import { fetch } from "./service/Service";
+import { startTimer, MAX_CONSECUTIVE_FAILURES } from "./timer";
+import "./login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -77,19 +75,16 @@ const Login = () => {
       console.log(d);
 
       if (d === "Welcome") {
-
         navigate("/Tabledefinition");
-      }  else if ( d === "waittt Creditenial") {
-
+      } else if (d === "waittt Creditenial") {
         setFailedAttempts((prevAttempts) => prevAttempts + 1);
 
         if (0 === MAX_CONSECUTIVE_FAILURES) {
           setShowTimer(true);
-          setErrorMessage('')
+          setErrorMessage("");
           startTimer(setShowTimer, setTimerSeconds, setFailedAttempts);
         }
-      } else if(d==="invaild credtinal") {
-        
+      } else if (d === "invaild credtinal") {
         setErrorMessage("Invaild Credentials");
       }
     } catch (error) {
@@ -102,9 +97,9 @@ const Login = () => {
       setTimerSeconds(10);
     };
   }, []);
-  
 
   return (
+
     <div className='bg-img'>
     <div className="container mt-5 login-box">
       <div className="row justify-content-center">
@@ -166,11 +161,11 @@ const Login = () => {
                 </div>
               </form>
             
+
             </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };
