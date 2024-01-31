@@ -730,6 +730,7 @@ function Dashboard() {
           </main>
 
         </div>
+        <br></br>
 
         <MyTable tableValue={tableResponse} table={tableResponse1} />
 
