@@ -45,6 +45,7 @@ public class CatsUsersServiceImpl implements CatsUsersService {
 	    if (isValid) {
 	        System.out.println("Valid credentials");
 	        count = 0;
+	        System.out.println("Welcome.........");
 	        return "Welcome";
 	        
 	    } else {
@@ -54,10 +55,12 @@ public class CatsUsersServiceImpl implements CatsUsersService {
 	        	
 	            
 	        	System.out.println("Wait for 10 seconds....");
+	        	System.out.println("wait............");
 	        	return "waittt Creditenial";
 	            
 	        }
 	    }
+	    System.out.println("Invalid.......");
 		return "invaild credtinal";
 	    
 	}

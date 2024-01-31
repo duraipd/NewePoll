@@ -7,12 +7,12 @@
             {
                 "title": "Table Definition",
                 "icon": "SubdirectoryArrowRightIcon",
-                "path": "/  "
+                "path": "/Dashboard"
             },
             {
                 "title": "Data Mapping",
                 "icon": "SubdirectoryArrowRightIcon",
-                "path": "/"
+                "path": "/Datamapping"
             }
            
         ]
@@ -24,7 +24,7 @@
             {
                 "title": "Load Data",
                 "icon":"SubdirectoryArrowRightIcon",
-                "path": "/"
+                "path": "/Loaddata"
             }            
         ]
     }

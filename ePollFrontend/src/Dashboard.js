@@ -3,13 +3,9 @@ import "./Css/Dashboard.css";
 import { CreateColoumn } from "./service/Service";
 import Sidebar from "./components/Sidebar";
 import { fetch } from "./service/Service";
-
-
 import MyTable from "./MyTable";
 import "./Css/table.css";
-
 import { Desctable, Tablecol, tablefields } from "./service/Service";
-
 
 function Dashboard() {
   const [fetchResponse, setFetchResponse] = useState([]);
@@ -26,7 +22,6 @@ function Dashboard() {
       tableName: "", // Initialize tableName as an empty string
     },
   ]);
-
 
   const handleSelectChange = async (e) => {
     setSelectedOption("");
@@ -121,13 +116,15 @@ function Dashboard() {
   return (
     <div className="main">
       <Sidebar />
-      <div className="container">
+      <div className="container full">
         <div className="dashboard-container">
-          <header>
-            <h1>Table Definition</h1>
+          <header className="h1table">
+            <h2>Table Definition</h2>
           </header>
-          <div>
-            <label htmlFor="dropdown">Select a table:</label>
+
+          <br></br>
+          <div className="droptable">
+            <label htmlFor="dropdown" className="selecttable" >Select table:</label>
             {loading ? (
               <p>Loading options...</p>
             ) : (
@@ -137,7 +134,7 @@ function Dashboard() {
                   value={selectedOption}
                   onChange={handleSelectChange}
                 >
-                  <option value="">Select a table</option>
+                  <option value="">Select table</option>
                   {fetchResponse.map((item, index) => (
                     <option key={index} value={item.table_name}>
                       {item.table_name}
@@ -149,14 +146,14 @@ function Dashboard() {
           </div>
 
           <main>
-            <div className="table-container">
+            <div className="table-container columndesign">
               <table>
                 <thead>
-                  <tr>
-                    <th>Column Name</th>
-                    <th>Nullable</th>
-                    <th>Data Type</th>
-                    <th>Actions</th>
+                  <tr >
+                    <th className="headerdesign">Column Name</th>
+                    <th className="headerdesign">Nullable</th>
+                    <th  className="headerdesign">Data Type</th>
+                    <th  className="headerdesign">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -227,7 +224,10 @@ function Dashboard() {
               </table>
             </div>
 
-            <button className="submit-button" onClick={handleSubmit}>
+            <button
+              className="submit-button submitdesign"
+              onClick={handleSubmit}
+            >
               Submit
             </button>
           </main>
@@ -239,3 +239,7 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
+
+
+

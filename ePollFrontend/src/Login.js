@@ -1,12 +1,10 @@
-
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Service from './service/Service';
-import { fetch } from './service/Service';
-import { startTimer, MAX_CONSECUTIVE_FAILURES } from './timer';
-import './login.css';
-
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Service from "./service/Service";
+import { fetch } from "./service/Service";
+import { startTimer, MAX_CONSECUTIVE_FAILURES } from "./timer";
+import "./login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -77,15 +75,16 @@ const Login = () => {
       console.log(d);
 
       if (d === "Welcome") {
-        navigate("/Dashboard");
-      } else if (d === "Invalid Credentials" || d === "waittt Creditenial") {
+        navigate("/Tabledefinition");
+      } else if (d === "waittt Creditenial") {
         setFailedAttempts((prevAttempts) => prevAttempts + 1);
 
         if (0 === MAX_CONSECUTIVE_FAILURES) {
           setShowTimer(true);
+          setErrorMessage("");
           startTimer(setShowTimer, setTimerSeconds, setFailedAttempts);
         }
-      } else {
+      } else if (d === "invaild credtinal") {
         setErrorMessage("Invaild Credentials");
       }
     } catch (error) {
@@ -98,9 +97,9 @@ const Login = () => {
       setTimerSeconds(10);
     };
   }, []);
-  
 
   return (
+
     <div className='bg-img'>
     <div className="container mt-5 login-box">
       <div className="row justify-content-center">
@@ -140,7 +139,13 @@ const Login = () => {
                   />
                 </div>
 
-                <br></br>
+                
+                {showTimer && (
+                <p className="text-danger mt-3">
+                   Try again in{" "}
+                  {timerSeconds} seconds.
+                </p>
+              )}
                 
                 {errorMessage && <p className='text-danger'>{errorMessage}</p>}
 
@@ -154,21 +159,20 @@ const Login = () => {
                   </button>
                 </div>
               </form>
-              {showTimer && (
-                <p className="text-danger mt-3">
-                  You have entered invalid credentials 3 times. Try again in{" "}
-                  {timerSeconds} seconds.
-                </p>
-              )}
+            
+
             </div>
           </div>
         </div>
       </div>
     </div>
+
     </div>
 
 
 );
+
+
 };
 
 export default Login;

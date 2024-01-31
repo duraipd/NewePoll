@@ -50,7 +50,7 @@ body{
  
   width: 250px;
   flex-shrink: 0;
-  background-color:#202e50;;
+  background-color:#202e50;
   height: 700px;
   overflow: auto;
 }

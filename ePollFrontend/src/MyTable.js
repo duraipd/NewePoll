@@ -1,77 +1,56 @@
 import React, { useState } from "react";
-// import { Desctable } from "./service/Service";
-import { Desctable } from "./service/Service";
+import './Css/table.css';
 
 const MyTable = (props) => {
   const { tableValue, table } = props;
-  const [tableData, setTableData] = useState([]);
   const [error, setError] = useState(null);
+  const [displayStaticTable, setDisplayStaticTable] = useState(true);
 
-  const handleButtonClick1 = () => {
-    console.log("Button 1 clicked");
-    // console.log(table);
-    setTableData(table);
-  };
-
-  const handleButtonClick2 = async () => {
-    setTableData(tableValue);
-
-    // try {
-    //   const response = await Desctable("placeholder_entity");
-    //   setTableData(response);
-    // } catch (error) {
-    //   console.error("Error fetching data:", error);
-    //   setError(error.message);
-    // }
-    console.log("Button 2 clicked");
-  };
-
-  const data = [
-    {
-      id: 1,
-      name: "John Doe",
-      age: 30,
-      mob: 98745636251,
-      password: 8585858555,
-      product: "mobile",
-      price: 85852,
-      brand: "apple",
-      waranty: "yes",
-    },
-    { id: 2, name: "Jane Smith", age: 25, mob: 98745636251 },
-    { id: 3, name: "Bob Johnson", age: 35 },
-    { id: 4, name: "Bob Johnson", age: 35 },
-    { id: 5, name: "Bob Johnson", age: 35 },
-  ];
+  console.log("table", table);
+  console.log("tableValue", tableValue);
 
   return (
-    <div className="tab">
+    <div className="taba">
       <h2></h2>
       <div>
-        <button onClick={handleButtonClick1} className="tab2">
+        <button onClick={() => setDisplayStaticTable(true)} className="tabab">
           {" "}
           Table Definition
         </button>
-        <button onClick={handleButtonClick2} className="tab3">
+        <button onClick={() => setDisplayStaticTable(false)} className="tabac">
           Table Data
         </button>
       </div>
       {error && <p>Error: {error}</p>}
-      {tableData.length > 0 && (
+      {table.length > 0 && (
         <table border="1">
           <thead>
             <tr>
-              {Object.keys(tableValue[0]).map((key) => (
-                <th key={key}>{key}</th>
-              ))}
+              {displayStaticTable &&
+                Object.keys(table[0]).map((key, index) => (
+                  <th key={index}>{key}</th>
+                ))}
+              {!displayStaticTable &&
+                Object.keys(tableValue[0]).map((key, index) => (
+                  <th key={index}>{key.charAt(0).toUpperCase() + key.slice(1)}</th>
+                ))}
             </tr>
           </thead>
           <tbody>
-            {tableData.map((item, rowIndex) => (
-              <tr key={rowIndex}>
-                {Object.values(item).map((value, colIndex) => (
-                  <td key={colIndex}>{value}</td>
-                ))}
+            {displayStaticTable &&
+              table.map((staticItem, index) => (
+                <tr key={`row-${index}`}>
+                  {Object.keys(staticItem).map((key, colIndex) => (
+                    <td key={colIndex}>{staticItem[key]}</td>
+                  ))}
+                </tr>
+              ))}
+            {tableValue.map((dynamicItem, index) => (
+              <tr key={`dynamic-row-${index}`}>
+                {!displayStaticTable &&
+                  Object.keys(dynamicItem).map((key, colIndex) => (
+                    <td key={colIndex}>{dynamicItem[key]}</td>
+                  ))}
               </tr>
             ))}
           </tbody>
