@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './Css/table.css';
+import "./Css/table.css";
 
 const MyTable = (props) => {
   const { tableValue, table } = props;
@@ -10,8 +10,8 @@ const MyTable = (props) => {
   console.log("tableValue", tableValue);
 
   return (
-    <div >
-      
+    <div>
+      <h2></h2>
       <div>
         <button onClick={() => setDisplayStaticTable(true)} className="tabab">
           {" "}
@@ -22,43 +22,43 @@ const MyTable = (props) => {
         </button>
       </div>
       <div className="tabad">
-      {error && <p>Error: {error}</p>}
-      {table.length > 0 && (
-        <table border="1">
-          <thead>
-            <tr>
-              {displayStaticTable &&
-                Object.keys(table[0]).map((key, index) => (
-                  <th key={index}>{key}</th>
-                ))}
-              {!displayStaticTable &&
-                Object.keys(tableValue[0]).map((key, index) => (
-                  <th key={index}>{key.charAt(0).toUpperCase() + key.slice(1)}</th>
-                ))}
-            </tr>
-          </thead>
-          <tbody>
-            {displayStaticTable &&
-              table.map((staticItem, index) => (
-                <tr key={`row-${index}`}>
-                  {Object.keys(staticItem).map((key, colIndex) => (
-                    <td key={colIndex}>{staticItem[key]}</td>
-                  ))}
-                </tr>
-              ))}
-            {tableValue.map((dynamicItem, index) => (
-              <tr key={`dynamic-row-${index}`}>
+        {error && <p>Error: {error}</p>}
+        {table.length > 0 && (
+          <table border="1">
+            <thead>
+              <tr>
+                {displayStaticTable && <th>Column Name</th>}
+                {displayStaticTable && <th>Data Type</th>}
+                {displayStaticTable && <th>Nullable</th>}
                 {!displayStaticTable &&
-                  Object.keys(dynamicItem).map((key, colIndex) => (
-                    <td key={colIndex}>{dynamicItem[key]}</td>
+                  Object.keys(tableValue[0]).map((key, index) => (
+                    <th key={index}>
+                      {key.charAt(0).toUpperCase() + key.slice(1)}
+                    </th>
                   ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-        
-      )}
-    </div>
+            </thead>
+            <tbody>
+              {displayStaticTable &&
+                table.map((staticItem, index) => (
+                  <tr key={`row-${index}`}>
+                    {Object.keys(staticItem).map((key, colIndex) => (
+                      <td key={colIndex}>{staticItem[key]}</td>
+                    ))}
+                  </tr>
+                ))}
+              {tableValue.map((dynamicItem, index) => (
+                <tr key={`dynamic-row-${index}`}>
+                  {!displayStaticTable &&
+                    Object.keys(dynamicItem).map((key, colIndex) => (
+                      <td key={colIndex}>{dynamicItem[key]}</td>
+                    ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </div>
   );
 };
