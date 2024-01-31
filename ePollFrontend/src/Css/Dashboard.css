@@ -142,7 +142,7 @@
 }
 
 .h1table {
-  background-color: #202e50;
+  background-color:#736F6E;
   padding: 10px;
   color: white;
   width: 100%;
@@ -200,7 +200,7 @@ th, td {
 
 .action-button.plus {
   color: white;
-  background-color: #28a745;
+  background-color: #A2AD9C;
   width: 30px;
   height: 30px;
   align-items: center;
@@ -209,7 +209,7 @@ th, td {
 
 .action-button.minus {
   color: white;
-  background-color: #dc3545;
+  background-color: #800000;
   width: 30px;
   height: 30px;
   align-items: center;
@@ -218,7 +218,7 @@ th, td {
 
 .submitdesign {
   margin-top: 20px;
-  background-color: #28a745;
+  background-color: #A2AD9C;
   color: white;
   border: 2px solid black;
   border-radius: 30px;
@@ -243,7 +243,7 @@ th, td {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #333;
+  background-color:#504A4B;
   color: white;
 }
 
@@ -267,6 +267,8 @@ th, td {
 
 .main {
   display: flex;
+  background-color: #FFFEFA;
+ 
 }
 
 .droptable{
@@ -316,5 +318,6 @@ th, td {
   font-optical-sizing: auto;
   font-weight: bold;
   font-style: normal;
+  background-color: #E1D9D1;
 
 }

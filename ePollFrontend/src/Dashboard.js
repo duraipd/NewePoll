@@ -189,7 +189,7 @@ function Dashboard() {
                           onChange={(e) => handleChange(e, index, "dataType")}
                           className="form-control"
                         >
-                          <option value="null">Select the value</option>
+                          <option >Select the value</option>
                           <option value="Integer">Integer</option>
                           <option value="String">String</option>
                           <option value="Number">Number</option>
