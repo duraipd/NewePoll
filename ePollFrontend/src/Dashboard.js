@@ -431,9 +431,7 @@ function Dashboard() {
       } catch (error) {
         console.error("Error:", error);
 
-        alert(
-          "An error occurred while processing your request. Please try again."
-        );
+        alert("Field Already exists in the Table");
       }
     }
   };
