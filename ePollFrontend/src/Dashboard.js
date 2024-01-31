@@ -119,7 +119,7 @@ function Dashboard() {
       <div className="container full">
         <div className="dashboard-container">
           <header className="h1table">
-            <h2>Table Definition</h2>
+            <h3>Table Definition</h3>
           </header>
 
           <br></br>
