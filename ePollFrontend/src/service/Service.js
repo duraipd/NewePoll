@@ -47,6 +47,7 @@ export const CreateColoumn = async (tableData) => {
       `http://localhost:7777/api/dynamic/addColumns`,
       tableData
     );
+    return response.data
     console.log(response.data);
   } catch (error) {
     console.error("Error submitting data:", error);
