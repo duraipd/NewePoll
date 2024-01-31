@@ -20,6 +20,7 @@ function Dashboard() {
       nullable: "",
       dataType: "",
       tableName: "", // Initialize tableName as an empty string
+      
     },
   ]);
 
@@ -111,6 +112,8 @@ function Dashboard() {
       console.log(selectedOption);
       const response = await CreateColoumn(tableData);
       console.log(response);
+      alert(response);
+
     }
   };
   return (

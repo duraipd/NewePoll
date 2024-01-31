@@ -71,8 +71,8 @@ public class DynamicTableService {
     	{
     		
     	}
-    	
-      return "Column is already exists in the Table";
+    	  	
+    	      return "Column "+columnName+" already exists in the Table";
      
     }
 
