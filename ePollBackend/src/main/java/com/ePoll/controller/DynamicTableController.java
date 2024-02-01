@@ -21,7 +21,7 @@ import java.util.Map;
 @RestController
 
 
-@CrossOrigin("http://localhost:3001")
+@CrossOrigin("http://localhost:3004")
 
 
 @RequestMapping("/api/dynamic")
