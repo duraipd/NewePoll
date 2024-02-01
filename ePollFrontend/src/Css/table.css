@@ -14,13 +14,14 @@
    background-color: #736F6E;
    color: #fff;
    height: 50px;
-  
+   border: 1px solid black;
  }
  .tabac {
    width: 50%;
    background-color: #736F6E;
    color: #fff;
    height: 50px;
+   border: 1px solid black;
  }
  /* table.css */
   
