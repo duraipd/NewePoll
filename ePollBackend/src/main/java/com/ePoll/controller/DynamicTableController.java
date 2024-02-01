@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin("http://localhost:3001")
+@CrossOrigin("http://localhost:3007")
 @RequestMapping("/api/dynamic")
 public class DynamicTableController {
 
