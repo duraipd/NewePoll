@@ -5,19 +5,48 @@ const MyTable = (props) => {
   const { tableValue, table } = props;
   const [error, setError] = useState(null);
   const [displayStaticTable, setDisplayStaticTable] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3; // Adjust as needed
 
-  console.log("table", table);
-  console.log("tableValue", tableValue);
+  const totalStaticPages = Math.ceil(table.length / itemsPerPage);
+  const totalDynamicPages = Math.ceil(tableValue.length / itemsPerPage);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const renderTableRows = (data) => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    return data.slice(startIndex, endIndex).map((item, index) => (
+      <tr key={`row-${index}`}>
+        {displayStaticTable
+          ? Object.keys(item).map((key, colIndex) => (
+              <td key={colIndex}>{item[key]}</td>
+            ))
+          : Object.keys(item).map((key, colIndex) => (
+              <td key={colIndex}>{tableValue[index][key]}</td>
+            ))}
+      </tr>
+    ));
+  };
 
   return (
     <div>
       <h2></h2>
       <div>
-        <button onClick={() => setDisplayStaticTable(true)} className="tabab">
+        <button
+          onClick={() => setDisplayStaticTable(true)}
+          className="tabab "
+        >
           {" "}
           Table Definition
         </button>
-        <button onClick={() => setDisplayStaticTable(false)} className="tabac">
+        <button
+          onClick={() => setDisplayStaticTable(false)}
+          className="tabac"
+        >
           Table Data
         </button>
       </div>
@@ -38,27 +67,63 @@ const MyTable = (props) => {
                   ))}
               </tr>
             </thead>
+            <tbody>{displayStaticTable && renderTableRows(table)}</tbody>
             <tbody>
-              {displayStaticTable &&
-                table.map((staticItem, index) => (
-                  <tr key={`row-${index}`}>
-                    {Object.keys(staticItem).map((key, colIndex) => (
-                      <td key={colIndex}>{staticItem[key]}</td>
-                    ))}
-                  </tr>
-                ))}
-              {tableValue.map((dynamicItem, index) => (
-                <tr key={`dynamic-row-${index}`}>
-                  {!displayStaticTable &&
-                    Object.keys(dynamicItem).map((key, colIndex) => (
-                      <td key={colIndex}>{dynamicItem[key]}</td>
-                    ))}
-                </tr>
-              ))}
+              {!displayStaticTable && renderTableRows(tableValue)}
             </tbody>
           </table>
         )}
+        <div>
+          {displayStaticTable && (
+            <Pagination1
+              currentPage={currentPage}
+              totalPages={totalStaticPages}
+              onPageChange={handlePageChange}
+            />
+          )}
+          {!displayStaticTable && (
+            <Pagination1
+              currentPage={currentPage}
+              totalPages={totalDynamicPages}
+              onPageChange={handlePageChange}
+            />
+          )}
+        </div>
       </div>
+    </div>
+  );
+};
+
+const Pagination1 = ({ currentPage, totalPages, onPageChange }) => {
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  let visiblePageNumbers = [];
+
+  if (totalPages <= 10) {
+    visiblePageNumbers = pageNumbers;
+  } else {
+    if (currentPage <= 3) {
+      visiblePageNumbers = [...pageNumbers.slice(0, 5), '...', totalPages - 1, totalPages];
+    } else if (currentPage >= totalPages - 2) {
+      visiblePageNumbers = [1, 2, '...', ...pageNumbers.slice(totalPages - 5)];
+    } else {
+      visiblePageNumbers = [1, 2, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages - 1, totalPages];
+    }
+  }
+
+  return (
+    <div>
+      <ul className="pagination">
+        {visiblePageNumbers.map((number, index) => (
+          <li
+            key={index}
+            className={currentPage === number ? 'active' : ''}
+            onClick={() => (typeof number === 'number' ? onPageChange(number) : null)}
+          >
+            {number}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
