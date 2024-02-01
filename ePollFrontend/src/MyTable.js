@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Css/table.css";
 
 const MyTable = (props) => {
-  const { tableValue, table } = props;
+  const { tableValue, table, resetFormData, fetchData } = props;
   const [error, setError] = useState(null);
   const [displayStaticTable, setDisplayStaticTable] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3; // Adjust as needed
+
 
   const totalStaticPages = Math.ceil(table.length / itemsPerPage);
   const totalDynamicPages = Math.ceil(tableValue.length / itemsPerPage);
@@ -30,16 +31,22 @@ const MyTable = (props) => {
             ))}
       </tr>
     ));
+
+ 
+
   };
 
   return (
     <div>
       <h2></h2>
       <div>
+
         <button
           onClick={() => setDisplayStaticTable(true)}
           className="tabab "
         >
+
+
           {" "}
           Table Definition
         </button>

@@ -32,13 +32,14 @@
    background-color: #736F6E;
    color: #fff;
    height: 50px;
-  
+   border: 1px solid black;
  }
  .tabac {
    width: 50%;
    background-color: #736F6E;
    color: #fff;
    height: 50px;
+   border: 1px solid black;
  }
 
  .tab div {
@@ -62,6 +63,7 @@
   
  th, td {
   border: 1px solid #C9C0BB;
+   /* border: 1px solid #E1D9D1; */
    text-align: left;
    padding: 8px;
   
@@ -69,10 +71,12 @@
   
  th {
    background-color: #E1D9D1;
+   ;
  }
 
  tbody tr:nth-child(even) {
    background-color: #f9f9f9;
+
  }
 
  .pagination {
@@ -110,3 +114,6 @@
 }
  
  
+
+   
+ }
