@@ -498,7 +498,7 @@ function Dashboard() {
                     <tr key={index}>
                       <td>
                         <input
-                          type="text"
+                          type="text1"
                           name={`columnName${index}`}
                           value={data.columnName}
                           onChange={(e) => handleChange(e, index, "columnName")}
