@@ -1,59 +1,78 @@
 import React, { useState, useEffect } from "react";
 import "./Css/table.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp, faArrowDown, faFilter } from "@fortawesome/free-solid-svg-icons";
 
 const MyTable = (props) => {
-  const { tableValue, table, resetFormData, fetchData } = props;
+  const { tableValue, table, resetFormData } = props;
   const [error, setError] = useState(null);
   const [displayStaticTable, setDisplayStaticTable] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3; // Adjust as needed
+  const [sortColumn, setSortColumn] = useState(null);
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [filters, setFilters] = useState({});
+  const [activeFilter, setActiveFilter] = useState(null);
 
+  useEffect(() => {
+    setDisplayStaticTable(true);
+  }, [tableValue]);
 
-  const totalStaticPages = Math.ceil(table.length / itemsPerPage);
-  const totalDynamicPages = Math.ceil(tableValue.length / itemsPerPage);
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+  const switchToStaticTable = () => {
+    setDisplayStaticTable(true);
+    resetFormData();
   };
 
-  const renderTableRows = (data) => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-
-    return data.slice(startIndex, endIndex).map((item, index) => (
-      <tr key={`row-${index}`}>
-        {displayStaticTable
-          ? Object.keys(item).map((key, colIndex) => (
-              <td key={colIndex}>{item[key]}</td>
-            ))
-          : Object.keys(item).map((key, colIndex) => (
-              <td key={colIndex}>{tableValue[index][key]}</td>
-            ))}
-      </tr>
-    ));
-
- 
-
+  const handleSort = (column) => {
+    if (sortColumn === column) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortColumn(column);
+      setSortOrder("asc");
+    }
   };
+
+  const handleFilterChange = (column, value) => {
+    setFilters({ ...filters, [column]: value });
+  };
+
+  const toggleFilter = (column) => {
+    setActiveFilter(activeFilter === column ? null : column);
+  };
+
+  const applyFilters = (data) => {
+    return data.filter((item) => {
+      return Object.keys(filters).every((key) => {
+        const filterValue = filters[key];
+        return !filterValue || String(item[key] || "").toLowerCase().includes(filterValue.toLowerCase());
+      });
+    });
+  };
+
+  const sortedAndFilteredTable = applyFilters(
+    tableValue.slice().sort((a, b) => {
+      if (sortColumn) {
+        const aValue = String(a[sortColumn] || "");
+        const bValue = String(b[sortColumn] || "");
+
+        if (sortOrder === "asc") {
+          return aValue.localeCompare(bValue);
+        } else {
+          return bValue.localeCompare(aValue);
+        }
+      }
+
+      return 0;
+    })
+  );
 
   return (
     <div>
       <h2></h2>
       <div>
-
-        <button
-          onClick={() => setDisplayStaticTable(true)}
-          className="tabab "
-        >
-
-
+        <button onClick={switchToStaticTable} className="tabab">
           {" "}
           Table Definition
         </button>
-        <button
-          onClick={() => setDisplayStaticTable(false)}
-          className="tabac"
-        >
+        <button onClick={() => setDisplayStaticTable(false)} className="tabac">
           Table Data
         </button>
       </div>
@@ -63,76 +82,150 @@ const MyTable = (props) => {
           <table border="1">
             <thead>
               <tr>
-                {displayStaticTable && <th>Column Name</th>}
-                {displayStaticTable && <th>Data Type</th>}
-                {displayStaticTable && <th>Nullable</th>}
+                {displayStaticTable && (
+                  <>
+                    <th>
+                      <div className="header-cell">
+                        <span onClick={() => handleSort("columnName")}>
+                          Column Name
+                          {sortColumn === "columnName" &&
+                            (sortOrder === "asc" ? (
+                              <FontAwesomeIcon icon={faArrowUp} />
+                            ) : (
+                              <FontAwesomeIcon icon={faArrowDown} />
+                            ))}
+                        </span>
+                        <FontAwesomeIcon
+                          icon={faFilter}
+                          onClick={() => toggleFilter("columnName")}
+                          className={`filter-icon ${activeFilter === "columnName" ? "active" : ""}`}
+                        />
+                        {activeFilter === "columnName" && (
+                          <input
+                            type="text"
+                            placeholder="Filter"
+                            value={filters["columnName"] || ""}
+                            onChange={(e) => handleFilterChange("columnName", e.target.value)}
+                          />
+                        )}
+                      </div>
+                    </th>
+                    <th>
+                      <div className="header-cell">
+                        <span onClick={() => handleSort("dataType")}>
+                          Data Type
+                          {sortColumn === "dataType" &&
+                            (sortOrder === "asc" ? (
+                              <FontAwesomeIcon icon={faArrowUp} />
+                            ) : (
+                              <FontAwesomeIcon icon={faArrowDown} />
+                            ))}
+                        </span>
+                        <FontAwesomeIcon
+                          icon={faFilter}
+                          onClick={() => toggleFilter("dataType")}
+                          className={`filter-icon ${activeFilter === "dataType" ? "active" : ""}`}
+                        />
+                        {activeFilter === "dataType" && (
+                          <input
+                            type="text"
+                            placeholder="Filter"
+                            value={filters["dataType"] || ""}
+                            onChange={(e) => handleFilterChange("dataType", e.target.value)}
+                          />
+                        )}
+                      </div>
+                    </th>
+                    <th>
+                      <div className="header-cell">
+                        <span onClick={() => handleSort("nullable")}>
+                          Nullable
+                          {sortColumn === "nullable" &&
+                            (sortOrder === "asc" ? (
+                              <FontAwesomeIcon icon={faArrowUp} />
+                            ) : (
+                              <FontAwesomeIcon icon={faArrowDown} />
+                            ))}
+                        </span>
+                        <FontAwesomeIcon
+                          icon={faFilter}
+                          onClick={() => toggleFilter("nullable")}
+                          className={`filter-icon ${activeFilter === "nullable" ? "active" : ""}`}
+                        />
+                        {activeFilter === "nullable" && (
+                          <input
+                            type="text"
+                            placeholder="Filter"
+                            value={filters["nullable"] || ""}
+                            onChange={(e) => handleFilterChange("nullable", e.target.value)}
+                          />
+                        )}
+                      </div>
+                    </th>
+                  </>
+                )}
                 {!displayStaticTable &&
                   Object.keys(tableValue[0]).map((key, index) => (
                     <th key={index}>
-                      {key.charAt(0).toUpperCase() + key.slice(1)}
+                      <div className="header-cell">
+                        <span onClick={() => handleSort(key)}>
+                          {key.charAt(0).toUpperCase() + key.slice(1)}
+                          {sortColumn === key &&
+                            (sortOrder === "asc" ? (
+                              <FontAwesomeIcon icon={faArrowUp} />
+                            ) : (
+                              <FontAwesomeIcon icon={faArrowDown} />
+                            ))}
+                        </span>
+                        <FontAwesomeIcon
+                          icon={faFilter}
+                          onClick={() => toggleFilter(key)}
+                          className={`filter-icon ${activeFilter === key ? "active" : ""}`}
+                        />
+                        {activeFilter === key && (
+                          <input
+                            type="text"
+                            placeholder="Filter"
+                            value={filters[key] || ""}
+                            onChange={(e) => handleFilterChange(key, e.target.value)}
+                          />
+                        )}
+                      </div>
                     </th>
                   ))}
               </tr>
             </thead>
-            <tbody>{displayStaticTable && renderTableRows(table)}</tbody>
             <tbody>
-              {!displayStaticTable && renderTableRows(tableValue)}
+              {displayStaticTable &&
+                table.map((staticItem, index) => (
+                  <tr key={`row-${index}`}>
+                    {Object.keys(staticItem).map((key, colIndex) => (
+                      <td key={colIndex}>{staticItem[key]}</td>
+                    ))}
+                  </tr>
+                ))}
+              {sortedAndFilteredTable.map((dynamicItem, index) => (
+                <tr key={`dynamic-row-${index}`}>
+                  {!displayStaticTable &&
+                    Object.keys(dynamicItem).map((key, colIndex) => (
+                      <td key={colIndex}>{dynamicItem[key]}</td>
+                    ))}
+                </tr>
+              ))}
             </tbody>
           </table>
         )}
-        <div>
-          {displayStaticTable && (
-            <Pagination1
-              currentPage={currentPage}
-              totalPages={totalStaticPages}
-              onPageChange={handlePageChange}
-            />
-          )}
-          {!displayStaticTable && (
-            <Pagination1
-              currentPage={currentPage}
-              totalPages={totalDynamicPages}
-              onPageChange={handlePageChange}
-            />
-          )}
-        </div>
       </div>
     </div>
   );
 };
 
-const Pagination1 = ({ currentPage, totalPages, onPageChange }) => {
-  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
-
-  let visiblePageNumbers = [];
-
-  if (totalPages <= 10) {
-    visiblePageNumbers = pageNumbers;
-  } else {
-    if (currentPage <= 3) {
-      visiblePageNumbers = [...pageNumbers.slice(0, 5), '...', totalPages - 1, totalPages];
-    } else if (currentPage >= totalPages - 2) {
-      visiblePageNumbers = [1, 2, '...', ...pageNumbers.slice(totalPages - 5)];
-    } else {
-      visiblePageNumbers = [1, 2, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages - 1, totalPages];
-    }
-  }
-
-  return (
-    <div>
-      <ul className="pagination">
-        {visiblePageNumbers.map((number, index) => (
-          <li
-            key={index}
-            className={currentPage === number ? 'active' : ''}
-            onClick={() => (typeof number === 'number' ? onPageChange(number) : null)}
-          >
-            {number}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
 export default MyTable;
+
+
+
+
+
+
+
+
