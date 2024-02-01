@@ -169,7 +169,7 @@ const MyTable = (props) => {
   };
 
   return (
-    <div>
+    <div >
       <h2></h2>
       <div>
         <button onClick={() => switchToStaticTable(true)} className="tabab">
