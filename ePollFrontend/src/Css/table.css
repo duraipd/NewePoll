@@ -5,79 +5,87 @@
   overflow-y: auto;
   overflow-x: auto;
   scrollbar-width: thin;
-  scrollbar-color: #736f6e #e1d9d1;
-
+  scrollbar-color: #736F6E #E1D9D1;
+  
+ 
+ 
   &::-webkit-scrollbar {
     width: 10px;
   }
-
+ 
   &::-webkit-scrollbar-thumb {
-    background-color: #736f6e;
+    background-color: #736F6E;
   }
-
+ 
   &::-webkit-scrollbar-track {
-    background-color: #e1d9d1;
+    background-color: #E1D9D1;
   }
 }
 .tabad table {
   margin-bottom: 0;
 }
-
-.tablebutton {
+ 
+ 
+ 
+.tablebutton{
   width: 100%;
 }
-
-.tabab {
-  width: 50%;
-  background-color: #736f6e;
-  color: #fff;
-  height: 50px;
-  border: 1px solid black;
-}
-.tabac {
-  width: 50%;
-  background-color: #736f6e;
-  color: #fff;
-  height: 50px;
-  border: 1px solid black;
-}
-
-.tab div {
-  margin-bottom: 10px;
-  overflow: hidden;
-}
-
-.tab button {
-  padding: 10px;
-  margin-right: 10px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  border: 1px solid black;
-}
-
-th,
-td {
-  border: 1px solid #c9c0bb;
-  /* border: 1px solid #E1D9D1; */
-  text-align: left;
-  padding: 8px;
-}
-
-th {
-  background-color: #e1d9d1;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-.pagination {
+ 
+ .tabab {
+   width: 50%;
+   background-color: #736F6E;
+   color: #fff;
+   height: 50px;
+   border: 1px solid black;
+ }
+ .tabac {
+   width: 50%;
+   background-color: #736F6E;
+   color: #fff;
+   height: 50px;
+   border: 1px solid black;
+ }
+ 
+ .tab div {
+   margin-bottom: 10px;
+   overflow: hidden;
+ }
+ 
+ .tab button {
+   padding: 10px;
+   margin-right: 10px;
+   font-size: 16px;
+   cursor: pointer;
+ }
+ 
+ table {
+   width: 100%;
+   border-collapse: collapse;
+   margin-top: 20px;
+   border: 1px solid black;
+ 
+ 
+ }
+ 
+ th, td {
+  border: 1px solid #C9C0BB;
+   /* border: 1px solid #E1D9D1; */
+   text-align: left;
+   padding: 8px;
+ 
+ }
+ 
+ th {
+   background-color: #E1D9D1;
+   
+ }
+ 
+ tbody tr:nth-child(even) {
+   background-color: #f9f9f9;
+ 
+ }
+ 
+ .pagination {
   display: flex;
   list-style: none;
   padding: 0;
@@ -85,14 +93,14 @@ tbody tr:nth-child(even) {
   margin-top: 20px;
   margin-left: 350px;
 }
-
+ 
 .pagination {
   display: flex;
   list-style: none;
   padding: 0;
   justify-content: center;
 }
-
+ 
 .pagination li {
   margin: 0 5px;
   cursor: pointer;
@@ -101,50 +109,20 @@ tbody tr:nth-child(even) {
   border-radius: 4px;
   transition: background-color 0.3s;
 }
-
+ 
 .pagination li:hover {
   background-color: #ddd;
 }
-
+ 
 .pagination li.active {
   background-color: #007bff;
   color: #fff;
 }
-
-/* Add this CSS to your existing CSS file or create a new one */
-
-#tabdrop {
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 10px;
-  margin-left: 20px;
-  margin-top: 10px;
-  margin-bottom: -60px;
-  width: 10%;
-}
-
-.exportbutton {
-  padding: 6px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.form-control1 {
-  width: 27%;
-  padding: 8px;
-  box-sizing: border-box;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  margin-top: 25px;
-  border: 1px solid #dee2e6;
-}
-
-.form-control1:focus {
-  border: 5px solid#b8b9d5;
-}
-
+ 
+ /* *{
+overflow: auto;
+ } */
+ 
 .sub-heading2 {
   font-size: large;
   font-weight: 700;
@@ -154,15 +132,35 @@ tbody tr:nth-child(even) {
   font-optical-sizing: auto;
   font-style: normal;
   margin-top: 25px;
+ 
 }
-
-.exportbutton {
+ 
+.exportbutton{
   margin-left: 20px;
   width: 60px;
   height: 35px;
   border-radius: 5px;
   margin-top: 15px;
+ 
 }
-.selecttable {
-  margin-right: 10px;
+
+.form-control1 {
+  width: 25%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-bottom: 2px;
+  border-radius: 6px;
+  margin-top: 25px;
+  border: 1px solid #dee2e6;
+ 
+}
+.form-control1:focus {
+  border : 5px solid#b8b9d5;
+ 
+ 
+ 
+}
+.errortab{
+  margin-top: -7px;
+  color: red;
 }
