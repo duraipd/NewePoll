@@ -1,104 +1,133 @@
-.tabad{
+.tabad {
   margin-left: 50px;
   margin-right: 50px;
   margin-top: 50px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #736F6E #E1D9D1; /* thumb color track color (For Firefox) */
+ 
+  /* For WebKit (Chrome, Safari, Edge) */
+  &::-webkit-scrollbar {
+    width: 10px; /* width of the scrollbar */
+  }
+ 
+  &::-webkit-scrollbar-thumb {
+    background-color: #736F6E; /* color of the thumb */
+  }
+ 
+  &::-webkit-scrollbar-track {
+    background-color: #E1D9D1; /* color of the track */
+  }
 }
+ 
 .tablebutton{
   width: 100%;
 }
-  
+ 
  .tabab {
    width: 50%;
    background-color: #736F6E;
    color: #fff;
    height: 50px;
-  
+   border: 1px solid black;
  }
  .tabac {
    width: 50%;
    background-color: #736F6E;
    color: #fff;
    height: 50px;
+   border: 1px solid black;
  }
- /* table.css */
-  
- /* .tab {
-   margin: 40px auto;
-   width: 80%;
- } */
-  
+ 
  .tab div {
-   margin-bottom: 15px;
+   margin-bottom: 10px;
  }
-  
+ 
  .tab button {
    padding: 10px;
    margin-right: 10px;
    font-size: 16px;
    cursor: pointer;
  }
-  
+ 
  table {
    width: 100%;
    border-collapse: collapse;
    margin-top: 20px;
+   border: 1px solid black;
+ 
  }
-  
+ 
  th, td {
   border: 1px solid #C9C0BB;
- 
    /* border: 1px solid #E1D9D1; */
    text-align: left;
    padding: 8px;
+ 
  }
-  
+ 
  th {
    background-color: #E1D9D1;
    ;
  }
-  
- /* Optional: Add styles for alternating rows */
+ 
  tbody tr:nth-child(even) {
    background-color: #f9f9f9;
-   
- }
-
  
-/* Styles for ascending and descending icons */
-th svg {
-  margin-left: 5px;
-}
-
-
-
-
-.filter-container {
-  position: relative;
-  margin-bottom: 15px;
-}
-
-/* Filter header styles */
-.filter-header {
+ }
+ 
+ .pagination {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+  margin-top: 20px;
+  margin-left: 350px;
 }
-
-.filter-header span {
-  margin-right: 5px;
+ 
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
 }
-
-/* Filter input styles */
-.filter-input {
-  padding: 5px;
-  width: 100px;
+ 
+.pagination li {
+  margin: 0 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+ 
+.pagination li:hover {
+  background-color: #ddd;
+}
+ 
+.pagination li.active {
+  background-color: #007bff;
+  color: #fff;
+}
+ 
+ /* Add this CSS to your existing CSS file or create a new one */
+ 
+ #tabdrop {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   margin-right: 10px;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: -60px;
+  width: 10%;
 }
-
-/* Active filter icon styles */
-.filter-icon.active {
-  color: grey;
-  font-weight: bold;
+ 
+.exportbutton {
+  padding: 6px;
+  font-size: 16px;
+  cursor: pointer;
 }
-
+ 
