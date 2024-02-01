@@ -11,10 +11,12 @@ const MyTable = (props) => {
   const [displayStaticTable, setDisplayStaticTable] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedExportOption, setSelectedExportOption] = useState("");
+
   const [sortColumn, setSortColumn] = useState(null);
   const [sortOrder, setSortOrder] = useState("asc");
   const [filters, setFilters] = useState({});
   const [activeFilter, setActiveFilter] = useState(null);
+
 
   const itemsPerPage = 3;
   const totalStaticPages = Math.ceil(table.length / itemsPerPage);
@@ -85,6 +87,7 @@ const MyTable = (props) => {
       default:
         setError("Please select an export option");
     }
+
 
     // After exporting, call the updateTable function to update the table data
     if (typeof updateTable === 'function') {
@@ -166,6 +169,7 @@ const MyTable = (props) => {
         ))}
       </tr>
     ));
+
   };
 
   return (
@@ -180,17 +184,43 @@ const MyTable = (props) => {
           {" "}
           Table Data
         </button>
+
         <select onChange={(e) => setSelectedExportOption(e.target.value)} id="tabdrop">
+
           <option value="">Select Export</option>
           <option value="excel">Export to Excel</option>
           <option value="pdf">Export to PDF</option>
           <option value="csv">Export to CSV</option>
-        </select>
+
+
+<div className="table-header">
+            <div className="sub-heading2">
+              <label htmlFor="dropdown" className="selecttable">
+                Format:
+              </label>
+            </div>
+            
+
+            <select 
+              id="exportDropdown loading1"
+              value={selectedExportOption}
+              onChange={(e) => setSelectedExportOption(e.target.value)}
+              className="form-control1"
+            >
+              <option className="ex" value="">Select Export</option>
+              <option className="ex" value="excel">Export to Excel</option>
+              <option  className="ex" value="pdf">Export to PDF</option>
+              <option className="ex" value="csv">Export to CSV</option>
+            </select>
+
+
         <button onClick={handleExport} className="exportbutton">Export</button>
-       
-        
+
       </div>
-      <div className="tabad">
+</div>
+
+
+      <div className="tabad" >
         {error && <p>Error: {error}</p>}
         {table.length > 0 && (
           <table border="1">

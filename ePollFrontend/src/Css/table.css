@@ -118,3 +118,71 @@
   color: #fff;
 }
 
+ 
+ /* Add this CSS to your existing CSS file or create a new one */
+
+ #tabdrop {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: -60px;
+  width: 10%;
+}
+
+.exportbutton {
+  padding: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form-control1 {
+  width: 27%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  margin-top: 25px;
+  border: 1px solid #dee2e6;
+
+}
+
+.form-control1:focus {
+  border : 5px solid#b8b9d5;
+
+
+
+}
+
+.sub-heading2 {
+  font-size: large;
+  font-weight: 700;
+  margin-right: 20px; 
+  margin-left: 50px;
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  margin-top: 25px;
+ 
+}
+
+.exportbutton{
+  margin-left: 20px;
+  width: 60px;
+  height: 35px;
+  border-radius: 5px;
+  margin-top: 15px;
+
+}
+
+
+
+
+
+
+
+ 
+
