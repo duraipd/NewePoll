@@ -248,14 +248,12 @@ function Dashboard() {
                           className="form-control"
                         >
                           <option value="">Select the value</option>
-                          <option value="Integer">Integer</option>
-                          <option value="String">String</option>
-                          <option value="Number">Number</option>
                           <option value="Boolean">Boolean</option>
-                          <option value="Character">CHAR(n)</option>
-                          <option value="Character">VARCHAR(n)</option>
-                          <option value="Character">TEXT</option>
-                          <option value="Date">DATE</option>
+                          <option value="Character">Char</option>
+                          <option value="Date">Date</option>
+                          <option value="Integer">Integer</option>
+                          <option value="character varying(25)">Varchar(25)</option>
+                          <option value="character varying(100)">Varchar(100)</option>
                         </select>
                         {formSubmitted && (
                           <div className="error-message">
