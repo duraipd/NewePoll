@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Css/table.css";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown, faFilter } from "@fortawesome/free-solid-svg-icons";
 
@@ -19,16 +20,7 @@ const MyTable = (props) => {
   const switchToStaticTable = () => {
     setDisplayStaticTable(true);
     resetFormData();
-  };
 
-  const handleSort = (column) => {
-    if (sortColumn === column) {
-      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-    } else {
-      setSortColumn(column);
-      setSortOrder("asc");
-    }
-  };
 
   const handleFilterChange = (column, value) => {
     setFilters({ ...filters, [column]: value });
@@ -45,6 +37,7 @@ const MyTable = (props) => {
         return !filterValue || String(item[key] || "").toLowerCase().includes(filterValue.toLowerCase());
       });
     });
+
   };
 
   const sortedAndFilteredTable = applyFilters(
@@ -68,13 +61,18 @@ const MyTable = (props) => {
     <div>
       <h2></h2>
       <div>
+
         <button onClick={switchToStaticTable} className="tabab">
           {" "}
+
           Table Definition
         </button>
         <button onClick={() => setDisplayStaticTable(false)} className="tabac">
           Table Data
         </button>
+        <button onClick={exportToExcel}>Export to Excel</button>
+        <button onClick={exportToPDF}>Export to PDF</button>
+        <button onClick={exportToCSV}>Export to CSV</button>
       </div>
       <div className="tabad">
         {error && <p>Error: {error}</p>}
@@ -195,6 +193,7 @@ const MyTable = (props) => {
                   ))}
               </tr>
             </thead>
+
             <tbody>
               {displayStaticTable &&
                 table.map((staticItem, index) => (
@@ -213,6 +212,7 @@ const MyTable = (props) => {
                 </tr>
               ))}
             </tbody>
+
           </table>
         )}
       </div>
@@ -220,12 +220,57 @@ const MyTable = (props) => {
   );
 };
 
-export default MyTable;
+
+const Pagination1 = ({ currentPage, totalPages, onPageChange }) => {
+  const pageNumbers = [];
+
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
 
 
 
 
+  if (totalPages <= 10) {
+    visiblePageNumbers = pageNumbers;
+  } else {
+    if (currentPage <= 3) {
+      visiblePageNumbers = pageNumbers.slice(0, 5);
+      if (totalPages > 9) {
+        visiblePageNumbers.push('...');
+      }
+      visiblePageNumbers.push(totalPages - 1, totalPages);
+    } else if (currentPage >= totalPages - 2) {
+      visiblePageNumbers = [1, 2, '...'];
+      visiblePageNumbers.push(...pageNumbers.slice(totalPages - 5));
+    } else {
+      visiblePageNumbers = [1, 2, '...'];
+      visiblePageNumbers.push(
+        currentPage - 1,
+        currentPage,
+        currentPage + 1,
+        '...',
+        totalPages - 1,
+        totalPages
+      );
+    }
+  }
 
-
+  return (
+    <div>
+      <ul className="pagination">
+        {visiblePageNumbers.map((number, index) => (
+          <li
+            key={index}
+            className={currentPage === number ? "active" : ""}
+            onClick={() => onPageChange(number)}
+          >
+            {number}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 
