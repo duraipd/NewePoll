@@ -91,23 +91,21 @@
   padding: 0;
   justify-content: center;
   margin-top: 20px;
-  margin-left: 350px;
+  /* margin-left: 20px; */
+  
 }
  
-.pagination {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  justify-content: center;
-}
+
  
 .pagination li {
   margin: 0 5px;
   cursor: pointer;
   padding: 5px 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 10px;
   transition: background-color 0.3s;
+  background-color: #E1D9D1;
+  
 }
  
 .pagination li:hover {
@@ -115,7 +113,7 @@
 }
  
 .pagination li.active {
-  background-color: #007bff;
+  background-color:#736F6E;
   color: #fff;
 }
  
@@ -137,10 +135,13 @@ overflow: auto;
  
 .exportbutton{
   margin-left: 20px;
-  width: 60px;
+  width: 65px;
   height: 35px;
-  border-radius: 5px;
-  margin-top: 15px;
+  border-radius: 20px;
+  margin-top: 24px;
+  background-color: #E1D9D1;
+  border: 1.5px solid black;
+  
  
 }
 
