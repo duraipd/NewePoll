@@ -197,6 +197,33 @@ const MyTable = (props) => {
         <button onClick={() => setDisplayStaticTable(false)} className="tabac">
           Table Data
         </button>
+
+
+
+
+<div className="table-header">
+            <div className="sub-heading2">
+              <label htmlFor="dropdown" className="selecttable">
+                Format:
+              </label>
+            </div>
+            
+
+            <select 
+              id="exportDropdown loading1"
+              value={selectedExportOption}
+              onChange={(e) => setSelectedExportOption(e.target.value)}
+              className="form-control1"
+            >
+              <option className="ex" value="">Select Export</option>
+              <option className="ex" value="excel">Export to Excel</option>
+              <option  className="ex" value="pdf">Export to PDF</option>
+              <option className="ex" value="csv">Export to CSV</option>
+            </select>
+
+
+        <button onClick={handleExport} className="exportbutton">Export</button>
+r
       </div>
       <div className="sub-heading2">
         <label htmlFor="dropdown" className="selecttable">
