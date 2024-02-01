@@ -2,24 +2,29 @@
   margin-left: 50px;
   margin-right: 50px;
   margin-top: 50px;
-  overflow-y: scroll;
-  overflow-x: scroll;
-  scrollbar-width: thin; /* For Firefox */
-  scrollbar-color: #736F6E #E1D9D1; /* thumb color track color (For Firefox) */
+  overflow-y: auto;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #736F6E #E1D9D1;
  
-  /* For WebKit (Chrome, Safari, Edge) */
+ 
   &::-webkit-scrollbar {
-    width: 10px; /* width of the scrollbar */
+    width: 10px;
   }
  
   &::-webkit-scrollbar-thumb {
-    background-color: #736F6E; /* color of the thumb */
+    background-color: #736F6E;
   }
  
   &::-webkit-scrollbar-track {
-    background-color: #E1D9D1; /* color of the track */
+    background-color: #E1D9D1;
   }
 }
+.tabad table {
+  margin-bottom: 0;
+}
+ 
+ 
  
 .tablebutton{
   width: 100%;
@@ -42,6 +47,7 @@
  
  .tab div {
    margin-bottom: 10px;
+   overflow: hidden;
  }
  
  .tab button {
@@ -57,6 +63,7 @@
    margin-top: 20px;
    border: 1px solid black;
  
+ 
  }
  
  th, td {
@@ -69,7 +76,7 @@
  
  th {
    background-color: #E1D9D1;
-   ;
+   
  }
  
  tbody tr:nth-child(even) {
@@ -110,24 +117,4 @@
   background-color: #007bff;
   color: #fff;
 }
- 
- /* Add this CSS to your existing CSS file or create a new one */
- 
- #tabdrop {
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 10px;
-  margin-left: 20px;
-  margin-top: 10px;
-  margin-bottom: -60px;
-  width: 10%;
-}
- 
-.exportbutton {
-  padding: 6px;
-  font-size: 16px;
-  cursor: pointer;
-}
- 
+
