@@ -224,6 +224,7 @@ th, td {
 
 .submitdesign {
   margin-top: 25px;
+  margin-bottom: 20px;
   background-color: #A2AD9C;
   color: white;
   border: 2px solid black;
@@ -331,4 +332,32 @@ th, td {
   color: red;
   font-size: 14px;
 }
+
+
+.table-header {
+  display: flex;
+  align-items: center; 
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  
+}
+
+.loading {
+  width: 28%;
+  
+ 
+}
+
+.sub-heading1 {
+  font-size: large;
+  font-weight: 700;
+  margin-right: 20px; 
+  margin-left: 48px;
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+
 
