@@ -182,6 +182,7 @@ th, td {
   margin-bottom: 10px;
 }
 
+
 .input-group {
   width: 100%;
   max-width: 200px; 
@@ -291,6 +292,7 @@ th, td {
   margin-right: 50px;
 
 }
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -298,6 +300,7 @@ th, td {
   padding: 10px;
   background-color: #333;
   color: white;
+
 }
 
 
@@ -334,6 +337,7 @@ th, td {
 }
 
 
+
 .table-header {
   display: flex;
   align-items: center; 
@@ -358,6 +362,7 @@ th, td {
   font-optical-sizing: auto;
   font-style: normal;
 }
+
 
 
 
