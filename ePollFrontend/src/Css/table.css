@@ -1,10 +1,28 @@
 
 
-.tabad{
+.tabad {
   margin-left: 50px;
   margin-right: 50px;
   margin-top: 50px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #736F6E #E1D9D1; /* thumb color track color (For Firefox) */
+
+  /* For WebKit (Chrome, Safari, Edge) */
+  &::-webkit-scrollbar {
+    width: 10px; /* width of the scrollbar */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #736F6E; /* color of the thumb */
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #E1D9D1; /* color of the track */
+  }
 }
+  
 .tablebutton{
   width: 100%;
 }
@@ -23,15 +41,9 @@
    height: 50px;
    border: 1px solid black;
  }
- /* table.css */
-  
- /* .tab {
-   margin: 40px auto;
-   width: 80%;
- } */
-  
+
  .tab div {
-   margin-bottom: 15px;
+   margin-bottom: 10px;
  }
   
  .tab button {
@@ -45,23 +57,63 @@
    width: 100%;
    border-collapse: collapse;
    margin-top: 20px;
+   border: 1px solid black;
+
  }
   
  th, td {
   border: 1px solid #C9C0BB;
- 
    /* border: 1px solid #E1D9D1; */
    text-align: left;
    padding: 8px;
+  
  }
   
  th {
    background-color: #E1D9D1;
    ;
  }
-  
- /* Optional: Add styles for alternating rows */
+
  tbody tr:nth-child(even) {
    background-color: #f9f9f9;
+
+ }
+
+ .pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+  margin-top: 20px;
+  margin-left: 350px;
+}
+ 
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+}
+ 
+.pagination li {
+  margin: 0 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+ 
+.pagination li:hover {
+  background-color: #ddd;
+}
+ 
+.pagination li.active {
+  background-color: #007bff;
+  color: #fff;
+}
+ 
+ 
+
    
  }
