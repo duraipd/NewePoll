@@ -185,13 +185,6 @@ const MyTable = (props) => {
           Table Data
         </button>
 
-        <select onChange={(e) => setSelectedExportOption(e.target.value)} id="tabdrop">
-
-          <option value="">Select Export</option>
-          <option value="excel">Export to Excel</option>
-          <option value="pdf">Export to PDF</option>
-          <option value="csv">Export to CSV</option>
-
 
 <div className="table-header">
             <div className="sub-heading2">
