@@ -1,88 +1,70 @@
 import React, { useState } from "react";
 import "./Css/table.css";
-import * as XLSX from "xlsx";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp, faArrowDown, faFilter } from "@fortawesome/free-solid-svg-icons";
 
 const MyTable = (props) => {
-  const { tableValue, table } = props;
+  const { tableValue, table, resetFormData } = props;
   const [error, setError] = useState(null);
   const [displayStaticTable, setDisplayStaticTable] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  const [sortColumn, setSortColumn] = useState(null);
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [filters, setFilters] = useState({});
+  const [activeFilter, setActiveFilter] = useState(null);
 
-  const totalStaticPages = Math.ceil(table.length / itemsPerPage);
-  const totalDynamicPages = Math.ceil(tableValue.length / itemsPerPage);
+  useEffect(() => {
+    setDisplayStaticTable(true);
+  }, [tableValue]);
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+  const switchToStaticTable = () => {
+    setDisplayStaticTable(true);
+    resetFormData();
+
+
+  const handleFilterChange = (column, value) => {
+    setFilters({ ...filters, [column]: value });
   };
 
-  const renderTableRows = (data) => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-
-    return data.slice(startIndex, endIndex).map((item, index) => (
-      <tr key={`row-${index}`}>
-        {Object.keys(item).map((key, colIndex) => (
-          <td key={colIndex}>{item[key]}</td>
-        ))}
-      </tr>
-    ));
+  const toggleFilter = (column) => {
+    setActiveFilter(activeFilter === column ? null : column);
   };
 
-  const exportToExcel = () => {
-    try {
-      const ws = XLSX.utils.json_to_sheet(tableValue);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-      XLSX.writeFile(wb, "table_data.xlsx");
-    } catch (error) {
-      setError("Error exporting to Excel");
-    }
-  };
-
-  const exportToPDF = () => {
-    try {
-      const doc = new jsPDF();
-      doc.autoTable({
-        head: [Object.keys(tableValue[0]).map(key => key.charAt(0).toUpperCase() + key.slice(1))],
-        body: tableValue.map((row) => Object.values(row)),
-        startY: 20,
-        styles: {
-          fontSize: 8,
-          cellPadding: 3,
-          overflow: "linebreak",
-        },
+  const applyFilters = (data) => {
+    return data.filter((item) => {
+      return Object.keys(filters).every((key) => {
+        const filterValue = filters[key];
+        return !filterValue || String(item[key] || "").toLowerCase().includes(filterValue.toLowerCase());
       });
-      doc.save("table_data.pdf");
-    } catch (error) {
-      setError("Error exporting to PDF");
-    }
+    });
+
   };
 
-  const exportToCSV = () => {
-    try {
-      const csvContent = "data:text/csv;charset=utf-8," +
-        tableValue.map(row => Object.values(row).join(",")).join("\n");
+  const sortedAndFilteredTable = applyFilters(
+    tableValue.slice().sort((a, b) => {
+      if (sortColumn) {
+        const aValue = String(a[sortColumn] || "");
+        const bValue = String(b[sortColumn] || "");
 
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "table_data.csv");
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (error) {
-      setError("Error exporting to CSV");
-    }
-  };
+        if (sortOrder === "asc") {
+          return aValue.localeCompare(bValue);
+        } else {
+          return bValue.localeCompare(aValue);
+        }
+      }
+
+      return 0;
+    })
+  );
 
   return (
     <div>
       <h2></h2>
       <div>
-        <button onClick={() => setDisplayStaticTable(true)} className="tabab">
+
+        <button onClick={switchToStaticTable} className="tabab">
+          {" "}
+
           Table Definition
         </button>
         <button onClick={() => setDisplayStaticTable(false)} className="tabac">
@@ -98,41 +80,146 @@ const MyTable = (props) => {
           <table border="1">
             <thead>
               <tr>
-                {displayStaticTable && <th>Column Name</th>}
-                {displayStaticTable && <th>Data Type</th>}
-                {displayStaticTable && <th>Nullable</th>}
+                {displayStaticTable && (
+                  <>
+                    <th>
+                      <div className="header-cell">
+                        <span onClick={() => handleSort("columnName")}>
+                          Column Name
+                          {sortColumn === "columnName" &&
+                            (sortOrder === "asc" ? (
+                              <FontAwesomeIcon icon={faArrowUp} />
+                            ) : (
+                              <FontAwesomeIcon icon={faArrowDown} />
+                            ))}
+                        </span>
+                        <FontAwesomeIcon
+                          icon={faFilter}
+                          onClick={() => toggleFilter("columnName")}
+                          className={`filter-icon ${activeFilter === "columnName" ? "active" : ""}`}
+                        />
+                        {activeFilter === "columnName" && (
+                          <input
+                            type="text"
+                            placeholder="Filter"
+                            value={filters["columnName"] || ""}
+                            onChange={(e) => handleFilterChange("columnName", e.target.value)}
+                          />
+                        )}
+                      </div>
+                    </th>
+                    <th>
+                      <div className="header-cell">
+                        <span onClick={() => handleSort("dataType")}>
+                          Data Type
+                          {sortColumn === "dataType" &&
+                            (sortOrder === "asc" ? (
+                              <FontAwesomeIcon icon={faArrowUp} />
+                            ) : (
+                              <FontAwesomeIcon icon={faArrowDown} />
+                            ))}
+                        </span>
+                        <FontAwesomeIcon
+                          icon={faFilter}
+                          onClick={() => toggleFilter("dataType")}
+                          className={`filter-icon ${activeFilter === "dataType" ? "active" : ""}`}
+                        />
+                        {activeFilter === "dataType" && (
+                          <input
+                            type="text"
+                            placeholder="Filter"
+                            value={filters["dataType"] || ""}
+                            onChange={(e) => handleFilterChange("dataType", e.target.value)}
+                          />
+                        )}
+                      </div>
+                    </th>
+                    <th>
+                      <div className="header-cell">
+                        <span onClick={() => handleSort("nullable")}>
+                          Nullable
+                          {sortColumn === "nullable" &&
+                            (sortOrder === "asc" ? (
+                              <FontAwesomeIcon icon={faArrowUp} />
+                            ) : (
+                              <FontAwesomeIcon icon={faArrowDown} />
+                            ))}
+                        </span>
+                        <FontAwesomeIcon
+                          icon={faFilter}
+                          onClick={() => toggleFilter("nullable")}
+                          className={`filter-icon ${activeFilter === "nullable" ? "active" : ""}`}
+                        />
+                        {activeFilter === "nullable" && (
+                          <input
+                            type="text"
+                            placeholder="Filter"
+                            value={filters["nullable"] || ""}
+                            onChange={(e) => handleFilterChange("nullable", e.target.value)}
+                          />
+                        )}
+                      </div>
+                    </th>
+                  </>
+                )}
                 {!displayStaticTable &&
                   Object.keys(tableValue[0]).map((key, index) => (
                     <th key={index}>
-                      {key.charAt(0).toUpperCase() + key.slice(1)}
+                      <div className="header-cell">
+                        <span onClick={() => handleSort(key)}>
+                          {key.charAt(0).toUpperCase() + key.slice(1)}
+                          {sortColumn === key &&
+                            (sortOrder === "asc" ? (
+                              <FontAwesomeIcon icon={faArrowUp} />
+                            ) : (
+                              <FontAwesomeIcon icon={faArrowDown} />
+                            ))}
+                        </span>
+                        <FontAwesomeIcon
+                          icon={faFilter}
+                          onClick={() => toggleFilter(key)}
+                          className={`filter-icon ${activeFilter === key ? "active" : ""}`}
+                        />
+                        {activeFilter === key && (
+                          <input
+                            type="text"
+                            placeholder="Filter"
+                            value={filters[key] || ""}
+                            onChange={(e) => handleFilterChange(key, e.target.value)}
+                          />
+                        )}
+                      </div>
                     </th>
                   ))}
               </tr>
             </thead>
-            <tbody>{displayStaticTable && renderTableRows(table)}</tbody>
-            <tbody>{!displayStaticTable && renderTableRows(tableValue)}</tbody>
+
+            <tbody>
+              {displayStaticTable &&
+                table.map((staticItem, index) => (
+                  <tr key={`row-${index}`}>
+                    {Object.keys(staticItem).map((key, colIndex) => (
+                      <td key={colIndex}>{staticItem[key]}</td>
+                    ))}
+                  </tr>
+                ))}
+              {sortedAndFilteredTable.map((dynamicItem, index) => (
+                <tr key={`dynamic-row-${index}`}>
+                  {!displayStaticTable &&
+                    Object.keys(dynamicItem).map((key, colIndex) => (
+                      <td key={colIndex}>{dynamicItem[key]}</td>
+                    ))}
+                </tr>
+              ))}
+            </tbody>
+
           </table>
         )}
-        <div>
-          {displayStaticTable && (
-            <Pagination1
-              currentPage={currentPage}
-              totalPages={totalStaticPages}
-              onPageChange={handlePageChange}
-            />
-          )}
-          {!displayStaticTable && (
-            <Pagination1
-              currentPage={currentPage}
-              totalPages={totalDynamicPages}
-              onPageChange={handlePageChange}
-            />
-          )}
-        </div>
       </div>
     </div>
   );
 };
+
 
 const Pagination1 = ({ currentPage, totalPages, onPageChange }) => {
   const pageNumbers = [];
@@ -141,7 +228,8 @@ const Pagination1 = ({ currentPage, totalPages, onPageChange }) => {
     pageNumbers.push(i);
   }
 
-  let visiblePageNumbers = [];
+
+
 
   if (totalPages <= 10) {
     visiblePageNumbers = pageNumbers;
@@ -185,4 +273,4 @@ const Pagination1 = ({ currentPage, totalPages, onPageChange }) => {
   );
 };
 
-export default MyTable;
+
