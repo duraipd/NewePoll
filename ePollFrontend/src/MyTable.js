@@ -5,7 +5,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
  
 const MyTable = (props) => {
-  const { tableValue, table ,updateMyTableData} = props;
+  const { tableValue, table, updateMyTableData } = props;
   const [error, setError] = useState(null);
   const [displayStaticTable, setDisplayStaticTable] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,7 +19,6 @@ const MyTable = (props) => {
     setCurrentPage(page);
   };
  
-  
   const renderTableRows = (data) => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -33,28 +32,17 @@ const MyTable = (props) => {
     ));
   };
  
-  const exportToExcel = () => {
+  const exportToCSV = (data, filename) => {
     try {
-      const ws = XLSX.utils.json_to_sheet(tableValue);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-      XLSX.writeFile(wb, "table_data.xlsx");
-    } catch (error) {
-      setError("Error exporting to Excel");
-    }
-  };
- 
-  
- 
-  const exportToCSV = () => {
-    try {
-      const csvContent = "data:text/csv;charset=utf-8," +
-        tableValue.map(row => Object.values(row).join(",")).join("\n");
+      const csvContent =
+        "data:text/csv;charset=utf-8," +
+        Object.keys(data[0]).join(",") + "\n" +  // Add column headings
+        data.map((row) => Object.values(row).join(",")).join("\n");
  
       const encodedUri = encodeURI(csvContent);
       const link = document.createElement("a");
       link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "table_data.csv");
+      link.setAttribute("download", filename);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -64,16 +52,53 @@ const MyTable = (props) => {
   };
  
   const handleExport = () => {
-    switch (selectedExportOption) {
-      case "excel":
-        exportToExcel();
-        break;
-     
-      case "csv":
-        exportToCSV();
-        break;
-      default:
-        setError("Please select an export option");
+    if (!selectedExportOption) {
+      setError("Please select an export option");
+      return;
+    }
+ 
+    if (selectedExportOption === "excel") {
+      if (displayStaticTable) {
+        exportTableDefinitionsToExcel();
+      } else {
+        exportToExcel(tableValue, "table_data.xlsx");
+      }
+    } else if (selectedExportOption === "csv") {
+      if (displayStaticTable) {
+        exportTableDefinitionsToCSV();
+      } else {
+        exportToCSV(tableValue, "table_data.csv");
+      }
+    }
+  };
+ 
+  const exportTableDefinitionsToExcel = () => {
+    try {
+      const ws = XLSX.utils.json_to_sheet(table);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "TableDefinitions");
+      XLSX.writeFile(wb, "table_definitions.xlsx");
+    } catch (error) {
+      setError("Error exporting table definitions to Excel");
+    }
+  };
+ 
+  const exportTableDefinitionsToCSV = () => {
+    try {
+      exportToCSV(table, "table_definitions.csv");
+    } catch (error) {
+      setError("Error exporting table definitions to CSV");
+    }
+  };
+ 
+  const exportToExcel = (data, filename) => {
+    try {
+      const ws = XLSX.utils.json_to_sheet(data);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+      XLSX.writeFile(wb, filename);
+    } catch (error) {
+      setError("Error exporting to Excel");
     }
   };
  
