@@ -44,24 +44,7 @@ const MyTable = (props) => {
     }
   };
  
-  const exportToPDF = () => {
-    try {
-      const doc = new jsPDF();
-      doc.autoTable({
-        head: [Object.keys(tableValue[0]).map(key => key.charAt(0).toUpperCase() + key.slice(1))],
-        body: tableValue.map((row) => Object.values(row)),
-        startY: 20,
-        styles: {
-          fontSize: 8,
-          cellPadding: 3,
-          overflow: "linebreak",
-        },
-      });
-      doc.save("table_data.pdf");
-    } catch (error) {
-      setError("Error exporting to PDF");
-    }
-  };
+  
  
   const exportToCSV = () => {
     try {
@@ -85,9 +68,7 @@ const MyTable = (props) => {
       case "excel":
         exportToExcel();
         break;
-      case "pdf":
-        exportToPDF();
-        break;
+     
       case "csv":
         exportToCSV();
         break;
@@ -129,8 +110,7 @@ const MyTable = (props) => {
               className="form-control1"
             >
               <option className="ex" value="">Select Export</option>
-              <option className="ex" value="excel">Export to Excel</option>
-              <option  className="ex" value="pdf">Export to PDF</option>
+              <option className="ex" value="excel">Export to XLSX</option>
               <option className="ex" value="csv">Export to CSV</option>
             </select>
  
