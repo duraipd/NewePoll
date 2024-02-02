@@ -136,11 +136,11 @@ overflow: auto;
 .exportbutton{
   margin-left: 20px;
   width: 65px;
-  height: 35px;
+  height: 37px;
   border-radius: 20px;
   margin-top: 24px;
   background-color: #E1D9D1;
-  border: 1.5px solid black;
+  border: 2px solid black;
   
  
 }
