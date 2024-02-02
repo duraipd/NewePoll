@@ -5,98 +5,87 @@
   overflow-y: auto;
   overflow-x: auto;
   scrollbar-width: thin;
-  scrollbar-color: #736F6E #E1D9D1;
-  
- 
- 
+  scrollbar-color: #736f6e #e1d9d1;
+
   &::-webkit-scrollbar {
     width: 10px;
   }
- 
+
   &::-webkit-scrollbar-thumb {
-    background-color: #736F6E;
+    background-color: #736f6e;
   }
- 
+
   &::-webkit-scrollbar-track {
-    background-color: #E1D9D1;
+    background-color: #e1d9d1;
   }
 }
 .tabad table {
   margin-bottom: 0;
 }
- 
- 
- 
-.tablebutton{
+
+.tablebutton {
   width: 100%;
 }
- 
- .tabab {
-   width: 50%;
-   background-color: #736F6E;
-   color: #fff;
-   height: 50px;
-   border: 1px solid black;
- }
- .tabac {
-   width: 50%;
-   background-color: #736F6E;
-   color: #fff;
-   height: 50px;
-   border: 1px solid black;
- }
- 
- .tab div {
-   margin-bottom: 10px;
-   overflow: hidden;
- }
- 
- .tab button {
-   padding: 10px;
-   margin-right: 10px;
-   font-size: 16px;
-   cursor: pointer;
- }
- 
- table {
-   width: 100%;
-   border-collapse: collapse;
-   margin-top: 20px;
-   border: 1px solid black;
- 
- 
- }
- 
- th, td {
-  border: 1px solid #C9C0BB;
-   /* border: 1px solid #E1D9D1; */
-   text-align: left;
-   padding: 8px;
- 
- }
- 
- th {
-   background-color: #E1D9D1;
-   
- }
- 
- tbody tr:nth-child(even) {
-   background-color: #f9f9f9;
- 
- }
- 
- .pagination {
+
+.tabab {
+  width: 50%;
+  background-color: #736f6e;
+  color: #fff;
+  height: 50px;
+  border: 1px solid black;
+}
+.tabac {
+  width: 50%;
+  background-color: #736f6e;
+  color: #fff;
+  height: 50px;
+  border: 1px solid black;
+}
+
+.tab div {
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.tab button {
+  padding: 10px;
+  margin-right: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: 1px solid black;
+}
+
+th,
+td {
+  border: 1px solid #c9c0bb;
+  /* border: 1px solid #E1D9D1; */
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #e1d9d1;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.pagination {
   display: flex;
   list-style: none;
   padding: 0;
   justify-content: center;
   margin-top: 20px;
   /* margin-left: 20px; */
-  
 }
- 
 
- 
 .pagination li {
   margin: 0 5px;
   cursor: pointer;
@@ -104,23 +93,22 @@
   border: 1px solid #ccc;
   border-radius: 10px;
   transition: background-color 0.3s;
-  background-color: #E1D9D1;
-  
+  background-color: #e1d9d1;
 }
- 
+
 .pagination li:hover {
   background-color: #ddd;
 }
- 
+
 .pagination li.active {
-  background-color:#736F6E;
+  background-color: #736f6e;
   color: #fff;
 }
- 
- /* *{
+
+/* *{
 overflow: auto;
  } */
- 
+
 .sub-heading2 {
   font-size: large;
   font-weight: 700;
@@ -130,19 +118,16 @@ overflow: auto;
   font-optical-sizing: auto;
   font-style: normal;
   margin-top: 25px;
- 
 }
- 
-.exportbutton{
+
+.exportbutton {
   margin-left: 20px;
-  width: 65px;
+  width: fit-content;
   height: 37px;
   border-radius: 20px;
   margin-top: 24px;
-  background-color: #E1D9D1;
+  background-color: #e1d9d1;
   border: 2px solid black;
-  
- 
 }
 
 .form-control1 {
@@ -153,15 +138,11 @@ overflow: auto;
   border-radius: 6px;
   margin-top: 25px;
   border: 1px solid #dee2e6;
- 
 }
 .form-control1:focus {
-  border : 5px solid#b8b9d5;
- 
- 
- 
+  border: 5px solid#b8b9d5;
 }
-.errortab{
+.errortab {
   margin-top: -7px;
   color: red;
 }
