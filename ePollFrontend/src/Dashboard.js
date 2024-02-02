@@ -6,7 +6,7 @@ import { fetch, Desctable, tablefields } from "./service/Service";
 import MyTable from "./MyTable";
 import "./Css/table.css";
 import Swal from 'sweetalert2';
-
+ 
 function Dashboard() {
   const [fetchResponse, setFetchResponse] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,45 +22,13 @@ function Dashboard() {
       tableName: "",
     },
   ]);
-
+ 
   const [selectedOptionError, setSelectedOptionError] = useState("");
   const [tableDataErrors, setTableDataErrors] = useState([]);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0); // New state for remounting MyTable
-
-
-  // const handleSelectChange = async (e) => {
-  //   setSelectedOptionError("");
-  //   setSelectedOption(e.target.value);
-
-  //   const res = await tablefields(e.target.value);
-  //   setTableResponse1(res);
-
-  //   const response = await Desctable(e.target.value);
-  //   setTableResponse(response);
-  // };
-
-  const handleSelectChange = async (e) => {
-    try {
-      const selectedValue = e.target.value;
-      setSelectedOption(selectedValue === "" ? null : selectedValue);
-    
-      const res = await tablefields(selectedValue);
-      setTableResponse1(res);
-
-     
-      const response = await Desctable(selectedValue);
-      setTableResponse(response);
-      
-      
-      
-    } catch (error) {
-      console.error("Axios Error:", error);
-      
-    }
-    
-
-
+ 
+ 
   const handleSelectChange = async (e) => {
     try {
       const selectedValue = e.target.value;
@@ -75,10 +43,9 @@ function Dashboard() {
       console.error("Axios Error:", error);
      
     }
-
   };
-  
-
+ 
+ 
   const fetchData = async () => {
     try {
       const response = await fetch();
@@ -89,32 +56,32 @@ function Dashboard() {
       setLoading(false);
     }
   };
-  
+ 
   const updateMyTableData = async () => {
     try {
       const res = await tablefields(selectedOption);
       setTableResponse1(res);
-
+ 
       const response = await Desctable(selectedOption);
       setTableResponse(response);
     } catch (error) {
       console.error("Axios Error:", error);
     }
   };
-
+ 
   useEffect(() => {
     fetchData();
   }, [selectedOption]);
-
+ 
   useEffect(() => {
     setTableData((prevData) =>
       prevData.map((row) => ({ ...row, tableName: selectedOption }))
     );
   }, [selectedOption]);
-
+ 
   const handleAddRow = () => {
     setRowCount(rowCount + 1);
-
+ 
     setTableData([
       ...tableData,
       {
@@ -125,45 +92,45 @@ function Dashboard() {
       },
     ]);
   };
-
+ 
   const handleRemoveRow = (index) => {
     if (rowCount > 1) {
       setRowCount(rowCount - 1);
       setTableData((prevData) => prevData.filter((_, i) => i !== index));
     }
   };
-
+ 
   const handleChange = (event, index, field) => {
     const updatedData = [...tableData];
     updatedData[index][field] = event.target.value;
     setTableData(updatedData);
   };
-
+ 
   const validateForm = () => {
     let isValid = true;
-
+ 
     if (!selectedOption) {
       setSelectedOptionError("Please select a table");
       isValid = false;
     } else {
       setSelectedOptionError("");
     }
-
+ 
     const errors = tableData.map((data) => ({
       columnName: data.columnName.trim() === "",
       nullable: data.nullable.trim() === "",
       dataType: data.dataType.trim() === "",
     }));
-
+ 
     setTableDataErrors(errors);
-
+ 
     if (errors.some((error) => Object.values(error).some((e) => e))) {
       isValid = false;
     }
-
+ 
     return isValid;
   };
-
+ 
   const resetFormData = () => {
     setTableData([
       {
@@ -174,17 +141,17 @@ function Dashboard() {
       },
     ]);
   };
-
+ 
   const handleSubmit = async () => {
     setFormSubmitted(true);
     const isValid = validateForm();
-
+ 
     if (isValid) {
       try {
         const response = await Desctable(selectedOption);
         const createColumnResponse = await CreateColoumn(tableData);
         updateMyTableData();
-
+ 
         Swal.fire({
           icon: 'success',
           title: 'Table Altered Successfully',
@@ -198,20 +165,20 @@ function Dashboard() {
             icon:'custom-icon-error' // Add your custom content class
           },
         });
-
+ 
         resetFormData();
-
+ 
         setRefreshKey((prevKey) => prevKey + 1);
-        fetchData(); 
+        fetchData();
       } catch (error) {
         console.error("Error:", error);
-        
+       
         Swal.fire({
           icon: 'error',
           title: 'Field Already exists in the Table',
           timer: 1000,
           showConfirmButton: false,
-        
+       
           customClass: {
             popup: 'custom-popup-error', // Add your custom error class
             title: 'custom-title-error', // Add your custom title class
@@ -222,7 +189,7 @@ function Dashboard() {
       }
     }
   };
-
+ 
   return (
     <div className="main">
       <Sidebar />
@@ -232,7 +199,7 @@ function Dashboard() {
             <h6>Table Definition</h6>
           </header>
           <br />
-
+ 
           <div className="table-header">
             <div className="sub-heading1">
               <label htmlFor="dropdown" className="selecttable">
@@ -249,7 +216,7 @@ function Dashboard() {
                   onChange={handleSelectChange}
                   className="form-control"
                 >
-                  <option value="" >Select table</option>
+                  <option value="">Select table</option>
                   {fetchResponse.map((item, index) => (
                     <option key={index} value={item.table_name}>
                       {item.table_name}
@@ -377,7 +344,5 @@ function Dashboard() {
     </div>
   );
 }
-
+ 
 export default Dashboard;
-
-//

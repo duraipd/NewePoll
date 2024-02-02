@@ -24,11 +24,11 @@ const MyTable = (props) => {
     const endIndex = startIndex + itemsPerPage;
  
     return data.slice(startIndex, endIndex).map((item, index) => (
-      <tr key={`row-${index}`}>
+<tr key={`row-${index}`}>
         {Object.keys(item).map((key, colIndex) => (
-          <td key={colIndex}>{item[key]}</td>
+<td key={colIndex}>{item[key]}</td>
         ))}
-      </tr>
+</tr>
     ));
   };
  
@@ -103,87 +103,77 @@ const MyTable = (props) => {
   };
  
   return (
-    <div>
-      <h2></h2>
-      <div>
-        <button onClick={() => setDisplayStaticTable(true)} className="tabab">
+<div>
+<h2></h2>
+<div>
+<button onClick={() => setDisplayStaticTable(true)} className="tabab">
           Table Definition
-        </button>
-        <button onClick={() => setDisplayStaticTable(false)} className="tabac">
+</button>
+<button onClick={() => setDisplayStaticTable(false)} className="tabac">
           Table Data
-        </button>
-     
-        {/* <select onChange={(e) => setSelectedExportOption(e.target.value)} id="tabdrop" >
-          <option value="">Select Export</option>
-          <option value="excel">Export to Excel</option>
-          <option value="pdf">Export to PDF</option>
-          <option value="csv">Export to CSV</option>
-        </select> */}
+</button>
  
-<div className="table-header">
-            <div className="sub-heading2">
-              <label htmlFor="dropdown" className="selecttable">
-                Format:
-              </label>
-            </div>
-           
- 
-            <select
-              id="exportDropdown loading1"
-              value={selectedExportOption}
-              onChange={(e) => setSelectedExportOption(e.target.value)}
-              className="form-control1"
-            >
-              <option className="ex" value="">Select Export</option>
-              <option className="ex" value="excel">Export to XLSX</option>
-              <option className="ex" value="csv">Export to CSV</option>
-            </select>
- 
- 
-        <button onClick={handleExport} className="exportbutton">Export</button>
-      </div>
+        <div className="table-header">
+<div className="sub-heading2">
+<label htmlFor="dropdown" className="selecttable">
+              Format:
+</label>
 </div>
  
+          <select
+            id="exportDropdown loading1"
+            value={selectedExportOption}
+            onChange={(e) => setSelectedExportOption(e.target.value)}
+            className="form-control1"
+>
+<option className="ex" value="">Select Export</option>
+<option className="ex" value="excel">Export to XLSX</option>
+<option className="ex" value="csv">Export to CSV</option>
+</select>
  
-      <div className="tabad" >
+          <button onClick={handleExport} className="exportbutton">Export</button>
+</div>
+</div>
+ 
+      <div className="tabad">
         {error && <p className="errortab">Error: {error}</p>}
         {table.length > 0 && (
-          <table border="1">
-            <thead>
-            <tr>
+<table border="1">
+<thead>
+<tr>
                 {displayStaticTable && <th>Column Name</th>}
                 {displayStaticTable && <th>Data Type</th>}
                 {displayStaticTable && <th>Nullable</th>}
                 {!displayStaticTable &&
                   Object.keys(tableValue[0]).map((key, index) => (
-                    <th key={index}>
+<th key={index}>
                       {key.charAt(0).toUpperCase() + key.slice(1)}
-                    </th>
+</th>
                   ))}
-              </tr>
-            </thead>
-            <tbody>{displayStaticTable && renderTableRows(table)}</tbody>
-            <tbody>{!displayStaticTable && renderTableRows(tableValue)}</tbody>
-          </table>
+</tr>
+</thead>
+<tbody>{displayStaticTable && renderTableRows(table)}</tbody>
+<tbody>{!displayStaticTable && renderTableRows(tableValue)}</tbody>
+</table>
         )}
-        <div>
+<div>
           {displayStaticTable && (
-            <Pagination1
+<Pagination1
               currentPage={currentPage}
               totalPages={totalStaticPages}
               onPageChange={handlePageChange}
             />
           )}
           {!displayStaticTable && (
-            <Pagination1
+<Pagination1
               currentPage={currentPage}
               totalPages={totalDynamicPages}
               onPageChange={handlePageChange}
             />
           )}
-        </div>
-      </div>
-    </div>
+</div>
+</div>
+</div>
   );
 };
  
@@ -222,19 +212,19 @@ const Pagination1 = ({ currentPage, totalPages, onPageChange }) => {
   }
  
   return (
-    <div>
-      <ul className="pagination">
+<div>
+<ul className="pagination">
         {visiblePageNumbers.map((number, index) => (
-          <li
+<li
             key={index}
             className={currentPage === number ? "active" : ""}
-            onClick={() => onPageChange(number)}
-          >
+            onClick={() => typeof number === 'number' && onPageChange(number)}
+>
             {number}
-          </li>
+</li>
         ))}
-      </ul>
-    </div>
+</ul>
+</div>
   );
 };
  
