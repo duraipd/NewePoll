@@ -6,6 +6,7 @@
   overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: #736F6E #E1D9D1;
+  
  
  
   &::-webkit-scrollbar {
@@ -90,23 +91,21 @@
   padding: 0;
   justify-content: center;
   margin-top: 20px;
-  margin-left: 350px;
+  /* margin-left: 20px; */
+  
 }
  
-.pagination {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  justify-content: center;
-}
+
  
 .pagination li {
   margin: 0 5px;
   cursor: pointer;
   padding: 5px 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 10px;
   transition: background-color 0.3s;
+  background-color: #E1D9D1;
+  
 }
  
 .pagination li:hover {
@@ -114,7 +113,55 @@
 }
  
 .pagination li.active {
-  background-color: #007bff;
+  background-color:#736F6E;
   color: #fff;
 }
+ 
+ /* *{
+overflow: auto;
+ } */
+ 
+.sub-heading2 {
+  font-size: large;
+  font-weight: 700;
+  margin-right: 20px;
+  margin-left: 50px;
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  margin-top: 25px;
+ 
+}
+ 
+.exportbutton{
+  margin-left: 20px;
+  width: 65px;
+  height: 37px;
+  border-radius: 20px;
+  margin-top: 24px;
+  background-color: #E1D9D1;
+  border: 2px solid black;
+  
+ 
+}
 
+.form-control1 {
+  width: 25%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-bottom: 2px;
+  border-radius: 6px;
+  margin-top: 25px;
+  border: 1px solid #dee2e6;
+ 
+}
+.form-control1:focus {
+  border : 5px solid#b8b9d5;
+ 
+ 
+ 
+}
+.errortab{
+  margin-top: -7px;
+  color: red;
+}
