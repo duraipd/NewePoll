@@ -28,15 +28,36 @@ function Dashboard() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0); // New state for remounting MyTable
 
+  // const handleSelectChange = async (e) => {
+  //   setSelectedOptionError("");
+  //   setSelectedOption(e.target.value);
+
+  //   const res = await tablefields(e.target.value);
+  //   setTableResponse1(res);
+
+  //   const response = await Desctable(e.target.value);
+  //   setTableResponse(response);
+  // };
+
   const handleSelectChange = async (e) => {
-    setSelectedOptionError("");
-    setSelectedOption(e.target.value);
+    try {
+      const selectedValue = e.target.value;
+      setSelectedOption(selectedValue === "" ? null : selectedValue);
+    
+      const res = await tablefields(selectedValue);
+      setTableResponse1(res);
 
-    const res = await tablefields(e.target.value);
-    setTableResponse1(res);
-
-    const response = await Desctable(e.target.value);
-    setTableResponse(response);
+     
+      const response = await Desctable(selectedValue);
+      setTableResponse(response);
+      
+      
+      
+    } catch (error) {
+      console.error("Axios Error:", error);
+      
+    }
+    
   };
 
   const fetchData = async () => {
@@ -196,7 +217,7 @@ function Dashboard() {
                   onChange={handleSelectChange}
                   className="form-control"
                 >
-                  <option value="">Select table</option>
+                  <option value="" >Select table</option>
                   {fetchResponse.map((item, index) => (
                     <option key={index} value={item.table_name}>
                       {item.table_name}
@@ -325,3 +346,5 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
+//
