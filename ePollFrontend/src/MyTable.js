@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Css/table.css";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
  
 const MyTable = (props) => {
-  const { tableValue, table } = props;
+  const { tableValue, table ,updateMyTableData} = props;
   const [error, setError] = useState(null);
   const [displayStaticTable, setDisplayStaticTable] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,6 +19,7 @@ const MyTable = (props) => {
     setCurrentPage(page);
   };
  
+  
   const renderTableRows = (data) => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;

@@ -28,16 +28,6 @@ function Dashboard() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0); // New state for remounting MyTable
 
-  // const handleSelectChange = async (e) => {
-  //   setSelectedOptionError("");
-  //   setSelectedOption(e.target.value);
-
-  //   const res = await tablefields(e.target.value);
-  //   setTableResponse1(res);
-
-  //   const response = await Desctable(e.target.value);
-  //   setTableResponse(response);
-  // };
 
   const handleSelectChange = async (e) => {
     try {
@@ -54,6 +44,7 @@ function Dashboard() {
      
     }
   };
+  
 
   const fetchData = async () => {
     try {
@@ -63,6 +54,18 @@ function Dashboard() {
       console.error("Error fetching data:", error);
     } finally {
       setLoading(false);
+    }
+  };
+  
+  const updateMyTableData = async () => {
+    try {
+      const res = await tablefields(selectedOption);
+      setTableResponse1(res);
+
+      const response = await Desctable(selectedOption);
+      setTableResponse(response);
+    } catch (error) {
+      console.error("Axios Error:", error);
     }
   };
 
@@ -147,6 +150,7 @@ function Dashboard() {
       try {
         const response = await Desctable(selectedOption);
         const createColumnResponse = await CreateColoumn(tableData);
+        updateMyTableData();
 
         Swal.fire({
           icon: 'success',
@@ -165,7 +169,7 @@ function Dashboard() {
         resetFormData();
 
         setRefreshKey((prevKey) => prevKey + 1);
-        fetchData(); // Fetch data after the table is altered
+        fetchData(); 
       } catch (error) {
         console.error("Error:", error);
         
@@ -322,6 +326,7 @@ function Dashboard() {
             <button
               className="submit-button submitdesign"
               onClick={handleSubmit}
+              onChange={handleSelectChange}
             >
               Submit
             </button>
@@ -332,7 +337,7 @@ function Dashboard() {
           tableValue={tableResponse}
           table={tableResponse1}
           resetFormData={resetFormData}
-          fetchData={fetchData} // Pass fetchData to MyTable
+          fetchData={fetchData}
           key={refreshKey}
         />
       </div>
