@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 
-@CrossOrigin("http://localhost:3002")
+@CrossOrigin("http://localhost:3000")
 
 
 
