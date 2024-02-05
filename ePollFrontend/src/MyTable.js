@@ -112,10 +112,10 @@ const MyTable = (props) => {
     <div>
       <h2></h2>
       <div>
-        <button onClick={() => setDisplayStaticTable(true)} className="tabab">
+        <button onClick={() => setDisplayStaticTable(true)} className="tabab" disabled={tableValue.length === 0 && table.length === 0}>   
           Table Definition
         </button>
-        <button onClick={() => setDisplayStaticTable(false)} className="tabac">
+        <button onClick={() => setDisplayStaticTable(false)} className="tabac" disabled={tableValue.length === 0 && table.length === 0}> 
           Table Data
         </button>
  
