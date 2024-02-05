@@ -67,10 +67,12 @@ td {
   /* border: 1px solid #E1D9D1; */
   text-align: left;
   padding: 8px;
+  width: 40px;
 }
 
 th {
   background-color: #e1d9d1;
+
 }
 
 tbody tr:nth-child(even) {
@@ -113,11 +115,11 @@ overflow: auto;
   font-size: large;
   font-weight: 700;
   margin-right: 20px;
-  margin-left: 50px;
+  margin-left: 5px;
   font-family: "DM Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-  margin-top: 25px;
+  /* margin-top: 15px; */
 }
 
 .exportbutton {
@@ -125,7 +127,7 @@ overflow: auto;
   width: fit-content;
   height: 37px;
   border-radius: 20px;
-  margin-top: 24px;
+  /* margin-top: 14px; */
   background-color: #e1d9d1;
   border: 2px solid black;
 }
@@ -136,7 +138,7 @@ overflow: auto;
   box-sizing: border-box;
   margin-bottom: 2px;
   border-radius: 6px;
-  margin-top: 25px;
+  /* margin-top: 15px; */
   border: 1px solid #dee2e6;
 }
 .form-control1:focus {
@@ -145,4 +147,38 @@ overflow: auto;
 .errortab {
   margin-top: -7px;
   color: red;
+  margin-left: 98px;
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
+
+.header-cell{
+  width: 350px;
+}
+
+.filter-icon{
+  float: right;
+  margin-top: 7px;
+  color: #736f6e;
+ 
+}
+
+.header-cell1{
+  width: 380px;
+
+}
+
+.header-cell1 span svg,
+.header-cell span svg {
+  margin-left: 10px; 
+  color: #736f6e; 
+  
+}
+
+.filterinput{
+  /* padding-right: 30px; */
+  margin-left: 30px;
+  border-radius: 8px;
+}
+
