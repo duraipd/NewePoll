@@ -7,9 +7,9 @@ import {
   faFilter,
 } from "@fortawesome/free-solid-svg-icons";
 import * as XLSX from "xlsx";
-
+ 
 import "jspdf-autotable";
-
+ 
 const MyTable = (props) => {
   const { tableValue, table, resetFormData, updateMyTableData } = props;
   const [error, setError] = useState(null);
@@ -20,20 +20,20 @@ const MyTable = (props) => {
   const [sortOrder, setSortOrder] = useState("asc");
   const [filters, setFilters] = useState({});
   const [activeFilter, setActiveFilter] = useState(null);
-
+ 
   const itemsPerPage = 7;
   const totalStaticPages = Math.ceil(table.length / itemsPerPage);
   const totalDynamicPages = Math.ceil(tableValue.length / itemsPerPage);
-
+ 
   useEffect(() => {
     setDisplayStaticTable(true);
   }, [tableValue]);
-
+ 
   const switchToStaticTable = () => {
     setDisplayStaticTable(true);
     resetFormData();
   };
-
+ 
   const handleSort = (column) => {
     if (sortColumn === column) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
@@ -42,15 +42,15 @@ const MyTable = (props) => {
       setSortOrder("asc");
     }
   };
-
+ 
   const handleFilterChange = (column, value) => {
     setFilters({ ...filters, [column]: value });
   };
-
+ 
   const toggleFilter = (column) => {
     setActiveFilter(activeFilter === column ? null : column);
   };
-
+ 
   const applyFilters = (data) => {
     return data.filter((item) => {
       return Object.keys(filters).every((key) => {
@@ -64,29 +64,29 @@ const MyTable = (props) => {
       });
     });
   };
-
+ 
   const sortedAndFilteredTable = (data) =>
     applyFilters(
       data.slice().sort((a, b) => {
         if (sortColumn) {
           const aValue = String(a[sortColumn] || "");
           const bValue = String(b[sortColumn] || "");
-
+ 
           if (sortOrder === "asc") {
             return aValue.localeCompare(bValue);
           } else {
             return bValue.localeCompare(aValue);
           }
         }
-
+ 
         return 0;
       })
     );
-
+ 
   const renderTableRows = (data) => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-
+ 
     return data.slice(startIndex, endIndex).map((item, index) => (
       <tr key={`row-${index}`}>
         {Object.keys(item).map((key, colIndex) => (
@@ -95,7 +95,7 @@ const MyTable = (props) => {
       </tr>
     ));
   };
-
+ 
   const exportToCSV = (data, filename) => {
     try {
       const csvContent =
@@ -103,7 +103,7 @@ const MyTable = (props) => {
         Object.keys(data[0]).join(",") +
         "\n" +
         data.map((row) => Object.values(row).join(",")).join("\n");
-
+ 
       const encodedUri = encodeURI(csvContent);
       const link = document.createElement("a");
       link.setAttribute("href", encodedUri);
@@ -115,22 +115,22 @@ const MyTable = (props) => {
       setError("Error exporting to CSV");
     }
   };
-
+ 
   const handleExport = () => {
     // Reset error state
-
+ 
     setError(null);
-
+ 
     if (!selectedExportOption) {
       setError("Please select an format option");
       return;
     }
-
+ 
     // if (table.length === 0 && tableValue.length === 0) {
     //   // setError("Table does not contain any data");
     //   return;
     // }
-
+ 
     if (selectedExportOption === "excel") {
       if (displayStaticTable) {
         exportTableDefinitionsToExcel();
@@ -145,7 +145,7 @@ const MyTable = (props) => {
       }
     }
   };
-
+ 
   const exportTableDefinitionsToExcel = () => {
     try {
       const ws = XLSX.utils.json_to_sheet(table);
@@ -156,7 +156,7 @@ const MyTable = (props) => {
       setError("Error exporting table definitions to Excel");
     }
   };
-
+ 
   const exportTableDefinitionsToCSV = () => {
     try {
       exportToCSV(table, "table_definitions.csv");
@@ -164,7 +164,7 @@ const MyTable = (props) => {
       setError("Error exporting table definitions to CSV");
     }
   };
-
+ 
   const exportTableDataToExcel = () => {
     try {
       const ws = XLSX.utils.json_to_sheet(tableValue);
@@ -175,11 +175,11 @@ const MyTable = (props) => {
       setError("Error exporting table data to Excel");
     }
   };
-
+ 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-
+ 
   return (
     <div>
       <h2></h2>
@@ -208,7 +208,7 @@ const MyTable = (props) => {
                   Format:
                 </label>
               </div>
-
+ 
               <select
                 id="exportDropdown"
                 value={selectedExportOption}
@@ -228,18 +228,18 @@ const MyTable = (props) => {
                   Export to CSV
                 </option>
               </select>
-
+ 
               <button onClick={handleExport} className="exportbutton">
                 Export
               </button>
-              
+             
             </div>
             <br></br>
             <div className="errortab">
             {error && <p> {error}</p>}
             </div>
-            
-
+           
+ 
             <table border="1">
               <thead>
                 <tr>
@@ -249,16 +249,16 @@ const MyTable = (props) => {
                         <div className="header-cell1">
                           <span onClick={() => handleSort("column_name")}>
                             Column Name
-                            
+                           
                               {sortColumn === "column_name" &&
                                 (sortOrder === "asc" ? (
                                   <FontAwesomeIcon icon={faArrowUp} />
                                 ) : (
                                   <FontAwesomeIcon icon={faArrowDown} />
                                 ))}
-                            
+                           
                           </span>
-
+ 
                           <FontAwesomeIcon
                             icon={faFilter}
                             onClick={() => toggleFilter("column_name")}
@@ -283,9 +283,9 @@ const MyTable = (props) => {
                       </th>
                       <th>
                         <div className="header-cell1">
-                          
+                         
                           <span onClick={() => handleSort("data_type")}>
-                            Data Type 
+                            Data Type
                             {sortColumn === "data_type" &&
                               (sortOrder === "asc" ? (
                                 <FontAwesomeIcon icon={faArrowUp} />
@@ -312,14 +312,14 @@ const MyTable = (props) => {
                         <div className="header-cell1">
                           <span onClick={() => handleSort("is_nullable")}>
                             Nullable
-                          
+                         
                               {sortColumn === "is_nullable" &&
                                 (sortOrder === "asc" ? (
                                   <FontAwesomeIcon icon={faArrowUp} />
                                 ) : (
                                   <FontAwesomeIcon icon={faArrowDown} />
                                 ))}
-                            
+                           
                           </span>
                           <FontAwesomeIcon
                             icon={faFilter}
@@ -411,16 +411,16 @@ const MyTable = (props) => {
     </div>
   );
 };
-
+ 
 const Pagination1 = ({ currentPage, totalPages, onPageChange }) => {
   const pageNumbers = [];
-
+ 
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
-
+ 
   let visiblePageNumbers = [];
-
+ 
   if (totalPages <= 10) {
     visiblePageNumbers = pageNumbers;
   } else {
@@ -445,7 +445,7 @@ const Pagination1 = ({ currentPage, totalPages, onPageChange }) => {
       );
     }
   }
-
+ 
   return (
     <div>
       <ul className="pagination">
@@ -462,5 +462,5 @@ const Pagination1 = ({ currentPage, totalPages, onPageChange }) => {
     </div>
   );
 };
-
+ 
 export default MyTable;
