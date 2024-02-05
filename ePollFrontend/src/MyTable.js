@@ -3,7 +3,7 @@ import "./Css/table.css";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-
+ 
 const MyTable = (props) => {
   const { tableValue, table, updateMyTableData } = props;
   const [error, setError] = useState(null);
@@ -11,23 +11,23 @@ const MyTable = (props) => {
   const [currentPageStatic, setCurrentPageStatic] = useState(1);
   const [currentPageDynamic, setCurrentPageDynamic] = useState(1);
   const [selectedExportOption, setSelectedExportOption] = useState("");
-
+ 
   const itemsPerPage = 7;
   const totalStaticPages = Math.ceil(table.length / itemsPerPage);
   const totalDynamicPages = Math.ceil(tableValue.length / itemsPerPage);
-
+ 
   const handlePageChangeStatic = (page) => {
     setCurrentPageStatic(page);
   };
-
+ 
   const handlePageChangeDynamic = (page) => {
     setCurrentPageDynamic(page);
   };
-
-  const renderTableRows = (data) => {
-    const startIndex = (displayStaticTable ? currentPageStatic : currentPageDynamic - 1) * itemsPerPage;
+ 
+  const renderTableRows = (data, currentPage) => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-
+ 
     return data.slice(startIndex, endIndex).map((item, index) => (
       <tr key={`row-${index}`}>
         {Object.keys(item).map((key, colIndex) => (
@@ -36,7 +36,7 @@ const MyTable = (props) => {
       </tr>
     ));
   };
-
+ 
   const exportToCSV = (data, filename) => {
     try {
       const csvContent =
@@ -44,7 +44,7 @@ const MyTable = (props) => {
         Object.keys(data[0]).join(",") +
         "\n" +
         data.map((row) => Object.values(row).join(",")).join("\n");
-
+ 
       const encodedUri = encodeURI(csvContent);
       const link = document.createElement("a");
       link.setAttribute("href", encodedUri);
@@ -56,13 +56,13 @@ const MyTable = (props) => {
       setError("Error exporting to CSV");
     }
   };
-
+ 
   const handleExport = () => {
     if (!selectedExportOption) {
       setError("Please select an export option");
       return;
     }
-
+ 
     if (selectedExportOption === "excel") {
       if (displayStaticTable) {
         exportTableDefinitionsToExcel();
@@ -77,7 +77,7 @@ const MyTable = (props) => {
       }
     }
   };
-
+ 
   const exportTableDefinitionsToExcel = () => {
     try {
       const ws = XLSX.utils.json_to_sheet(table);
@@ -88,7 +88,7 @@ const MyTable = (props) => {
       setError("Error exporting table definitions to Excel");
     }
   };
-
+ 
   const exportTableDefinitionsToCSV = () => {
     try {
       exportToCSV(table, "table_definitions.csv");
@@ -96,7 +96,7 @@ const MyTable = (props) => {
       setError("Error exporting table definitions to CSV");
     }
   };
-
+ 
   const exportToExcel = (data, filename) => {
     try {
       const ws = XLSX.utils.json_to_sheet(data);
@@ -107,7 +107,7 @@ const MyTable = (props) => {
       setError("Error exporting to Excel");
     }
   };
-
+ 
   return (
     <div>
       <h2></h2>
@@ -118,14 +118,14 @@ const MyTable = (props) => {
         <button onClick={() => setDisplayStaticTable(false)} className="tabac">
           Table Data
         </button>
-
+ 
         <div className="table-header">
           <div className="sub-heading2">
             <label htmlFor="dropdown" className="selecttable">
               Format:
             </label>
           </div>
-
+ 
           <select
             id="exportDropdown loading1"
             value={selectedExportOption}
@@ -142,13 +142,13 @@ const MyTable = (props) => {
               Export to CSV
             </option>
           </select>
-
+ 
           <button onClick={handleExport} className="exportbutton">
             Export
           </button>
         </div>
       </div>
-
+ 
       <div className="tabad">
         {error && <p className="errortab">Error: {error}</p>}
         {table.length > 0 && (
@@ -164,8 +164,8 @@ const MyTable = (props) => {
                   ))}
               </tr>
             </thead>
-            <tbody>{displayStaticTable && renderTableRows(table)}</tbody>
-            <tbody>{!displayStaticTable && renderTableRows(tableValue)}</tbody>
+            <tbody>{displayStaticTable && renderTableRows(table, currentPageStatic)}</tbody>
+            <tbody>{!displayStaticTable && renderTableRows(tableValue, currentPageDynamic)}</tbody>
           </table>
         )}
         <div>
@@ -188,16 +188,16 @@ const MyTable = (props) => {
     </div>
   );
 };
-
+ 
 const Pagination1 = ({ currentPage, totalPages, onPageChange }) => {
   const pageNumbers = [];
-
+ 
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
-
+ 
   let visiblePageNumbers = [];
-
+ 
   if (totalPages <= 10) {
     visiblePageNumbers = pageNumbers;
   } else {
@@ -222,7 +222,7 @@ const Pagination1 = ({ currentPage, totalPages, onPageChange }) => {
       );
     }
   }
-
+ 
   return (
     <div>
       <ul className="pagination">
@@ -239,5 +239,5 @@ const Pagination1 = ({ currentPage, totalPages, onPageChange }) => {
     </div>
   );
 };
-
+ 
 export default MyTable;
